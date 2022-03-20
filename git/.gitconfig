@@ -1,0 +1,9 @@
+[init]
+	defaultBranch = main
+[core]
+	editor = nvim
+	excludesFile = ~/.gitignore
+[pull]
+    rebase = false
+[include]
+    path = ~/.private.gitconfig
