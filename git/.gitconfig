@@ -4,6 +4,6 @@
 	editor = nvim
 	excludesFile = ~/.gitignore
 [pull]
-    rebase = false
+	rebase = false
 [include]
-    path = ~/.private.gitconfig
+	path = ~/.private.gitconfig
