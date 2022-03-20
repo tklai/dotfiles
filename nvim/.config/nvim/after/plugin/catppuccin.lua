@@ -1,8 +1,6 @@
 local present, catppuccin = pcall(require, "catppuccin")
 if not present then
-  print("Where is my Catppuccin?")
-
-  return false
+  return
 end
 
 local set_highlights = function(color_group)

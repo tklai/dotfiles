@@ -19,10 +19,9 @@ return require("packer").startup(function(use)
   use("jose-elias-alvarez/null-ls.nvim")
 
   -- Theme
-  use({
-    "catppuccin/nvim",
-    as = "catppuccin",
-  })
+  -- use({"catppuccin/nvim", as = "catppuccin"})
+  use({"rebelot/kanagawa.nvim"})
+
   use({
     "feline-nvim/feline.nvim",
     config = function()
