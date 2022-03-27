@@ -43,9 +43,5 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     export HOMEBREW_PREFIX=$(brew --prefix)
 fi
 
-# asdf
-source $(brew --prefix asdf)/libexec/asdf.sh
-
-
 # Private
 source $HOME/.credentials
