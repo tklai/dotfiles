@@ -32,4 +32,4 @@ alias vim="nvim"
 alias neovim="nvim"
 
 # Private
-source $HOME/.credentials
+[ -s "$HOME/.private.credentials" ] && . "$HOME/.private.credentials"
