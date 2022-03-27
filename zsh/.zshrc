@@ -17,6 +17,10 @@ SAVEHIST=30000000
 REPORTTIME=15
 TIMEFMT='%J  %*U user %*S system %P cpu (%*E wasted time).'
 
+NEWLINE=$'\n'
+PROMPT="%F{204}%n%f@%F{248}%M%f %F{123}%~%f${NEWLINE}%# "
+RPROMPT="%D %*"
+
 export VISUAL="nvim"
 
 # Command Alias
