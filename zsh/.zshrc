@@ -17,12 +17,6 @@ SAVEHIST=30000000
 REPORTTIME=15
 TIMEFMT='%J  %*U user %*S system %P cpu (%*E wasted time).'
 
-# *nix
-# XDG User Directories
-export XDG_CACHE_HOME="$HOME/.cache"
-export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_DATA_HOME="$HOME/.local/share"
-
 export VISUAL="nvim"
 
 # Command Alias
@@ -36,12 +30,6 @@ alias lat="ls -la --sort=time"
 alias vi="nvim"
 alias vim="nvim"
 alias neovim="nvim"
-
-# OS-specific
-if [[ "$OSTYPE" == "darwin"* ]]; then
-    # Homebrew location
-    export HOMEBREW_PREFIX=$(brew --prefix)
-fi
 
 # Private
 source $HOME/.credentials
