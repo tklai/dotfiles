@@ -1,5 +1,7 @@
 local opt = vim.opt
 
+vim.g.did_load_filetypes = 1
+
 opt.clipboard = "unnamedplus"
 opt.cursorline = true
 opt.fileencoding = "utf-8"
