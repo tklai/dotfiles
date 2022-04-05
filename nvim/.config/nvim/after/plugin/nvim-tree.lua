@@ -4,7 +4,6 @@ if not present then
 end
 
 nvim_tree.setup({
-  auto_close = true,
   update_cwd = true,
   view = {
     width = 50,
