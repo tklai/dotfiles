@@ -63,6 +63,13 @@ return require("packer").startup(function(use)
   })
 
   use({
+    "nvim-orgmode/orgmode",
+    config = function()
+      require("orgmode").setup({})
+    end,
+  })
+
+  use({
     "numToStr/Comment.nvim",
     config = function()
       require("Comment").setup()
