@@ -61,27 +61,27 @@ local handlers = {
 local lsp_highlight_document = function(client)
   -- Set autocommands conditional on server_capabilities
   if client.resolved_capabilities.document_highlight then
-      vim.api.nvim_create_augroup("lsp_document_highlight", {})
-      vim.api.nvim_create_autocmd("CursorHold", {
-        group = "lsp_document_highlight",
-        desc = "Show the document highlight",
-        callback = vim.lsp.buf.document_highlight,
-      })
-      vim.api.nvim_create_autocmd("CursorMoved", {
-        group = "lsp_document_highlight",
-        desc = "Clear references",
-        callback = vim.lsp.buf.clear_references,
-      })
+    vim.api.nvim_create_augroup("lsp_document_highlight", {})
+    vim.api.nvim_create_autocmd("CursorHold", {
+      group = "lsp_document_highlight",
+      desc = "Show the document highlight",
+      callback = vim.lsp.buf.document_highlight,
+    })
+    vim.api.nvim_create_autocmd("CursorMoved", {
+      group = "lsp_document_highlight",
+      desc = "Clear references",
+      callback = vim.lsp.buf.clear_references,
+    })
   end
 end
 
 local custom_on_attach = function(client, bufnr)
-  local buf_keymap = function (mode, lhs, rhs, desc, opts)
-      local default_opts = { buffer = 0 }
+  local buf_keymap = function(mode, lhs, rhs, desc, opts)
+    local default_opts = { buffer = 0 }
 
-      opts = vim.tbl_extend("force", default_opts, opts or {})
+    opts = vim.tbl_extend("force", default_opts, opts or {})
 
-      keymap(mode, lhs, rhs, desc, opts)
+    keymap(mode, lhs, rhs, desc, opts)
   end
 
   buf_keymap("n", "gd", vim.lsp.buf.definition, "Go to definition")
@@ -101,8 +101,8 @@ local custom_on_attach = function(client, bufnr)
   vim.api.nvim_create_autocmd("CursorHold", {
     group = "lsp_diagnostic",
     desc = "Show diagnostic float",
-    callback = function ()
-        vim.diagnostic.open_float()
+    callback = function()
+      vim.diagnostic.open_float()
     end,
   })
 end
@@ -143,19 +143,17 @@ for _, server in pairs(lsp_servers) do
 end
 
 local present, null_ls = pcall(require, "null-ls")
-if not present then
-  return false
+if present then
+  null_ls.setup({
+    sources = {
+      -- Completion
+      null_ls.builtins.completion.spell,
+      -- Diagnostics
+      null_ls.builtins.diagnostics.eslint,
+      -- Formatter
+      null_ls.builtins.formatting.prettier,
+      null_ls.builtins.formatting.stylua,
+      null_ls.builtins.formatting.phpcsfixer,
+    },
+  })
 end
-
-null_ls.setup({
-  sources = {
-    -- Completion
-    null_ls.builtins.completion.spell,
-    -- Diagnostics
-    null_ls.builtins.diagnostics.eslint,
-    -- Formatter
-    null_ls.builtins.formatting.prettier,
-    null_ls.builtins.formatting.stylua,
-    null_ls.builtins.formatting.phpcsfixer,
-  },
-})

@@ -20,7 +20,7 @@ return require("packer").startup(function(use)
 
   -- Theme
   -- use({"catppuccin/nvim", as = "catppuccin"})
-  use({"rebelot/kanagawa.nvim"})
+  use("rebelot/kanagawa.nvim")
 
   use({
     "feline-nvim/feline.nvim",
