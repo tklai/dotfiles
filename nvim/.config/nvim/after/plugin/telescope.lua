@@ -1,6 +1,6 @@
 local present, telescope = pcall(require, "telescope")
 if not present then
-  return false
+  return
 end
 
 local telescope_extensions = {

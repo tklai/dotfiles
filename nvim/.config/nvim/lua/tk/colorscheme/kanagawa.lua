@@ -1,6 +1,6 @@
 local present, kanagawa = pcall(require, "kanagawa")
 if not present then
-  return nil
+  return
 end
 
 kanagawa.setup({

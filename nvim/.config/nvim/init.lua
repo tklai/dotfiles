@@ -7,7 +7,6 @@ pcall(require, "impatient")
 
 if require("tk.initial_setup") then
   print("Initial Setup Completed. Please restart Neovim.")
-
   return
 end
 

@@ -1,6 +1,6 @@
 local present, catppuccin = pcall(require, "catppuccin")
 if not present then
-  return nil
+  return
 end
 
 catppuccin.setup({

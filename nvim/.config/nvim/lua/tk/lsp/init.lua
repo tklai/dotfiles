@@ -1,11 +1,7 @@
 local has_lsp_config, lspconfig = pcall(require, "lspconfig")
-if not has_lsp_config then
-  return
-end
-
 local has_installer, lsp_installer_servers = pcall(require, "nvim-lsp-installer.servers")
-if not has_installer then
-  return false
+if not has_lsp_config or not has_installer  then
+  return
 end
 
 local keymap = require("tk.utils").keymap
