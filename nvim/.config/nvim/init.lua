@@ -16,6 +16,7 @@ local modules = {
   "tk.options",
   "tk.plugins",
   "tk.lsp",
+  "tk.colorscheme",
 }
 
 for _, module in ipairs(modules) do
