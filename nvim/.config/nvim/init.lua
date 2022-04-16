@@ -1,6 +1,6 @@
-if vim.api.nvim_call_function("has", { "nvim-0.7" }) ~= 1 then
-  print("Neovim 0.7 has many improvements than before. Please consider upgrading to the unstable!")
-  error("This configuration can only be runned on neovim >0.7.")
+local version = vim.version()
+if not (version.major >= 0 and version.minor >= 7) then
+  error("This configuration can only be run on neovim >=0.7.")
 end
 
 pcall(require, "impatient")
