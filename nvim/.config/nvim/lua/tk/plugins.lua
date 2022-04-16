@@ -62,12 +62,7 @@ return require("packer").startup(function(use)
     run = ":TSUpdate",
   })
 
-  use({
-    "nvim-orgmode/orgmode",
-    config = function()
-      require("orgmode").setup({})
-    end,
-  })
+  use("nvim-orgmode/orgmode")
 
   use({
     "numToStr/Comment.nvim",
