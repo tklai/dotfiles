@@ -48,6 +48,17 @@ if orgmode_present then
     })
 
     orgmode.setup{}
+
+    local cmp_present, cmp = pcall(require, 'cmp')
+    if cmp_present then
+        cmp.setup.filetype('org', {
+            sources = cmp.config.sources({
+                { name = "orgmode" },
+                { name = "path" },
+                { name = "buffer" },
+            })
+        })
+    end
 end
 
 treesitter_config.setup(config)
