@@ -37,11 +37,11 @@ opt.tabstop = 4
 opt.shortmess:append("I")
 
 opt.fillchars:append({
-    horiz = '═',
-    horizup = '╩',
-    horizdown = '╦',
-    vert = '║',
-    vertleft = '╣',
-    vertright = '╠',
-    verthoriz = '╬',
+  horiz = "═",
+  horizup = "╩",
+  horizdown = "╦",
+  vert = "║",
+  vertleft = "╣",
+  vertright = "╠",
+  verthoriz = "╬",
 })

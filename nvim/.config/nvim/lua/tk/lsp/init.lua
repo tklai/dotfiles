@@ -1,6 +1,6 @@
 local has_lsp_config, lspconfig = pcall(require, "lspconfig")
 local has_installer, lsp_installer_servers = pcall(require, "nvim-lsp-installer.servers")
-if not has_lsp_config or not has_installer  then
+if not has_lsp_config or not has_installer then
   return
 end
 

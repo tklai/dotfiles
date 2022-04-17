@@ -1,9 +1,9 @@
-local present, spectre = pcall(require, 'spectre')
+local present, spectre = pcall(require, "spectre")
 if not present then
   return
 end
 
-local keymap = require("tk/utils").keymap
+local keymap = require("tk.utils").keymap
 
 spectre.setup({})
 
