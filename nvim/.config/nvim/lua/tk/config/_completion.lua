@@ -1,18 +1,12 @@
-local has_cmp, cmp = pcall(require, "cmp")
-local has_snip_engine, luasnip = pcall(require, "luasnip")
-
-if not has_cmp or not has_snip_engine then
-  return nil
-end
-
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
-
 vim.opt.shortmess:append("c")
+
+local cmp = require("cmp")
 
 cmp.setup({
   snippet = {
     expand = function(args)
-      luasnip.lsp_expand(args.body)
+      require("luasnip").lsp_expand(args.body)
     end,
   },
   mapping = cmp.mapping.preset.insert({
@@ -31,10 +25,8 @@ cmp.setup({
     { name = "buffer" },
   }),
   window = {
-      documentation = {
-        border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-      },
+    documentation = {
+      border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+    },
   },
 })
-
-require("luasnip.loaders.from_vscode").load()

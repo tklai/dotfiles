@@ -35,16 +35,23 @@ return require("packer").startup(function(use)
     "nvim-telescope/telescope.nvim",
     requires = {
       -- Extensions
-      "nvim-telescope/telescope-project.nvim",
       "nvim-telescope/telescope-media-files.nvim",
     },
+    config = function()
+      require("tk.config._telescope")
+    end,
   })
 
   -- Auto-completion
   use({
+    "L3MON4D3/LuaSnip",
+    config = function()
+      require("luasnip.loaders.from_vscode").load()
+    end,
+  })
+  use({
     "hrsh7th/nvim-cmp",
     requires = {
-      "L3MON4D3/LuaSnip",
       -- Sources
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
@@ -60,9 +67,10 @@ return require("packer").startup(function(use)
   use({
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",
+    config = function()
+      require("tk.config._treesitter")
+    end,
   })
-
-  use("nvim-orgmode/orgmode")
 
   use({
     "numToStr/Comment.nvim",
@@ -71,11 +79,57 @@ return require("packer").startup(function(use)
     end,
   })
 
-  use("lewis6991/gitsigns.nvim")
-  use("kyazdani42/nvim-tree.lua")
-  use("akinsho/bufferline.nvim")
+  use({
+    "lewis6991/gitsigns.nvim",
+    config = function()
+      require("gitsigns").setup()
+    end,
+  })
+  use({
+    "kyazdani42/nvim-tree.lua",
+    config = function()
+      require("nvim-tree").setup({
+        update_cwd = true,
+        view = {
+          width = 50,
+          side = "right",
+        },
+      })
 
-  use("akinsho/toggleterm.nvim")
+      vim.keymap.set("n", "<C-b>", "<cmd>NvimTreeToggle<CR>", { noremap = true })
+    end,
+  })
+  use({
+    "akinsho/bufferline.nvim",
+    config = function()
+      require("bufferline").setup({
+        options = {
+          diagnostics = "nvim_lsp",
+          offsets = {
+            {
+              filetype = "NvimTree",
+              text = " File Explorer",
+              text_align = "left",
+            },
+          },
+        },
+      })
+    end,
+  })
 
-  use("windwp/nvim-spectre")
+  use({
+    "akinsho/toggleterm.nvim",
+    config = function()
+      require("toggleterm").setup({
+        -- TODO: It can intergrate with lazygit!!
+      })
+    end,
+  })
+
+  use({
+    "windwp/nvim-spectre",
+    config = function()
+      require("tk.config._spectre")
+    end,
+  })
 end)

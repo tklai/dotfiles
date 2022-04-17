@@ -1,9 +1,4 @@
-local present, kanagawa = pcall(require, "kanagawa")
-if not present then
-  return
-end
-
-kanagawa.setup({
+require("kanagawa").setup({
   dimInactive = true,
   globalStatus = true,
 })
