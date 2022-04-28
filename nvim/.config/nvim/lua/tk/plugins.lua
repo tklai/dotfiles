@@ -66,6 +66,9 @@ return require("packer").startup(function(use)
   -- Tree-sitter
   use({
     "nvim-treesitter/nvim-treesitter",
+    requires = {
+      "nvim-treesitter/nvim-treesitter-textobjects",
+    },
     run = ":TSUpdate",
     config = function()
       require("tk.config._treesitter")
