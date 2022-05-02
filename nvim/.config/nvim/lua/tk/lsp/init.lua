@@ -97,6 +97,7 @@ lspinstaller.setup({
     "bashls",
     "cssls",
     "emmet_ls",
+    "gopls",
     "html",
     "jsonls",
     "tsserver",
