@@ -1,45 +1,16 @@
-local has_lsp_config, lspconfig = pcall(require, "lspconfig")
-local has_installer, lsp_installer_servers = pcall(require, "nvim-lsp-installer.servers")
-if not has_lsp_config or not has_installer then
+local has_lspconfig, lspconfig = pcall(require, "lspconfig")
+local has_lspinstaller, lspinstaller = pcall(require, "nvim-lsp-installer")
+if not has_lspconfig or not has_lspinstaller then
   return
 end
 
 local keymap = require("tk.utils").keymap
-
-local lsp_servers = {
-  "bashls",
-  "cssls",
-  "emmet_ls",
-  "html",
-  "jsonls",
-  "tsserver",
-  "sumneko_lua",
-  "intelephense",
-  "yamlls",
-}
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 local has_cmp_lsp, cmp_lsp = pcall(require, "cmp_nvim_lsp")
 if has_cmp_lsp then
   capabilities = cmp_lsp.update_capabilities(capabilities)
 end
-
-local server_specific_opts = {
-  sumneko_lua = {
-    settings = {
-      Lua = {
-        diagnostics = {
-          globals = { "vim" },
-        },
-        workspace = {
-          library = {
-            [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-          },
-        },
-      },
-    },
-  },
-}
 
 local border = {
   { "╭", "FloatBorder" },
@@ -60,7 +31,7 @@ local handlers = {
 
 local lsp_highlight_document = function(client)
   -- Set autocommands conditional on server_capabilities
-  if client.resolved_capabilities.document_highlight then
+  if client.server_capabilities.document_highlight then
     vim.api.nvim_create_augroup("lsp_document_highlight", {})
     vim.api.nvim_create_autocmd("CursorHold", {
       group = "lsp_document_highlight",
@@ -121,27 +92,30 @@ vim.diagnostic.config({
   severity_sort = true,
 })
 
-for _, server in pairs(lsp_servers) do
-  local server_available, requested_server = lsp_installer_servers.get_server(server)
-  if server_available then
-    requested_server:on_ready(function()
-      local opts = {
-        capabilities = capabilities,
-        on_attach = custom_on_attach,
-        handlers = handlers,
-      }
+lspinstaller.setup({
+  ensure_installed = {
+    "bashls",
+    "cssls",
+    "emmet_ls",
+    "html",
+    "jsonls",
+    "tsserver",
+    "sumneko_lua",
+    "intelephense",
+    "yamlls",
+  },
+  automatic_installation = true,
+})
 
-      if server_specific_opts[server] then
-        opts = vim.tbl_extend("force", opts, server_specific_opts[server])
-      end
+local config = require("tk.lsp.config")
+for _, server in pairs(lspinstaller.get_installed_servers()) do
+  local opts = vim.tbl_extend("force", {
+    capabilities = capabilities,
+    on_attach = custom_on_attach,
+    handlers = handlers,
+  }, config[server.name] or {})
 
-      requested_server:setup(opts)
-    end)
-
-    if not requested_server:is_installed() then
-      requested_server:install()
-    end
-  end
+  lspconfig[server.name].setup(opts)
 end
 
 local present, null_ls = pcall(require, "null-ls")
