@@ -34,5 +34,8 @@ alias vi="nvim"
 alias vim="nvim"
 alias neovim="nvim"
 
+## SSH Fix
+[[ "$TERM" == "xterm-kitty" ]] && alias ssh="kitty +kitten ssh"
+
 # Private
 [ -s "$HOME/.private.credentials" ] && . "$HOME/.private.credentials"
