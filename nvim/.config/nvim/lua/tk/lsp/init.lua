@@ -6,6 +6,8 @@ end
 
 local keymap = require("tk.utils").keymap
 
+require("tk.config._completion")
+
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 local has_cmp_lsp, cmp_lsp = pcall(require, "cmp_nvim_lsp")
 if has_cmp_lsp then
