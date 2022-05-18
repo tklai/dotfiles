@@ -21,19 +21,37 @@ NEWLINE=$'\n'
 PROMPT="${NEWLINE}%F{204}%n%f@%F{248}%M%f [%D %*] %F{123}%~%f${NEWLINE}%# "
 
 # Command Alias
-## ls
-alias ll="ls -l"
-alias la="ls -la"
-alias lt="ls --sort=time"
-alias lat="ls -la --sort=time"
+## Directory Listing
+EXECUTABLE_LS="ls"
+if hash exa 2>/dev/null; then
+    EXECUTABLE_LS="exa"
+fi
+alias ls="$EXECUTABLE_LS"
+alias ll="$EXECUTABLE_LS -l"
+alias la="$EXECUTABLE_LS -la"
+alias lt="$EXECUTABLE_LS --sort=time"
+alias lat="$EXECUTABLE_LS -la --sort=time"
 
 ## Text editor
-alias vi="nvim"
-alias vim="nvim"
-alias neovim="nvim"
+if hash nvim 2>/dev/null; then
+    alias vi="nvim"
+    alias vim="nvim"
+    alias neovim="nvim"
+fi
 
+# Docker
+if hash docker 2>/dev/null; then
+    alias dattach="docker exec -it"
+fi
+
+# Terminal
 ## SSH Fix
 [[ "$TERM" == "xterm-kitty" ]] && alias ssh="kitty +kitten ssh"
+
+## Eoxide
+if hash zoxide 2>/dev/null; then
+    eval "$(zoxide init zsh)"
+fi
 
 # Private
 [ -s "$HOME/.private.credentials" ] && . "$HOME/.private.credentials"
