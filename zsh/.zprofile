@@ -3,6 +3,15 @@ export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 
+# Editor
+if hash nvim 2>/dev/null; then
+    export EDITOR=nvim
+
+    export MANPAGER='nvim +Man!'
+else
+    export EDITOR=vim
+fi
+
 # Homebrew
 if [[ "$OSTYPE" == "darwin"* ]]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
