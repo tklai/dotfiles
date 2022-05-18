@@ -20,8 +20,6 @@ TIMEFMT='%J  %*U user %*S system %P cpu (%*E wasted time).'
 NEWLINE=$'\n'
 PROMPT="${NEWLINE}%F{204}%n%f@%F{248}%M%f [%D %*] %F{123}%~%f${NEWLINE}%# "
 
-export VISUAL="nvim"
-
 # Command Alias
 ## ls
 alias ll="ls -l"
