@@ -1,3 +1,12 @@
+;; Increase GC threshold on start
+(setq gc-cons-threshold (* 128 1024 1024))
+;; Then lower the value on normal run
+(add-hook 'emacs-startup-hook
+	  (lambda()
+	    (setq gc-cons-threshold (* 16 1024 1024))))
+
+
+
 (when system-type 'darwin
       ;; Set mac command and option modifier
       (setq mac-command-modifier 'super
@@ -10,8 +19,10 @@
       (setq ns-use-proxy-icon nil
 	    frame-title-format nil))
 
+;; Keep the UI simple
 (tool-bar-mode -1)
 (menu-bar-mode -1)
+(scroll-bar-mode -1)
 
 (column-number-mode)
 ;; Don't use ==linum.el==. ==display-line-numbers.el== instead
@@ -28,16 +39,23 @@
 
 
 ;; Some hooks
-(add-hook 'help-mode-hook (lambda()
-			    (display-line-numbers-mode 0)))
+(add-hook 'help-mode-hook
+	  (lambda()
+	    (display-line-numbers-mode 0)))
 
-(add-hook 'org-mode-hook (lambda()
-			   (display-line-numbers-mode 0)
-			   (variable-pitch-mode)))
+(add-hook 'org-mode-hook
+	  (lambda()
+	    (display-line-numbers-mode 0)
+	    (variable-pitch-mode)
+	    (visual-line-mode)))
 
-(add-hook 'term-mode-hook (lambda()
-			    (display-line-numbers-mode 0)))
+(add-hook 'term-mode-hook
+	  (lambda()
+	    (display-line-numbers-mode 0)))
 
+;; Easy zooming in and out
+(global-set-key (kbd "C-=") 'text-scale-increase)
+(global-set-key (kbd "C--") 'text-scale-decrease)
 
 
 (custom-set-variables
