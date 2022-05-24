@@ -1,0 +1,16 @@
+#+TITLE: README for Emacs Configuration
+#+AUTHOR: TK Lai
+#+DATE: 2022-05-23 23:42
+
+* Emacs Configuration
+This Emacs configuration is personal and very opinionated.
+** OS-specific configuration
+*** macOS
+**** Modern window
+The first line of command can force macOS to enable transparent title bar. Use ==LIGHT== and ==DARK== to match your colorscheme correspondingly.
+Then the second line of command can get rid of the document icon for the clean title bar.
+
+#+BEGIN_SRC bash
+  defaults write org.gnu.Emacs TransparentTitleBar DARK
+  defaults write org.gnu.Emacs HideDocumentIcon YES
+#+END_SRC
