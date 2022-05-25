@@ -1,0 +1,146 @@
+#+TITLE: Emacs Configuration
+#+AUTHOR: TK Lai
+#+DESCRIPTION: This config.org file will be tangled and compile source code into a single el file
+#+STARTUP: showeverything
+
+* Preface
+This is my personal and opinionated configuration for Emacs.
+
+* Before we start
+** Load this file
+Before go through this org file, you may want to know what Org Mode is. Org Mode is a mode that allows you taking notes and authoring documents. You can consider this org file is a document, or configuration file. Org has an ability to extract the source code between =#+BEGIN_SRC= and =#END_SRC= from the document. But Emacs will only read the configuration from =$HOME/.emacs= or =$HOME/.emacs.d/init.el=. How do Emacs load them?
+
+You need to add the following code into your entry point file so that Emacs will parse this configuration file and extract the source code into a file which it understand.
+
+#+BEGIN_EXAMPLE elisp
+  (org-babel-load-file
+   (expand-file-name
+    "config.org"
+    user-emacs-directory))
+#+END_EXAMPLE
+
+** Emacs version
+This configuration was written in Emacs 28.1. Therefore, I would like to limiting not to run on older Emacs version.
+
+#+BEGIN_SRC emacs-lisp
+  (let ((minver "28.1"))
+    (when (version< emacs-version minver)
+      (error "Please consider upgrading your Emacs. This config requires version %s or higher" minver)))
+#+END_SRC
+
+** Garbage Collection
+When your configuration extends with more functions and more packages, Emacs will trigger the garbage collection easily since the default threshold is only 800 KB. But we have more memory in your computer these days. I am going to set a higher value on startup and lower the value on normal run which may perform a faster startup.
+
+#+BEGIN_SRC emacs-lisp
+  ;; Increase GC threshold on start
+  (setq gc-cons-threshold (* 128 1024 1024))
+  ;; Then lower the value on normal run
+  (add-hook 'emacs-startup-hook
+	    (lambda()
+	      (setq gc-cons-threshold (* 16 1024 1024))))
+#+END_SRC
+
+* UI Tweaks
+** "For info..." Wait, silent.
+#+BEGIN_SRC emacs-lisp
+  (setq inhibit-startup-screen t)
+  ;; (setq inhibit-startup-echo-area-message user-login-name)
+  (put 'inhibit-startup-echo-area-message 'saved-value
+       (setq inhibit-startup-echo-area-message (user-login-name)))
+#+END_SRC
+
+** Disable Menubar, Toolbar and Scrollbar
+#+BEGIN_SRC emacs-lisp
+  ;; Keep the UI simple
+  (tool-bar-mode -1)
+  (menu-bar-mode -1)
+  (scroll-bar-mode -1)
+#+END_SRC
+
+** Enable column numbers and line numbers
+#+BEGIN_SRC emacs-lisp
+  (column-number-mode)
+  
+  ;; Don't use =linum.el= in modern Emacs. Use =display-line-numbers.el= instead.
+  (global-display-line-numbers-mode)
+#+END_SRC
+
+** Fonts
+#+BEGIN_SRC emacs-lisp
+  (custom-theme-set-faces 'user
+			  '(default ((t (:family "Liga SFMono Nerd Font" :height 120 :weight medium))))
+			  '(fixed-pitch ((t (:family "Liga SFMono Nerd Font" :height 120 :weight medium))))
+			  '(variable-pitch ((t (:family "SF Pro Text" :height 140 :weight medium)))))
+#+END_SRC
+
+* Hooks
+** Help Mode
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'help-mode-hook
+	    (lambda()
+	      (display-line-numbers-mode 0)))
+#+END_SRC
+
+** Org Mode
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'org-mode-hook
+	    (lambda()
+	      (display-line-numbers-mode 0)
+	      (variable-pitch-mode)
+	      (visual-line-mode)))
+#+END_SRC
+
+** Term Mode
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'term-mode-hook
+	    (lambda()
+	      (display-line-numbers-mode 0)))
+#+END_SRC
+
+* OS-specific configuration
+** Darwin
+#+BEGIN_SRC emacs-lisp
+  (when system-type 'darwin
+	;; Set mac command and option modifier
+	(setq mac-command-modifier 'super
+	      mac-option-modifier 'meta)
+
+	;; Create natural title bar
+	(add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+	(add-to-list 'default-frame-alist '(ns-appearance . dark))
+
+	(setq ns-use-proxy-icon nil
+	      frame-title-format nil))
+#+END_SRC
+
+* Undocumented
+#+BEGIN_SRC emacs-lisp
+  ;; Easy zooming in and out
+  (global-set-key (kbd "C-=") 'text-scale-increase)
+  (global-set-key (kbd "C--") 'text-scale-decrease)
+
+  ;; Packages
+  (require 'package)
+  (add-to-list 'package-archives
+	       '("melpa" . "https://melpa.org/packages/"))
+
+  (package-initialize)
+
+  (unless package-archive-contents
+    (package-refresh-contents))
+
+  (unless (package-installed-p 'use-package)
+    (package-install 'use-package))
+
+  (require 'use-package)
+  (setq use-package-always-ensure t)
+
+  ;; Language
+  (use-package php-mode)
+
+  ;; LSP
+  (use-package lsp-mode
+    :hook (
+	   (php-mode . lsp)
+	   (js-mode . lsp)))
+#+END_SRC
