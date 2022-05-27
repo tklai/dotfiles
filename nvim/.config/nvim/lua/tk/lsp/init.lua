@@ -106,6 +106,7 @@ lspinstaller.setup({
     "rust_analyzer",
     "sumneko_lua",
     "tsserver",
+    "vuels",
     "yamlls",
   },
   automatic_installation = true,
