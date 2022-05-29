@@ -1,5 +1,4 @@
-local version = vim.version()
-if not (version.major >= 0 and version.minor >= 7) then
+if vim.fn.has('nvim-0.7') == 0 then
   error("This configuration can only be run on neovim >=0.7.")
 end
 
