@@ -1,12 +1,12 @@
 local opt = vim.opt
 
-vim.g.did_load_filetypes = 1
-
+opt.autoread = true
 opt.clipboard = "unnamedplus"
 opt.cursorline = true
 opt.fileencoding = "utf-8"
 opt.hlsearch = true
 opt.ignorecase = true
+opt.inccommand = "split"
 opt.laststatus = 3
 opt.mouse = "a"
 opt.number = true
@@ -19,7 +19,6 @@ opt.showtabline = 2
 opt.sidescrolloff = 8
 opt.signcolumn = "yes:2"
 opt.smartcase = true
-opt.smartindent = true
 opt.splitbelow = true
 opt.splitright = true
 opt.swapfile = false

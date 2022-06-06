@@ -14,7 +14,7 @@ require("nvim-treesitter.configs").setup({
     "html",
     "http",
     "php",
-    --"phpdoc", -- Cannot be installed in ARM64 ;(
+    --"phpdoc", -- Cannot be installed on ARM64 ;(
     "jsdoc",
     "json",
     "json5",
