@@ -123,9 +123,7 @@ return require("packer").startup(function(use)
   use({
     "akinsho/toggleterm.nvim",
     config = function()
-      require("toggleterm").setup({
-        -- TODO: It can intergrate with lazygit!!
-      })
+      require("tk.config._toggleterm")
     end,
   })
 
