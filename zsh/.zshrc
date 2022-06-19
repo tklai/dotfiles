@@ -53,5 +53,9 @@ if hash zoxide 2>/dev/null; then
     eval "$(zoxide init zsh)"
 fi
 
+if hash exa 2>/dev/null; then
+    export MANPAGER="nvim +Man!"
+fi
+
 # Private
 [ -s "$HOME/.private.credentials" ] && . "$HOME/.private.credentials"
