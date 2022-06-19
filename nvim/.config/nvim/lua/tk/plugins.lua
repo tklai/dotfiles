@@ -99,7 +99,7 @@ return require("packer").startup(function(use)
         },
       })
 
-      vim.keymap.set("n", "<C-b>", "<cmd>NvimTreeToggle<CR>", { noremap = true })
+      require("tk.utils.keymap").nnoremap("<C-b>", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle NvimTree" })
     end,
   })
   use({

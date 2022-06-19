@@ -4,7 +4,8 @@ if not has_lspconfig or not has_lspinstaller then
   return
 end
 
-local keymap = require("tk.utils").keymap
+local Keymap = require("tk.utils.keymap")
+local nnoremap = Keymap.nnoremap
 
 require("tk.config._completion")
 
@@ -51,24 +52,16 @@ local lsp_highlight_document = function(client)
 end
 
 local custom_on_attach = function(client, bufnr)
-  local buf_keymap = function(mode, lhs, rhs, desc, opts)
-    local default_opts = { buffer = 0 }
-
-    opts = vim.tbl_extend("force", default_opts, opts or {})
-
-    keymap(mode, lhs, rhs, desc, opts)
-  end
-
-  buf_keymap("n", "gd", vim.lsp.buf.definition, "Go to definition")
-  buf_keymap("n", "gD", vim.lsp.buf.declaration, "Go to declaration")
-  buf_keymap("n", "gi", vim.lsp.buf.implementation, "Go to implementation")
-  buf_keymap("n", "gf", vim.lsp.buf.references, "Find references")
-  buf_keymap("n", "K", vim.lsp.buf.hover, "Show hover documentation")
-  -- buf_keymap("n", '<C-k>', vim.lsp.buf.signature_help, "Show signature help of the function under cursor")
-  -- buf_keymap("n", '<leader>D', vim.lsp.buf.type_definition, "Go to type definition")
-  -- buf_keymap("n", '<leader>rn', vim.lsp.buf.rename, "Rename the thing under cursor in the buffer")
-  -- buf_keymap("n", '<leader>ca', vim.lsp.buf.code_action, "Code action")
-  buf_keymap("n", "<leader>rf", vim.lsp.buf.formatting, "Run formatter")
+  nnoremap("gd", vim.lsp.buf.definition, { desc = "Go to definition" })
+  nnoremap("gD", vim.lsp.buf.declaration, { desc = "Go to declaration" })
+  nnoremap("gi", vim.lsp.buf.implementation, { desc = "Go to implementation" })
+  nnoremap("gf", vim.lsp.buf.references, { desc = "Find references" })
+  nnoremap("K", vim.lsp.buf.hover, { desc = "Show hover documentation" })
+  nnoremap("<C-h>", vim.lsp.buf.signature_help, { desc = "Show signature help of the function under cursor" })
+  nnoremap("<leader>D", vim.lsp.buf.type_definition, { desc = "Go to type definition" })
+  nnoremap("<leader>rn", vim.lsp.buf.rename, { desc = "Rename the thing under cursor in the buffer" })
+  nnoremap("<leader>ca", vim.lsp.buf.code_action, { desc = "Code action" })
+  nnoremap("<leader>cf", function() vim.lsp.buf.format({ async = true }) end, { desc = "Run code format" })
 
   lsp_highlight_document(client)
 

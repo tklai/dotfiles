@@ -1,4 +1,4 @@
-local keymap = require("tk.utils").keymap
+local Keymap = require("tk.utils.keymap")
 
 require("toggleterm").setup{}
 
@@ -14,4 +14,4 @@ function _lazygit_toggle()
   lazygit:toggle()
 end
 
-keymap("n", "<leader>lg", "<cmd>lua _lazygit_toggle()<CR>", "Toggle lazygit with ToggleTerm")
+Keymap.nnoremap("<leader>lg", "<cmd>lua _lazygit_toggle()<CR>", { desc = "Toggle lazygit with ToggleTerm" })

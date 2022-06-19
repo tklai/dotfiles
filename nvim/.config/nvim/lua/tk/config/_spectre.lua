@@ -1,9 +1,11 @@
-local keymap = require("tk.utils").keymap
+local Keymap = require("tk.utils.keymap")
+local nnoremap = Keymap.nnoremap
+local vnoremap = Keymap.vnoremap
+
 local spectre = require("spectre")
 
 spectre.setup({})
 
-keymap("n", "<leader>S", spectre.open, "Find & Replace Globally")
-keymap("n", "<leader>sw", function() spectre.open_visual({select_word = true}) end, "Display Find & Replace and search the word under the cursor")
-keymap("v", "<leader>sv", spectre.open_visual, "Find & Replace the text which selected in VISUAL")
-
+nnoremap("<leader>S", spectre.open, { desc = "Find & Replace Globally" })
+nnoremap("<leader>sw", function() spectre.open_visual({select_word = true}) end, { desc = "Display Find & Replace and search the word under the cursor" })
+vnoremap("<leader>sv", spectre.open_visual, { desc = "Find & Replace the text which selected in VISUAL" })

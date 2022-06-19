@@ -24,6 +24,4 @@ for _, module in ipairs(modules) do
   end
 end
 
-vim.keymap.set("", "<Space>", "<Nop>", { noremap = true, silent = true })
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+vim.opt.guifont="Liga SFMono Nerd Font:h12"

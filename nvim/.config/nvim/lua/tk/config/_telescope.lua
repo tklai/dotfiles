@@ -33,17 +33,19 @@ telescope.setup({
   },
 })
 
-local keymap = require("tk.utils").keymap
+local Keymap = require("tk.utils.keymap")
+local nnoremap = Keymap.nnoremap
+
 local telescope_builtin = require("telescope.builtin")
 
 -- Global Files
-keymap("n", "<C-p>", telescope_builtin.find_files)
-keymap("n", "<leader>ff", function()
+nnoremap("<C-p>", telescope_builtin.find_files)
+nnoremap("<leader>ff", function()
   telescope_builtin.find_files({ find_command = { "rg", "-i", "--files", "-g", "!.git" } })
 end)
 -- Find specific string in working directory (Global search)
-keymap("n", "<leader>fg", telescope_builtin.live_grep)
+nnoremap("<leader>fg", telescope_builtin.live_grep)
 -- Find the string under the cursor in working directory and filter the result (Scoped Search)
-keymap("n", "<leader>fs", telescope_builtin.grep_string)
-keymap("n", "<leader>fb", telescope_builtin.buffers)
-keymap("n", "<leader>vh", telescope_builtin.help_tags)
+nnoremap("<leader>fs", telescope_builtin.grep_string)
+nnoremap("<leader>fb", telescope_builtin.buffers)
+nnoremap("<leader>vh", telescope_builtin.help_tags)
