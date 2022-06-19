@@ -40,10 +40,9 @@ cmp.setup({
     ["<C-d>"] = cmp.mapping.scroll_docs(-4),
     ["<C-f>"] = cmp.mapping.scroll_docs(4),
     ["<C-Space>"] = cmp.mapping.complete(),
-    ["<C-e>"] = cmp.mapping.abort(),
     -- DO NOT SET `select` to true in `confirm()`.
     -- Otherwise, the first item will be selected even you didn't select anything.
-    ["<CR>"] = cmp.mapping.confirm(),
+    ["<C-y>"] = cmp.mapping.confirm({ select = true }),
   }),
   sources = cmp.config.sources({
     { name = "nvim_lsp" },
