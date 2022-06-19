@@ -7,6 +7,7 @@ vim.g.maplocalleader = " "
 -- Escape
 -- jj to escape
 keymap("i", "jj", "<ESC>", "Exit current mode")
+keymap("i", "<C-c>", "<ESC>", "Exit insert mode")
 
 -- Window navigation
 keymap("n", "<C-h>", "<C-w>h", "Move cursor to the left window")
