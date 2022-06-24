@@ -3,3 +3,6 @@
 .\#*
 
 config.el
+
+eln-cache/
+elpa/
