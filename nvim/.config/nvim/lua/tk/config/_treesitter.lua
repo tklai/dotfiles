@@ -28,6 +28,9 @@ require("nvim-treesitter.configs").setup({
     "toml",
     "yaml",
   },
+  highlight = {
+    enable = true,
+  },
   textobjects = {
     select = {
       enable = true,
