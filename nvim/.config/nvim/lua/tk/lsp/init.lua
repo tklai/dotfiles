@@ -15,6 +15,16 @@ if has_cmp_lsp then
   capabilities = cmp_lsp.update_capabilities(capabilities)
 end
 
+local has_ufo, ufo = pcall(require, "ufo")
+if has_ufo then
+  capabilities.textDocument.foldingRange = {
+    dynamicRegistration = false,
+    lineFoldingOnly = true,
+  }
+
+  ufo.setup()
+end
+
 local border = {
   { "╭", "FloatBorder" },
   { "─", "FloatBorder" },

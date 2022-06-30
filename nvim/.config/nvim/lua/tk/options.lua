@@ -37,7 +37,10 @@ opt.softtabstop = 4
 opt.smartindent = true
 opt.colorcolumn = "80"
 -- Fold
-opt.foldmethod = "marker"
+-- opt.foldmethod = "marker"
+opt.foldcolumn = "1"
+opt.foldlevel = 10
+opt.foldenable = true
 
 opt.belloff = "all"
 
