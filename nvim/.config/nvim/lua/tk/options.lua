@@ -13,10 +13,10 @@ opt.number = true
 opt.pumheight = 10
 opt.relativenumber = true
 -- We will use status line instead.
-opt.scrolloff = 8
+opt.scrolloff = 4
 opt.showmode = false
 opt.showtabline = 2
-opt.sidescrolloff = 8
+opt.sidescrolloff = 4
 opt.signcolumn = "yes:2"
 opt.smartcase = true
 opt.splitbelow = true

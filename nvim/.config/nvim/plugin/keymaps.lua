@@ -26,6 +26,10 @@ nnoremap("<A-=>", ":resize +10<CR>", { desc = "Increase the height of current pa
 nnoremap("<A-_>", ":vertical resize -10<CR>", { desc = "Decrease the width of current pane" })
 nnoremap("<A-+>", ":vertical resize +10<CR>", { desc = "Increase the width of current pane" })
 
+-- Centered
+nnoremap("<C-d>", "<C-d>zz")
+nnoremap("<C-u>", "<C-u>zz")
+
 -- Allow gf to open non-existent files
 nnoremap("gf", ":edit <cfile><CR>", { desc = "Allow opening non-existent file" })
 
