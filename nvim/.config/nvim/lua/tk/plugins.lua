@@ -139,4 +139,13 @@ return require("packer").startup(function(use)
       require("tk.config._spectre")
     end,
   })
+
+  use({
+    "kylechui/nvim-surround",
+    config = function()
+      require("nvim-surround").setup({
+        -- Configuration here, or leave empty to use defaults
+      })
+    end,
+  })
 end)
