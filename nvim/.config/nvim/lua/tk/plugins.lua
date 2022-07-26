@@ -23,6 +23,8 @@ return require("packer").startup(function(use)
     requires = "kevinhwang91/promise-async",
   })
 
+  use("gpanders/editorconfig.nvim")
+
   -- Theme
   -- use({"catppuccin/nvim", as = "catppuccin"})
   use("rebelot/kanagawa.nvim")

@@ -42,7 +42,7 @@ cmp.setup({
     ["<C-Space>"] = cmp.mapping.complete(),
     -- DO NOT SET `select` to true in `confirm()`.
     -- Otherwise, the first item will be selected even you didn't select anything.
-    ["<C-y>"] = cmp.mapping.confirm({ select = true }),
+    ["<CR>"] = cmp.mapping.confirm({ select = false }),
   }),
   sources = cmp.config.sources({
     { name = "nvim_lsp" },

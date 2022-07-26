@@ -8,7 +8,7 @@ opt.hlsearch = true
 opt.ignorecase = true
 opt.inccommand = "split"
 opt.laststatus = 3
-opt.mouse = "n"
+opt.mouse = "a"
 opt.number = true
 opt.pumheight = 10
 opt.relativenumber = true
@@ -35,6 +35,7 @@ opt.shiftwidth = 4
 opt.tabstop = 4
 opt.softtabstop = 4
 opt.smartindent = true
+opt.shiftround = true
 opt.colorcolumn = "80"
 -- Fold
 -- opt.foldmethod = "marker"
@@ -54,4 +55,10 @@ opt.fillchars:append({
   vertleft = "╣",
   vertright = "╠",
   verthoriz = "╬",
+})
+
+opt.list = true
+opt.listchars:append({
+  space = "·",
+  tab = ">-",
 })
