@@ -1,6 +1,7 @@
 local has_lspconfig, lspconfig = pcall(require, "lspconfig")
-local has_lspinstaller, lspinstaller = pcall(require, "nvim-lsp-installer")
-if not has_lspconfig or not has_lspinstaller then
+local has_mason, mason = pcall(require, "mason")
+local has_mason_lspconfig, mason_lspconfig = pcall(require, "mason-lspconfig")
+if not has_lspconfig or not has_mason or not has_mason_lspconfig then
   return
 end
 
@@ -97,7 +98,10 @@ vim.diagnostic.config({
   severity_sort = true,
 })
 
-lspinstaller.setup({
+mason.setup({
+})
+
+mason_lspconfig.setup({
   ensure_installed = {
     "bashls",
     "cssls",
@@ -117,14 +121,14 @@ lspinstaller.setup({
 })
 
 local config = require("tk.lsp.config")
-for _, server in pairs(lspinstaller.get_installed_servers()) do
+for _, server in pairs(mason_lspconfig.get_installed_servers()) do
   local opts = vim.tbl_extend("force", {
     capabilities = capabilities,
     on_attach = custom_on_attach,
     handlers = handlers,
-  }, config[server.name] or {})
+  }, config[server] or {})
 
-  lspconfig[server.name].setup(opts)
+  lspconfig[server].setup(opts)
 end
 
 local present, null_ls = pcall(require, "null-ls")
