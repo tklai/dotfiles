@@ -143,6 +143,14 @@ return require("packer").startup(function(use)
   })
 
   use({
+    "TimUntersberger/neogit",
+    requires = "nvim-lua/plenary.nvim",
+    config = function()
+      require("tk.config._neogit")
+    end,
+  })
+
+  use({
     "kylechui/nvim-surround",
     config = function()
       require("nvim-surround").setup({
