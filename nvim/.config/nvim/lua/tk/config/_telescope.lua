@@ -8,6 +8,22 @@ for _, name in pairs(telescope_extensions) do
   telescope.load_extension(name)
 end
 
+local previewers = require("telescope.previewers")
+
+local new_maker = function(filepath, bufnr, opts)
+  opts = opts or {}
+
+  filepath = vim.fn.expand(filepath)
+  vim.loop.fs_stat(filepath, function(_, stat)
+    if not stat then return end
+    if stat.size > 102400 then
+      return
+    else
+      previewers.buffer_previewer_maker(filepath, bufnr, opts)
+    end
+  end)
+end
+
 telescope.setup({
   defaults = {
     layout_strategy = "flex",
@@ -19,6 +35,7 @@ telescope.setup({
       height = 0.9,
       preview_cutoff = 120,
     },
+    buffer_previewer_maker = new_maker,
   },
   extensions = {
     media_files = {
