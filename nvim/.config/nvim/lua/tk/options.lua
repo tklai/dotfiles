@@ -40,7 +40,7 @@ opt.colorcolumn = "80"
 -- Fold
 -- opt.foldmethod = "marker"
 opt.foldcolumn = "1"
-opt.foldlevel = 10
+opt.foldlevel = 20
 opt.foldenable = true
 
 opt.belloff = "all"

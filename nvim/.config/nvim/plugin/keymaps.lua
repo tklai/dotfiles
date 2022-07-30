@@ -59,3 +59,6 @@ vnoremap(">", ">gv", { desc = "Increase indentation level" })
 
 -- Terminal
 tnoremap("<ESC>", "<C-\\><C-n>", { desc = "Escape TERM mode using <Escape> key" })
+
+-- No more highlight after search please
+nnoremap("<ESC>", "<ESC>:noh<CR>", { desc = "Disable highlight search on escape"})
