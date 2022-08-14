@@ -7,3 +7,5 @@
 	rebase = false
 [include]
 	path = ~/.private.gitconfig
+[diff]
+	algorithm = patience
