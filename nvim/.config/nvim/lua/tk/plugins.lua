@@ -4,13 +4,6 @@ return require("packer").startup(function(use)
   -- Core
   use("wbthomason/packer.nvim")
   use("lewis6991/impatient.nvim")
-  -- use("nathom/filetype.nvim")
-  use({
-    "antoinemadec/FixCursorHold.nvim",
-    run = function()
-      vim.g.curshold_updatetime = 1000
-    end,
-  })
   use("nvim-lua/plenary.nvim")
 
   -- LSP
@@ -125,20 +118,6 @@ return require("packer").startup(function(use)
           },
         },
       })
-    end,
-  })
-
-  use({
-    "akinsho/toggleterm.nvim",
-    config = function()
-      require("tk.config._toggleterm")
-    end,
-  })
-
-  use({
-    "windwp/nvim-spectre",
-    config = function()
-      require("tk.config._spectre")
     end,
   })
 
