@@ -16,8 +16,14 @@ local new_maker = function(filepath, bufnr, opts)
   filepath = vim.fn.expand(filepath)
   vim.loop.fs_stat(filepath, function(_, stat)
     if not stat then return end
-    if stat.size > 102400 then
-      return
+    local max_size = 256000
+    if stat.size > max_size then
+      vim.schedule_wrap(require("telescope.previewers.utils").set_preview_message)(
+        bufnr,
+        opts.winid,
+        string.format("File size exceeds %d KB", max_size / 1024),
+        opts.preview.msg_bg_fillchar
+      )
     else
       previewers.buffer_previewer_maker(filepath, bufnr, opts)
     end
