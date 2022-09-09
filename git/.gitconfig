@@ -9,3 +9,5 @@
 	path = ~/.private.gitconfig
 [diff]
 	algorithm = patience
+[merge]
+	conflictstyle = diff3
