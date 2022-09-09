@@ -22,7 +22,7 @@ local new_maker = function(filepath, bufnr, opts)
         bufnr,
         opts.winid,
         string.format("File size exceeds %d KB", max_size / 1024),
-        opts.preview.msg_bg_fillchar
+        vim.F.if_nil(opts.preview and opts.preview.msg_bg_fillchar or nil, "╱")
       )
     else
       previewers.buffer_previewer_maker(filepath, bufnr, opts)
