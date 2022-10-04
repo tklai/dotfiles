@@ -15,6 +15,23 @@ return require("packer").startup(function(use)
     "kevinhwang91/nvim-ufo",
     requires = "kevinhwang91/promise-async",
   })
+  use({
+    "glepnir/lspsaga.nvim",
+    branch = "main",
+    config = function()
+        local saga = require("lspsaga")
+
+        saga.init_lsp_saga({
+            -- your configuration
+        })
+    end,
+  })
+  use({
+    "ray-x/lsp_signature.nvim",
+    config = function()
+      require "lsp_signature".setup({})
+    end,
+  })
 
   use("gpanders/editorconfig.nvim")
 
@@ -89,6 +106,7 @@ return require("packer").startup(function(use)
       require("gitsigns").setup()
     end,
   })
+  use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
   use({
     "kyazdani42/nvim-tree.lua",
     config = function()
@@ -134,6 +152,28 @@ return require("packer").startup(function(use)
     config = function()
       require("nvim-surround").setup({
         -- Configuration here, or leave empty to use defaults
+      })
+    end,
+  })
+
+  use ({
+    "RRethy/vim-illuminate",
+    config = function()
+      require('illuminate').configure({
+        filetypes_denylist = {
+          'NvimTree',
+          'TelescopePrompt',
+        },
+      })
+
+      vim.api.nvim_set_hl(0, "IlluminatedWordText", {
+        bg = "#54546D",
+      })
+      vim.api.nvim_set_hl(0, "IlluminatedWordRead", {
+        bg = "#54546D",
+      })
+      vim.api.nvim_set_hl(0, "IlluminatedWordWrite", {
+        bg = "#54546D",
       })
     end,
   })

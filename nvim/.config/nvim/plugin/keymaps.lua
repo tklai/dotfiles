@@ -30,6 +30,9 @@ nnoremap("<A-+>", ":vertical resize +10<CR>", { desc = "Increase the width of cu
 nnoremap("<C-d>", "<C-d>zz")
 nnoremap("<C-u>", "<C-u>zz")
 
+nnoremap("<C-o>", "<C-o>zz")
+nnoremap("<C-i>", "<C-i>zz")
+
 -- Allow gf to open non-existent files
 nnoremap("gf", ":edit <cfile><CR>", { desc = "Allow opening non-existent file" })
 
