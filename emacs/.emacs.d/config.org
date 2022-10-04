@@ -143,4 +143,9 @@ When your configuration extends with more functions and more packages, Emacs wil
     :hook (
 	   (php-mode . lsp)
 	   (js-mode . lsp)))
+
+  ;; which-key
+  (use-package which-key
+    :config
+    (which-key-mode 1))
 #+END_SRC
