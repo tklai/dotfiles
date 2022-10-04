@@ -58,4 +58,7 @@ if hash exa 2>/dev/null; then
 fi
 
 # Private
+[ -s "$HOME/.private.config" ] && . "$HOME/.private.config"
 [ -s "$HOME/.private.credentials" ] && . "$HOME/.private.credentials"
+
+bindkey -s "^f" "tmux-sessionizer\n"
