@@ -11,6 +11,8 @@ return require("packer").startup(function(use)
   use("williamboman/mason.nvim")
   use("williamboman/mason-lspconfig.nvim")
   use("jose-elias-alvarez/null-ls.nvim")
+  use("b0o/schemastore.nvim")
+
   use({
     "kevinhwang91/nvim-ufo",
     requires = "kevinhwang91/promise-async",

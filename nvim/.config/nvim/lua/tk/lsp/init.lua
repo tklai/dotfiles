@@ -106,14 +106,18 @@ mason_lspconfig.setup({
   ensure_installed = {
     "bashls",
     "cssls",
+    "denols",
+    "diagnosticls",
+    "dockerls",
     "emmet_ls",
+    "eslint",
     "gopls",
     "html",
     "intelephense",
     "jsonls",
     "rust_analyzer",
     "sumneko_lua",
-    "svelte",
+    "sqls",
     "tsserver",
     "vuels",
     "yamlls",
@@ -136,14 +140,14 @@ local present, null_ls = pcall(require, "null-ls")
 if present then
   null_ls.setup({
     sources = {
-      -- Completion
-      null_ls.builtins.completion.spell,
-      -- Diagnostics
-      null_ls.builtins.diagnostics.eslint,
       -- Formatter
       null_ls.builtins.formatting.prettier,
       null_ls.builtins.formatting.stylua,
       null_ls.builtins.formatting.phpcsfixer,
+      -- Completion
+      null_ls.builtins.completion.spell,
+      -- Diagnostics
+      null_ls.builtins.diagnostics.eslint,
     },
   })
 end

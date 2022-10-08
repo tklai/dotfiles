@@ -1,4 +1,23 @@
+local has_schemastore, schemastore = pcall(require, "schemastore")
+
 local config = {}
+
+config.jsonls = {
+  settings = {
+    json = {
+      --
+    },
+  },
+}
+
+if has_schemastore then
+  config.jsonls.settings.json = {
+    schemas = schemastore.json.schemas(),
+    validate = {
+      enable = true,
+    },
+  }
+end
 
 config.sumneko_lua = {
   settings = {
