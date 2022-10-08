@@ -1,4 +1,6 @@
-require("kanagawa").setup({
+local kanagawa = vim.F.npcall(require, "kanagawa")
+
+kanagawa.setup({
   dimInactive = true,
   globalStatus = true,
 })
@@ -8,7 +10,7 @@ vim.cmd("colorscheme kanagawa")
 local default_colors = require("kanagawa.colors").setup()
 local setHl = require("tk.utils").set_highlights
 
-if pcall(require, "telescope") then
+if vim.F.npcall(require, "telescope") then
   local telescope_colors = {
     TelescopeNormal = {
       bg = default_colors.sumiInk2,

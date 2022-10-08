@@ -1,5 +1,5 @@
-local present, catppuccin = pcall(require, "catppuccin")
-if not present then
+local catppuccin = vim.F.npcall(require, "catppuccin")
+if not catppuccin then
   return
 end
 
@@ -18,7 +18,7 @@ vim.cmd("colorscheme catppuccin")
 local color_palette = require("catppuccin.core.color_palette")
 local setHl = require("tk.utils").set_highlights
 
-if pcall(require, "telescope") then
+if vim.F.npcall(require, "telescope") then
   local telescope_colors = {
     TelescopeNormal = {
       bg = color_palette.black2,

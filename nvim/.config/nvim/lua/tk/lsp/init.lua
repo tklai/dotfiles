@@ -1,7 +1,7 @@
-local has_lspconfig, lspconfig = pcall(require, "lspconfig")
-local has_mason, mason = pcall(require, "mason")
-local has_mason_lspconfig, mason_lspconfig = pcall(require, "mason-lspconfig")
-if not has_lspconfig or not has_mason or not has_mason_lspconfig then
+local lspconfig = vim.F.npcall(require, "lspconfig")
+local mason = vim.F.npcall(require, "mason")
+local mason_lspconfig = vim.F.npcall(require, "mason-lspconfig")
+if not lspconfig or not mason or not mason_lspconfig then
   return
 end
 
@@ -11,13 +11,13 @@ local nnoremap = Keymap.nnoremap
 require("tk.config._completion")
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-local has_cmp_lsp, cmp_lsp = pcall(require, "cmp_nvim_lsp")
-if has_cmp_lsp then
+local cmp_lsp = vim.F.npcall(require, "cmp_nvim_lsp")
+if cmp_lsp then
   capabilities = cmp_lsp.update_capabilities(capabilities)
 end
 
-local has_ufo, ufo = pcall(require, "ufo")
-if has_ufo then
+local ufo = vim.F.npcall(require, "ufo")
+if ufo then
   capabilities.textDocument.foldingRange = {
     dynamicRegistration = false,
     lineFoldingOnly = true,
@@ -136,8 +136,8 @@ for _, server in pairs(mason_lspconfig.get_installed_servers()) do
   lspconfig[server].setup(opts)
 end
 
-local present, null_ls = pcall(require, "null-ls")
-if present then
+local null_ls = vim.F.npcall(require, "null-ls")
+if null_ls then
   null_ls.setup({
     sources = {
       -- Formatter

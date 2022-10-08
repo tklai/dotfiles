@@ -1,5 +1,5 @@
-local has_neogit, neogit = pcall(require, 'neogit')
-if not has_neogit then
+local neogit = vim.F.npcall(require, 'neogit')
+if not neogit then
   return
 end
 
@@ -8,4 +8,4 @@ local nnoremap = Keymap.nnoremap
 
 neogit.setup({})
 
-nnoremap('<leader>vc', function() neogit.open() end)
+nnoremap('<leader>vc', neogit.open)

@@ -1,4 +1,4 @@
-local has_schemastore, schemastore = pcall(require, "schemastore")
+local schemastore = vim.F.npcall(require, "schemastore")
 
 local config = {}
 
@@ -10,7 +10,7 @@ config.jsonls = {
   },
 }
 
-if has_schemastore then
+if schemastore then
   config.jsonls.settings.json = {
     schemas = schemastore.json.schemas(),
     validate = {

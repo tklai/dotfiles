@@ -1,4 +1,4 @@
-_ = pcall(vim.cmd, "packadd packer.nvim")
+_ = vim.F.npcall(vim.cmd, "packadd packer.nvim")
 
 return require("packer").startup(function(use)
   -- Core

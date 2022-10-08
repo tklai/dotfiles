@@ -19,7 +19,7 @@ local setup_packer = function()
   print("Packer Cloned Successfully.")
 end
 
-if not pcall(require, "packer") then
+if not vim.F.npcall(require, "packer") then
   reload_required = true
   setup_packer()
 end
