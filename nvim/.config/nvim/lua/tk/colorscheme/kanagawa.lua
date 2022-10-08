@@ -63,9 +63,10 @@ if vim.F.npcall(require, "telescope") then
 end
 
 kanagawa.setup({
-  dimInactive = true,
+  dimInactive = false,
   globalStatus = true,
   overrides = overrides,
+  transparent = true,
 })
 
 vim.cmd("colorscheme kanagawa")
