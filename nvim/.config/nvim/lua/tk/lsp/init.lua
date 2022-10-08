@@ -146,8 +146,6 @@ if null_ls then
       null_ls.builtins.formatting.phpcsfixer,
       -- Completion
       null_ls.builtins.completion.spell,
-      -- Diagnostics
-      null_ls.builtins.diagnostics.eslint,
     },
   })
 end

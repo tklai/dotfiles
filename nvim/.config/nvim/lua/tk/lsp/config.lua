@@ -1,6 +1,25 @@
+local lspconfig = vim.F.npcall(require, "lspconfig")
+if not lspconfig then
+  return {}
+end
+
 local schemastore = vim.F.npcall(require, "schemastore")
 
 local config = {}
+
+config.denols = {
+  root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
+}
+
+config.eslint = {
+  root_dir = lspconfig.util.root_pattern(
+    ".eslintrc.js",
+    ".eslintrc.cjs",
+    ".eslintrc.yaml",
+    ".eslintrc.yml",
+    ".eslintrc.json"
+  ),
+}
 
 config.jsonls = {
   settings = {
@@ -32,6 +51,20 @@ config.sumneko_lua = {
       },
     },
   },
+}
+
+config.vuels = {
+  init_options = {
+    config = {
+      vetur = {
+        ignoreProjectWarning = true,
+      },
+    },
+  },
+}
+
+config.tsserver = {
+  root_dir = lspconfig.util.root_pattern("package.json"),
 }
 
 return config
