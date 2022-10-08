@@ -1,13 +1,15 @@
 [init]
-	defaultBranch = main
+    defaultBranch = main
 [core]
-	editor = nvim
-	excludesFile = ~/.gitignore
+    editor = nvim
+    excludesFile = ~/.gitignore
 [pull]
-	rebase = false
+    rebase = false
 [include]
-	path = ~/.private.gitconfig
+    path = ~/.private.gitconfig
 [diff]
-	algorithm = patience
+    algorithm = patience
 [merge]
-	conflictstyle = diff3
+    conflictstyle = diff3
+[alias]
+    tnylog = log --oneline --graph --decorate
