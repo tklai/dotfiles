@@ -42,6 +42,9 @@ telescope.setup({
       preview_cutoff = 120,
     },
     buffer_previewer_maker = new_maker,
+    file_ignore_patterns = {
+      "public/",
+    },
   },
   extensions = {
     media_files = {

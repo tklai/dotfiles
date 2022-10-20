@@ -107,7 +107,7 @@ mason_lspconfig.setup({
     "bashls",
     "cssls",
     "denols",
-    "diagnosticls",
+    -- "diagnosticls",
     "dockerls",
     "emmet_ls",
     "eslint",
