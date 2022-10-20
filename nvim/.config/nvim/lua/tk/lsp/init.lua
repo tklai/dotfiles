@@ -13,7 +13,7 @@ require("tk.config._completion")
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 local cmp_lsp = vim.F.npcall(require, "cmp_nvim_lsp")
 if cmp_lsp then
-  capabilities = cmp_lsp.update_capabilities(capabilities)
+  capabilities = cmp_lsp.default_capabilities(capabilities)
 end
 
 local ufo = vim.F.npcall(require, "ufo")
