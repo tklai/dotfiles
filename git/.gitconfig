@@ -13,3 +13,4 @@
     conflictstyle = diff3
 [alias]
     tnylog = log --oneline --graph --decorate
+    tnylognm = tnylog --no-merges
