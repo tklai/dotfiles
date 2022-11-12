@@ -72,8 +72,7 @@ local custom_on_attach = function(client, bufnr)
   nnoremap("sd", vim.lsp.buf.hover, { desc = "Show documentation" })
   nnoremap("<leader>D", vim.lsp.buf.type_definition, { desc = "Go to type definition" })
   nnoremap("<leader>rn", vim.lsp.buf.rename, { desc = "Rename the thing under cursor in the buffer" })
-  nnoremap("<leader>ca", vim.lsp.buf.code_action, { desc = "Code action" })
-  nnoremap("<leader>cf", function() vim.lsp.buf.format({ async = true }) end, { desc = "Run code format" })
+  nnoremap("\\\\", function() vim.lsp.buf.format({ async = true }) end, { desc = "Run code format" })
 
   lsp_highlight_document(client)
 
