@@ -14,6 +14,9 @@ vim.g.maplocalleader = " "
 inoremap("jj", "<ESC>", { desc = "Escape" })
 inoremap("<C-c>", "<ESC>", { desc = "Escape" })
 
+-- Save file
+nnoremap("<leader>w", ":w<CR>", { desc = "Save current buffer" })
+
 -- Window navigation
 nnoremap("<C-h>", "<C-w>h", { desc = "Move cursor to the left window" })
 nnoremap("<C-j>", "<C-w>j", { desc = "Move cursor to the lower window"})
@@ -64,4 +67,4 @@ vnoremap(">", ">gv", { desc = "Increase indentation level" })
 tnoremap("<ESC>", "<C-\\><C-n>", { desc = "Escape TERM mode using <Escape> key" })
 
 -- No more highlight after search please
-nnoremap("<ESC>", "<ESC>:noh<CR>", { desc = "Disable highlight search on escape"})
+nnoremap("<ESC>", "<ESC>:noh<CR>", { silent = true, desc = "Disable highlight search on escape"})
