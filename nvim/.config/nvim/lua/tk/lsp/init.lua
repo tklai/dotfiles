@@ -43,24 +43,26 @@ local handlers = {
   ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border }),
 }
 
-local lsp_highlight_document = function(client)
-  -- Set autocommands conditional on server_capabilities
-  if client.server_capabilities.document_highlight then
-    vim.api.nvim_create_augroup("lsp_document_highlight", {})
-    vim.api.nvim_create_autocmd("CursorHold", {
-      group = "lsp_document_highlight",
-      desc = "Show the document highlight",
-      buffer = 0,
-      callback = vim.lsp.buf.document_highlight,
-    })
-    vim.api.nvim_create_autocmd("CursorMoved", {
-      group = "lsp_document_highlight",
-      desc = "Clear references",
-      buffer = 0,
-      callback = vim.lsp.buf.clear_references,
-    })
-  end
-end
+local functions_attach = {
+  lsp_highlight_document = function(client)
+    -- Set autocommands conditional on server_capabilities
+    if client.server_capabilities.document_highlight then
+      vim.api.nvim_create_augroup("lsp_document_highlight", {})
+      vim.api.nvim_create_autocmd("CursorHold", {
+        group = "lsp_document_highlight",
+        desc = "Show the document highlight",
+        buffer = 0,
+        callback = vim.lsp.buf.document_highlight,
+      })
+      vim.api.nvim_create_autocmd("CursorMoved", {
+        group = "lsp_document_highlight",
+        desc = "Clear references",
+        buffer = 0,
+        callback = vim.lsp.buf.clear_references,
+      })
+    end
+  end,
+}
 
 local custom_on_attach = function(client, bufnr)
   nnoremap("gd", vim.lsp.buf.definition, { desc = "Go to definition" })
@@ -72,9 +74,11 @@ local custom_on_attach = function(client, bufnr)
   nnoremap("sd", vim.lsp.buf.hover, { desc = "Show documentation" })
   nnoremap("<leader>D", vim.lsp.buf.type_definition, { desc = "Go to type definition" })
   nnoremap("<leader>rn", vim.lsp.buf.rename, { desc = "Rename the thing under cursor in the buffer" })
-  nnoremap("\\\\", function() vim.lsp.buf.format({ async = true }) end, { desc = "Run code format" })
+  nnoremap("\\\\", function()
+    vim.lsp.buf.format({ async = true })
+  end, { desc = "Run code format" })
 
-  lsp_highlight_document(client)
+  functions_attach.lsp_highlight_document(client)
 
   vim.api.nvim_create_augroup("lsp_diagnostic", {})
   vim.api.nvim_create_autocmd("CursorHold", {
@@ -98,8 +102,7 @@ vim.diagnostic.config({
   severity_sort = true,
 })
 
-mason.setup({
-})
+mason.setup({})
 
 mason_lspconfig.setup({
   ensure_installed = {
