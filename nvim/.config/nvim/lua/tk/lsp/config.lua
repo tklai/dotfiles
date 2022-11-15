@@ -7,10 +7,6 @@ local schemastore = vim.F.npcall(require, "schemastore")
 
 local config = {}
 
-config.denols = {
-  root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
-}
-
 config.eslint = {
   root_dir = lspconfig.util.root_pattern(
     ".eslintrc.js",
@@ -61,10 +57,6 @@ config.vuels = {
       },
     },
   },
-}
-
-config.tsserver = {
-  root_dir = lspconfig.util.root_pattern("package.json"),
 }
 
 return config
