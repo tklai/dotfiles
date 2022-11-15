@@ -115,7 +115,7 @@ mason_lspconfig.setup({
     "eslint",
     "gopls",
     "html",
-    "intelephense",
+    "phpactor",
     "jsonls",
     "rust_analyzer",
     "sumneko_lua",
