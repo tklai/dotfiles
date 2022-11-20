@@ -60,6 +60,7 @@ return require("packer").startup(function(use)
       require("tk.config._telescope")
     end,
   })
+  use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
   -- Auto-completion
   use({
