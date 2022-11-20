@@ -49,6 +49,17 @@ telescope.setup({
       "public/",
     },
   },
+  pickers = {
+    buffers = {
+      show_all_buffers = true,
+      sort_lastused = true,
+      mappings = {
+        i = {
+          ["<c-d>"] = "delete_buffer",
+        },
+      },
+    },
+  },
   extensions = {
     fzf = {
       fuzzy = true, -- false will only do exact matching
