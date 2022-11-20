@@ -59,6 +59,11 @@ opt.fillchars:append({
 
 opt.list = true
 opt.listchars:append({
-  space = "·",
+  -- space = "·",
+  trail = "×",
+  leadmultispace = "·",
   tab = ">-",
+  extends = ">",
+  precedes = "<",
+  nbsp = "+",
 })
