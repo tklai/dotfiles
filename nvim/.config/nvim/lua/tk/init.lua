@@ -4,7 +4,7 @@ end
 
 vim.F.npcall(require, "impatient")
 
-if require("tk.initial_setup") then
+if require("tk.bootstrap") then
   print("Initial Setup Completed. Please restart Neovim.")
   return
 end
