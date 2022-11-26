@@ -34,6 +34,13 @@ if schemastore then
   }
 end
 
+config.phpactor = {
+  init_options = {
+    ["language_server_phpstan.enabled"] = false,
+    ["language_server_psalm.enabled"] = false,
+  }
+}
+
 config.sumneko_lua = {
   settings = {
     Lua = {

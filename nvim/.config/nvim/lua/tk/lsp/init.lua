@@ -142,6 +142,8 @@ local null_ls = vim.F.npcall(require, "null-ls")
 if null_ls then
   null_ls.setup({
     sources = {
+      -- Diagnostics
+      null_ls.builtins.diagnostics.psalm,
       -- Formatter
       null_ls.builtins.formatting.prettier,
       null_ls.builtins.formatting.stylua,
