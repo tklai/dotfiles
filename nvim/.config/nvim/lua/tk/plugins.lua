@@ -1,24 +1,35 @@
-_ = vim.F.npcall(vim.cmd, "packadd packer.nvim")
-
-return require("packer").startup(function(use)
+local plugins = {
   -- Core
-  use("wbthomason/packer.nvim")
-  use("lewis6991/impatient.nvim")
-  use("nvim-lua/plenary.nvim")
+  ["wbthomason/packer.nvim"] = {},
+  ["lewis6991/impatient.nvim"] = {},
+  ["nvim-lua/plenary.nvim"] = {},
 
-  -- LSP
-  use("neovim/nvim-lspconfig")
-  use("williamboman/mason.nvim")
-  use("williamboman/mason-lspconfig.nvim")
-  use("jose-elias-alvarez/null-ls.nvim")
-  use("b0o/schemastore.nvim")
+  -- Treesitter - syntax highlighting
+  ["nvim-treesitter/nvim-treesitter"] = {
+    requires = {
+      "nvim-treesitter/nvim-treesitter-context",
+      "nvim-treesitter/nvim-treesitter-textobjects",
+    },
+    run = ":TSUpdate",
+    config = function()
+      require("plugins.treesitter")
+    end,
+  },
 
-  use({
-    "kevinhwang91/nvim-ufo",
+  -- LSP and DAP
+  ["neovim/nvim-lspconfig"] = {},
+  ["williamboman/mason.nvim"] = {},
+  ["williamboman/mason-lspconfig.nvim"] = {},
+  ["jose-elias-alvarez/null-ls.nvim"] = {},
+  ["mfussenegger/nvim-dap"] = {},
+  ["b0o/schemastore.nvim"] = {},
+
+  -- Folding Plugin
+  -- Depends with LSP or treesitter
+  ["kevinhwang91/nvim-ufo"] = {
     requires = "kevinhwang91/promise-async",
-  })
-  use({
-    "glepnir/lspsaga.nvim",
+  },
+  ["glepnir/lspsaga.nvim"] = {
     branch = "main",
     config = function()
       local saga = require("lspsaga")
@@ -26,51 +37,48 @@ return require("packer").startup(function(use)
       saga.init_lsp_saga({
         -- your configuration
       })
+      -- vim.F.npcall('plugins.lspsaga')
     end,
-  })
-  use({
-    "ray-x/lsp_signature.nvim",
+  },
+  ["ray-x/lsp_signature.nvim"] = {
     config = function()
       require("lsp_signature").setup({})
     end,
-  })
-
-  use("gpanders/editorconfig.nvim")
+  },
+  ["gpanders/editorconfig.nvim"] = {},
 
   -- Theme
-  -- use({"catppuccin/nvim", as = "catppuccin"})
-  use("rebelot/kanagawa.nvim")
-
-  use({
-    "feline-nvim/feline.nvim",
+  -- ["catppuccin/nvim"] = {
+  --   as = "catppuccin"
+  -- },
+  ["rebelot/kanagawa.nvim"] = {},
+  ["nvim-lualine/lualine.nvim"] = {
+    requires = { "kyazdani42/nvim-web-devicons", opt = true },
     config = function()
-      -- Let me revisit once I get the sense of art.
-      require("feline").setup()
+      require("lualine").setup({})
     end,
-  })
+  },
 
-  -- Telescope
-  use({
-    "nvim-telescope/telescope.nvim",
+  --Telescope
+  ["nvim-telescope/telescope.nvim"] = {
     requires = {
       -- Extensions
-      "nvim-telescope/telescope-media-files.nvim",
+      { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
+      { "nvim-telescope/telescope-media-files.nvim" },
     },
     config = function()
-      require("tk.config._telescope")
+      require("plugins.telescope")
     end,
-  })
-  use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+  },
 
+  -- Tools
   -- Auto-completion
-  use({
-    "L3MON4D3/LuaSnip",
+  ["L3MON4D3/LuaSnip"] = {
     config = function()
       require("luasnip.loaders.from_vscode").load()
     end,
-  })
-  use({
-    "hrsh7th/nvim-cmp",
+  },
+  ["hrsh7th/nvim-cmp"] = {
     requires = {
       -- Sources
       "hrsh7th/cmp-buffer",
@@ -81,58 +89,19 @@ return require("packer").startup(function(use)
       -- Default Snippets
       "rafamadriz/friendly-snippets",
     },
-  })
+  },
 
-  -- Tree-sitter
-  use({
-    "nvim-treesitter/nvim-treesitter",
-    requires = {
-      "nvim-treesitter/nvim-treesitter-context",
-      "nvim-treesitter/nvim-treesitter-textobjects",
-    },
-    run = ":TSUpdate",
-    config = function()
-      require("tk.config._treesitter")
-    end,
-  })
-
-  use({
-    "danymat/neogen",
-    config = function()
-      require("neogen").setup()
-      local opts = { noremap = true, silent = true }
-      -- vim.api.nvim_set_keymap("n", "<leader>am", ":Neogen ", {})
-      vim.keymap.set("n", "<leader>af", function()
-        require("neogen").generate({ type = "func" })
-      end, opts)
-
-      vim.keymap.set("n", "<leader>ac", function()
-        require("neogen").generate({ type = "class" })
-      end, opts)
-
-      vim.keymap.set("n", "<leader>at", function()
-        require("neogen").generate({ type = "type" })
-      end, opts)
-    end,
-    requires = "nvim-treesitter/nvim-treesitter",
-  })
-
-  use({
-    "numToStr/Comment.nvim",
-    config = function()
-      require("Comment").setup()
-    end,
-  })
-
-  use({
-    "lewis6991/gitsigns.nvim",
+  ["lewis6991/gitsigns.nvim"] = {
     config = function()
       require("gitsigns").setup()
     end,
-  })
-  use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
-  use({
-    "kyazdani42/nvim-tree.lua",
+  },
+  ["sindrets/diffview.nvim"] = {
+    requires = {
+      { "nvim-lua/plenary.nvim" },
+    },
+  },
+  ["kyazdani42/nvim-tree.lua"] = {
     config = function()
       require("nvim-tree").setup({
         update_cwd = true,
@@ -144,9 +113,8 @@ return require("packer").startup(function(use)
 
       require("tk.utils.keymap").nnoremap("<C-b>", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle NvimTree" })
     end,
-  })
-  use({
-    "akinsho/bufferline.nvim",
+  },
+  ["akinsho/bufferline.nvim"] = {
     config = function()
       require("bufferline").setup({
         options = {
@@ -161,27 +129,51 @@ return require("packer").startup(function(use)
         },
       })
     end,
-  })
+  },
 
-  use({
-    "TimUntersberger/neogit",
-    requires = "nvim-lua/plenary.nvim",
+  ["danymat/neogen"] = {
+    requires = {
+      { "nvim-treesitter/nvim-treesitter" },
+    },
     config = function()
-      require("tk.config._neogit")
-    end,
-  })
+      require("neogen").setup()
+      local opts = { noremap = true, silent = true }
+      vim.keymap.set("n", "<leader>af", function()
+        require("neogen").generate({ type = "func" })
+      end, opts)
 
-  use({
-    "kylechui/nvim-surround",
+      vim.keymap.set("n", "<leader>ac", function()
+        require("neogen").generate({ type = "class" })
+      end, opts)
+
+      vim.keymap.set("n", "<leader>at", function()
+        require("neogen").generate({ type = "type" })
+      end, opts)
+    end,
+  },
+
+  ["numToStr/Comment.nvim"] = {
     config = function()
-      require("nvim-surround").setup({
-        -- Configuration here, or leave empty to use defaults
-      })
+      require("Comment").setup()
     end,
-  })
+  },
 
-  use({
-    "RRethy/vim-illuminate",
+  ["simrat39/symbols-outline.nvim"] = {
+    config = function()
+      require("symbols-outline").setup()
+    end,
+  },
+
+  ["TimUntersberger/neogit"] = {
+    requires = {
+      { "nvim-lua/plenary.nvim" },
+    },
+    config = function()
+      require("plugins.neogit")
+    end,
+  },
+
+  ["RRethy/vim-illuminate"] = {
     config = function()
       require("illuminate").configure({
         filetypes_denylist = {
@@ -189,23 +181,23 @@ return require("packer").startup(function(use)
           "TelescopePrompt",
         },
       })
-
-      vim.api.nvim_set_hl(0, "IlluminatedWordText", {
-        bg = "#54546D",
-      })
-      vim.api.nvim_set_hl(0, "IlluminatedWordRead", {
-        bg = "#54546D",
-      })
-      vim.api.nvim_set_hl(0, "IlluminatedWordWrite", {
-        bg = "#54546D",
-      })
     end,
-  })
+  },
+}
 
-  use({
-    "simrat39/symbols-outline.nvim",
-    config = function()
-      require("symbols-outline").setup()
-    end,
-  })
-end)
+return require("packer").startup({
+  function(use)
+    for name, plugin in pairs(plugins) do
+      if type(name) == "string" and not plugin[1] then
+        plugin[1] = name
+      end
+
+      use(plugin)
+    end
+  end,
+  config = {
+    display = {
+      open_fn = require("packer.util").float,
+    },
+  },
+})

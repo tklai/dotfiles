@@ -7,6 +7,7 @@ local default_colors = require("kanagawa.colors").setup()
 
 local overrides = {}
 
+-- Telescope
 if vim.F.npcall(require, "telescope") then
   overrides = vim.tbl_extend("force", overrides, {
     TelescopeNormal = {
@@ -58,6 +59,21 @@ if vim.F.npcall(require, "telescope") then
     TelescopeResultsBorder = {
       fg = default_colors.sumiInk1,
       bg = default_colors.sumiInk1,
+    },
+  })
+end
+
+-- Illuminate
+if vim.F.npcall(require, "Illuminate") then
+  overrides = vim.tbl_extend("force", overrides, {
+    IlluminatedWordText = {
+      bg = default_colors.sumiInk4,
+    },
+    IlluminatedWordRead = {
+      bg = default_colors.sumiInk4,
+    },
+    IlluminatedWordWrite = {
+      bg = default_colors.sumiInk4,
     },
   })
 end

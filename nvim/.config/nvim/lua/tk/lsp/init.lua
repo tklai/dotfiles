@@ -8,7 +8,7 @@ end
 local Keymap = require("tk.utils.keymap")
 local nnoremap = Keymap.nnoremap
 
-require("tk.config._completion")
+require("plugins.completion")
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 local cmp_lsp = vim.F.npcall(require, "cmp_nvim_lsp")
