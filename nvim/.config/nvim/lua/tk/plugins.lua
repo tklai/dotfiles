@@ -22,6 +22,8 @@ local plugins = {
   ["williamboman/mason-lspconfig.nvim"] = {},
   ["jose-elias-alvarez/null-ls.nvim"] = {},
   ["mfussenegger/nvim-dap"] = {},
+  ["rcarriga/nvim-dap-ui"] = {},
+  ["theHamsta/nvim-dap-virtual-text"] = {},
   ["b0o/schemastore.nvim"] = {},
 
   -- Folding Plugin

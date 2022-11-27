@@ -142,8 +142,6 @@ local null_ls = vim.F.npcall(require, "null-ls")
 if null_ls then
   null_ls.setup({
     sources = {
-      -- Diagnostics
-      null_ls.builtins.diagnostics.psalm,
       -- Formatter
       null_ls.builtins.formatting.prettier,
       null_ls.builtins.formatting.stylua,
@@ -152,4 +150,74 @@ if null_ls then
       null_ls.builtins.completion.spell,
     },
   })
+end
+
+local dap = vim.F.npcall(require, "dap")
+if dap then
+  dap.adapters.php = {
+    type = "executable",
+    command = "php-debug-adapter",
+  }
+
+  dap.configurations.php = {
+    {
+      type = "php",
+      request = "launch",
+      name = "Listen for Xdebug (Workspace)",
+      port = 9003,
+      ignore = {
+        "**/vendor/**/*.php",
+      },
+      pathMappings = {
+        ["/var/www"] = "${workspaceFolder}/../../../projects",
+      },
+    },
+  }
+
+  nnoremap("<M-b>", dap.toggle_breakpoint, { desc = "Toggle Breakpoint" })
+  nnoremap("<M-d>", dap.continue, { desc = "Start Debug" })
+  nnoremap("1", dap.step_over, { desc = "Debug Step over" })
+  nnoremap("2", dap.step_into, { desc = "Debug Step Into" })
+  nnoremap("3", dap.step_out, { desc = "Debug Step up" })
+
+  local dapui = vim.F.npcall(require, "dapui")
+  if dapui then
+    dapui.setup({
+      layouts = {
+        {
+          elements = {
+            "scopes",
+            "breakpoints",
+            "stacks",
+            -- "watches",
+            -- "repl",
+          },
+          size = 48,
+          position = "right",
+        },
+        {
+          elements = {
+            -- "console",
+          },
+          size = 0.2,
+          position = "bottom",
+        },
+      },
+    })
+
+    dap.listeners.after.event_initialized["dapui_config"] = function()
+      dapui.open()
+    end
+    dap.listeners.before.event_terminated["dapui_config"] = function()
+      dapui.close()
+    end
+    dap.listeners.before.event_exited["dapui_config"] = function()
+      dapui.close()
+    end
+  end
+
+  local dap_vritual_text = vim.F.npcall(require, "nvim-dap-virtual-text")
+  if dap_vritual_text then
+    dap_vritual_text.setup()
+  end
 end
