@@ -75,11 +75,7 @@ local plugins = {
 
   -- Tools
   -- Auto-completion
-  ["L3MON4D3/LuaSnip"] = {
-    config = function()
-      require("luasnip.loaders.from_vscode").load()
-    end,
-  },
+  ["L3MON4D3/LuaSnip"] = {},
   ["hrsh7th/nvim-cmp"] = {
     requires = {
       -- Sources
@@ -200,6 +196,9 @@ return require("packer").startup({
   config = {
     display = {
       open_fn = require("packer.util").float,
+    },
+    profile = {
+      enable = true,
     },
   },
 })
