@@ -34,12 +34,7 @@ local plugins = {
   ["glepnir/lspsaga.nvim"] = {
     branch = "main",
     config = function()
-      local saga = require("lspsaga")
-
-      saga.init_lsp_saga({
-        -- your configuration
-      })
-      -- vim.F.npcall('plugins.lspsaga')
+      require("lspsaga").init_lsp_saga({})
     end,
   },
   ["ray-x/lsp_signature.nvim"] = {
@@ -57,7 +52,7 @@ local plugins = {
   ["nvim-lualine/lualine.nvim"] = {
     requires = { "kyazdani42/nvim-web-devicons", opt = true },
     config = function()
-      require("lualine").setup({})
+      require("plugins.lualine")
     end,
   },
 

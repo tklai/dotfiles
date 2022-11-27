@@ -3,8 +3,6 @@ if not lspconfig then
   return {}
 end
 
-local schemastore = vim.F.npcall(require, "schemastore")
-
 local config = {}
 
 config.eslint = {
@@ -25,13 +23,14 @@ config.jsonls = {
   },
 }
 
+local schemastore = vim.F.npcall(require, "schemastore")
 if schemastore then
-  config.jsonls.settings.json = {
+  config.jsonls = vim.tbl_extend("force", config.jsonls.settings.json, {
     schemas = schemastore.json.schemas(),
     validate = {
       enable = true,
     },
-  }
+  })
 end
 
 config.phpactor = {
