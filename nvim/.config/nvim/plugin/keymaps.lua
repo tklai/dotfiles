@@ -4,6 +4,7 @@ local inoremap = Keymap.inoremap
 local nnoremap = Keymap.nnoremap
 local vnoremap = Keymap.vnoremap
 local tnoremap = Keymap.tnoremap
+local xnoremap = Keymap.xnoremap
 
 nnoremap("<Space>", "<Nop>", { desc = "Leader Key" })
 vim.g.mapleader = " "
@@ -19,9 +20,9 @@ nnoremap("<leader>w", ":w<CR>", { desc = "Save current buffer" })
 
 -- Window navigation
 nnoremap("<C-h>", "<C-w>h", { desc = "Move cursor to the left window" })
-nnoremap("<C-j>", "<C-w>j", { desc = "Move cursor to the lower window"})
-nnoremap("<C-k>", "<C-w>k", { desc = "Move cursor to the upper window"})
-nnoremap("<C-l>", "<C-w>l", { desc = "Move cursor to the right window"})
+nnoremap("<C-j>", "<C-w>j", { desc = "Move cursor to the lower window" })
+nnoremap("<C-k>", "<C-w>k", { desc = "Move cursor to the upper window" })
+nnoremap("<C-l>", "<C-w>l", { desc = "Move cursor to the right window" })
 
 -- Pane
 nnoremap("<A-->", ":resize -10<CR>", { desc = "Decrease the height of current pane" })
@@ -68,4 +69,18 @@ vnoremap(">", ">gv", { desc = "Increase indentation level" })
 tnoremap("<ESC>", "<C-\\><C-n>", { desc = "Escape TERM mode using <Escape> key" })
 
 -- No more highlight after search please
-nnoremap("<ESC>", "<ESC>:noh<CR>", { silent = true, desc = "Disable highlight search on escape"})
+nnoremap("<ESC>", "<ESC>:noh<CR>", { silent = true, desc = "Disable highlight search on escape" })
+
+-- Call tmux-sessionizer without creating extra shell
+nnoremap("<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>", { silent = true, desc = "Tmux sessionizer" })
+
+xnoremap("<leader>d", [["_d]], { desc = "Delete without affecting the clipboard" })
+xnoremap("<leader>p", [["_dP]], { desc = "Replace the selected line without losing the yank" })
+nnoremap("<leader>cj", "<cmd>cnext<CR>zz", { desc = "Navigate files in quickfix list blazingly fast" })
+nnoremap("<leader>ck", "<cmd>cprev<CR>zz", { desc = "Navigate files in quickfix list blazingly fast" })
+
+nnoremap(
+  "<leader>s",
+  [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
+  { desc = "Find the word in current buffer and create replace regex in a real quick" }
+)
