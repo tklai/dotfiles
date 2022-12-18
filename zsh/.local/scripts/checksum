@@ -1,0 +1,7 @@
+#!/bin/bash
+
+ALGO=$1
+FILE_PATH=$2
+HASH=$3
+
+[[ $($ALGO $FILE_PATH | awk '{print $1}') == $HASH ]] && echo "Identical" || echo "Not identical"
