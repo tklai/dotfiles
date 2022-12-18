@@ -1,8 +1,11 @@
+local spectre = vim.F.npcall(require, "spectre")
+if not spectre then
+  return
+end
+
 local Keymap = require("tk.utils.keymap")
 local nnoremap = Keymap.nnoremap
 local vnoremap = Keymap.vnoremap
-
-local spectre = require("spectre")
 
 spectre.setup({})
 

@@ -11,9 +11,6 @@ local plugins = {
       "nvim-treesitter/nvim-treesitter-textobjects",
     },
     run = ":TSUpdate",
-    config = function()
-      require("plugins.treesitter")
-    end,
   },
 
   -- LSP and DAP
@@ -51,9 +48,6 @@ local plugins = {
   ["rebelot/kanagawa.nvim"] = {},
   ["nvim-lualine/lualine.nvim"] = {
     requires = { "kyazdani42/nvim-web-devicons", opt = true },
-    config = function()
-      require("plugins.lualine")
-    end,
   },
 
   --Telescope
@@ -63,9 +57,6 @@ local plugins = {
       { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
       { "nvim-telescope/telescope-media-files.nvim" },
     },
-    config = function()
-      require("plugins.telescope")
-    end,
   },
 
   -- Tools
@@ -161,9 +152,6 @@ local plugins = {
     requires = {
       { "nvim-lua/plenary.nvim" },
     },
-    config = function()
-      require("plugins.neogit")
-    end,
   },
 
   ["RRethy/vim-illuminate"] = {
