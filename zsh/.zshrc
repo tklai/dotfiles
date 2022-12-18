@@ -62,3 +62,5 @@ fi
 [ -s "$HOME/.private.credentials" ] && . "$HOME/.private.credentials"
 
 bindkey -s "^f" "tmux-sessionizer\n"
+
+alias \:q="exit"
