@@ -175,9 +175,9 @@ if dap then
 
   nnoremap("<M-b>", dap.toggle_breakpoint, { desc = "Toggle Breakpoint" })
   nnoremap("<M-d>", dap.continue, { desc = "Start Debug" })
-  nnoremap("1", dap.step_over, { desc = "Debug Step over" })
-  nnoremap("2", dap.step_into, { desc = "Debug Step Into" })
-  nnoremap("3", dap.step_out, { desc = "Debug Step up" })
+  nnoremap("<F2>", dap.step_over, { desc = "Debug Step over" })
+  nnoremap("<F3>", dap.step_into, { desc = "Debug Step Into" })
+  nnoremap("<F4>", dap.step_out, { desc = "Debug Step up" })
 
   local dapui = vim.F.npcall(require, "dapui")
   if dapui then
