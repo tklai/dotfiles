@@ -6,13 +6,11 @@ local vnoremap = Keymap.vnoremap
 local tnoremap = Keymap.tnoremap
 local xnoremap = Keymap.xnoremap
 
-nnoremap("<Space>", "<Nop>", { desc = "Leader Key" })
+nnoremap("<Space>", "<Nop>", { desc = "Occupied by leader Key" })
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 -- Escape
--- jj to escape
-inoremap("jj", "<ESC>", { desc = "Escape" })
 inoremap("<C-c>", "<ESC>", { desc = "Escape" })
 
 -- Save file
@@ -30,10 +28,9 @@ nnoremap("<A-=>", ":resize +10<CR>", { desc = "Increase the height of current pa
 nnoremap("<A-_>", ":vertical resize -10<CR>", { desc = "Decrease the width of current pane" })
 nnoremap("<A-+>", ":vertical resize +10<CR>", { desc = "Increase the width of current pane" })
 
--- Centered
+-- Always Centered
 nnoremap("<C-d>", "<C-d>zz")
 nnoremap("<C-u>", "<C-u>zz")
-
 nnoremap("<C-o>", "<C-o>zz")
 nnoremap("<C-i>", "<C-i>zz")
 

@@ -22,6 +22,7 @@ local plugins = {
   ["rcarriga/nvim-dap-ui"] = {},
   ["theHamsta/nvim-dap-virtual-text"] = {},
   ["b0o/schemastore.nvim"] = {},
+  ["j-hui/fidget.nvim"] = {},
 
   -- Folding Plugin
   -- Depends with LSP or treesitter
@@ -164,7 +165,17 @@ local plugins = {
       })
     end,
   },
+
+  ["mbbill/undotree"] = {},
 }
+
+-- Re-source the file and run PackerCompile in background
+local packer_group = vim.api.nvim_create_augroup("Packer", { clear = true })
+vim.api.nvim_create_autocmd("BufWritePost", {
+  command = "source <afile> | PackerCompile",
+  group = packer_group,
+  pattern = vim.fn.expand("$MYVIMRC"),
+})
 
 return require("packer").startup({
   function(use)
