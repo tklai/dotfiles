@@ -13,10 +13,10 @@ catppuccin.setup({
   },
 })
 
-vim.cmd("colorscheme catppuccin")
+vim.cmd.colorscheme("catppuccin")
 
 local color_palette = require("catppuccin.core.color_palette")
-local setHl = require("tk.utils").set_highlights
+local setHl = require("core.utils").set_highlights
 
 if vim.F.npcall(require, "telescope") then
   local telescope_colors = {

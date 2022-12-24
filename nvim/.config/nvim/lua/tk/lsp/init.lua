@@ -24,23 +24,6 @@ if ufo then
   ufo.setup()
 end
 
-local border = {
-  { "╭", "FloatBorder" },
-  { "─", "FloatBorder" },
-  { "╮", "FloatBorder" },
-  { "│", "FloatBorder" },
-  { "╯", "FloatBorder" },
-  { "─", "FloatBorder" },
-  { "╰", "FloatBorder" },
-  { "│", "FloatBorder" },
-}
-
--- LSP settings (for overriding per client)
-local handlers = {
-  ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border }),
-  ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border }),
-}
-
 local functions_attach = {
   lsp_highlight_document = function(client)
     -- Set autocommands conditional on server_capabilities
@@ -131,7 +114,6 @@ for _, server in pairs(mason_lspconfig.get_installed_servers()) do
   local opts = vim.tbl_extend("force", {
     capabilities = capabilities,
     on_attach = custom_on_attach,
-    handlers = handlers,
   }, config[server] or {})
 
   lspconfig[server].setup(opts)

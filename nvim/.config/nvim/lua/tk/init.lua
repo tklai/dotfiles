@@ -4,12 +4,13 @@ end
 
 vim.F.npcall(require, "impatient")
 
-if require("tk.bootstrap") then
+if require("core.bootstrap") then
   print("Initial Setup Completed. Please restart Neovim.")
+
   return
 end
 
-require("tk.disable_builtins")
+require("core.disable_builtins")
 require("tk.options")
 require("tk.plugins")
 require("tk.lsp")

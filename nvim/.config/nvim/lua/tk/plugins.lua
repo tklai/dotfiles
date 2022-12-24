@@ -1,16 +1,48 @@
-local plugins = {
+local my_plugins = {
   -- Core
-  ["wbthomason/packer.nvim"] = {},
   ["lewis6991/impatient.nvim"] = {},
   ["nvim-lua/plenary.nvim"] = {},
+  ["folke/noice.nvim"] = {
+    config = function()
+      require("noice").setup({
+        lsp = {
+          override = {
+            ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+            ["vim.lsp.util.stylize_markdown"] = true,
+            ["cmp.entry.get_documentation"] = true,
+          },
+        },
+        presets = {
+          bottom_search = true,
+          command_palette = true,
+          long_message_to_split = true,
+          lsp_doc_border = true,
+        },
+      })
+
+      vim.opt.cmdheight = 0
+    end,
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      {
+        "rcarriga/nvim-notify",
+        config = function()
+          require("notify").setup({
+            background_colour = "#000000",
+            stages = "fade",
+          })
+        end,
+      },
+    },
+  },
 
   -- Treesitter - syntax highlighting
   ["nvim-treesitter/nvim-treesitter"] = {
-    requires = {
+    dependencies = {
       "nvim-treesitter/nvim-treesitter-context",
       "nvim-treesitter/nvim-treesitter-textobjects",
     },
-    run = ":TSUpdate",
+    build = ":TSUpdate",
   },
 
   -- LSP and DAP
@@ -18,16 +50,22 @@ local plugins = {
   ["williamboman/mason.nvim"] = {},
   ["williamboman/mason-lspconfig.nvim"] = {},
   ["jose-elias-alvarez/null-ls.nvim"] = {},
-  ["mfussenegger/nvim-dap"] = {},
-  ["rcarriga/nvim-dap-ui"] = {},
-  ["theHamsta/nvim-dap-virtual-text"] = {},
+  ["mfussenegger/nvim-dap"] = {
+    enabled = false,
+    lazy = true,
+    dependencies = {
+      "rcarriga/nvim-dap-ui",
+      "theHamsta/nvim-dap-virtual-text",
+    }
+  },
   ["b0o/schemastore.nvim"] = {},
-  ["j-hui/fidget.nvim"] = {},
 
   -- Folding Plugin
   -- Depends with LSP or treesitter
   ["kevinhwang91/nvim-ufo"] = {
-    requires = "kevinhwang91/promise-async",
+    dependencies = {
+      "kevinhwang91/promise-async"
+    },
   },
   ["glepnir/lspsaga.nvim"] = {
     branch = "main",
@@ -36,26 +74,32 @@ local plugins = {
     end,
   },
   ["ray-x/lsp_signature.nvim"] = {
+    enabled = false,
     config = function()
-      require("lsp_signature").setup({})
+      require("lsp_signature").setup({
+        noice = true,
+      })
     end,
   },
   ["gpanders/editorconfig.nvim"] = {},
 
   -- Theme
-  -- ["catppuccin/nvim"] = {
-  --   as = "catppuccin"
-  -- },
+  ["catppuccin/nvim"] = {
+    name = "catppuccin",
+    enabled = false,
+  },
   ["rebelot/kanagawa.nvim"] = {},
   ["nvim-lualine/lualine.nvim"] = {
-    requires = { "kyazdani42/nvim-web-devicons", opt = true },
+    dependencies = {
+      {"kyazdani42/nvim-web-devicons", lazy = true },
+    },
   },
 
   --Telescope
   ["nvim-telescope/telescope.nvim"] = {
-    requires = {
+    dependencies = {
       -- Extensions
-      { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
+      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
       { "nvim-telescope/telescope-media-files.nvim" },
     },
   },
@@ -64,7 +108,7 @@ local plugins = {
   -- Auto-completion
   ["L3MON4D3/LuaSnip"] = {},
   ["hrsh7th/nvim-cmp"] = {
-    requires = {
+    dependencies = {
       -- Sources
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
@@ -82,8 +126,8 @@ local plugins = {
     end,
   },
   ["sindrets/diffview.nvim"] = {
-    requires = {
-      { "nvim-lua/plenary.nvim" },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
     },
   },
   ["kyazdani42/nvim-tree.lua"] = {
@@ -117,7 +161,7 @@ local plugins = {
   },
 
   ["danymat/neogen"] = {
-    requires = {
+    dependencies = {
       { "nvim-treesitter/nvim-treesitter" },
     },
     config = function()
@@ -150,8 +194,8 @@ local plugins = {
   },
 
   ["TimUntersberger/neogit"] = {
-    requires = {
-      { "nvim-lua/plenary.nvim" },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
     },
   },
 
@@ -169,30 +213,13 @@ local plugins = {
   ["mbbill/undotree"] = {},
 }
 
--- Re-source the file and run PackerCompile in background
-local packer_group = vim.api.nvim_create_augroup("Packer", { clear = true })
-vim.api.nvim_create_autocmd("BufWritePost", {
-  command = "source <afile> | PackerCompile",
-  group = packer_group,
-  pattern = vim.fn.expand("$MYVIMRC"),
-})
+local lazy_plugins = {}
+for name, plugin in pairs(my_plugins) do
+  if type(name) == "string" and not plugin[1] then
+    plugin[1] = name
+  end
 
-return require("packer").startup({
-  function(use)
-    for name, plugin in pairs(plugins) do
-      if type(name) == "string" and not plugin[1] then
-        plugin[1] = name
-      end
+  table.insert(lazy_plugins, plugin)
+end
 
-      use(plugin)
-    end
-  end,
-  config = {
-    display = {
-      open_fn = require("packer.util").float,
-    },
-    profile = {
-      enable = true,
-    },
-  },
-})
+require("lazy").setup(lazy_plugins, {})
