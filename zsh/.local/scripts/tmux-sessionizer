@@ -19,13 +19,22 @@ fi
 selected_name=$(basename "$selected" | tr . _)
 tmux_running=$(pgrep tmux)
 
-if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
+# Create a session when there are no tmux sessions running.
+if [[ -z $tmux_running ]]; then
     tmux new-session -s $selected_name -c $selected
     exit 0
 fi
 
+# Create a detached session when tmux is running but there is no session for selected project.
 if ! tmux has-session -t=$selected_name 2> /dev/null; then
     tmux new-session -ds $selected_name -c $selected
 fi
 
+# Attach session when the user is not in tmux.
+if [[ -z $TMUX ]]; then
+    tmux attach -t $selected_name
+    exit 0
+fi
+
+# Otherwise, switch to the session.
 tmux switch-client -t $selected_name
