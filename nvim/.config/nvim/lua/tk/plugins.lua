@@ -18,6 +18,27 @@ local my_plugins = {
           long_message_to_split = true,
           lsp_doc_border = true,
         },
+        views = {
+          cmdline_popup = {
+            border = {
+              style = "single",
+            },
+            position = {
+              row = "100%",
+              col = "100%",
+            },
+          },
+          popupmenu = {
+            border = {
+              style = "none",
+            },
+          },
+          popup = {
+            border = {
+              style = "none",
+            },
+          },
+        },
       })
 
       vim.opt.cmdheight = 0
@@ -56,7 +77,7 @@ local my_plugins = {
     dependencies = {
       "rcarriga/nvim-dap-ui",
       "theHamsta/nvim-dap-virtual-text",
-    }
+    },
   },
   ["b0o/schemastore.nvim"] = {},
 
@@ -64,7 +85,7 @@ local my_plugins = {
   -- Depends with LSP or treesitter
   ["kevinhwang91/nvim-ufo"] = {
     dependencies = {
-      "kevinhwang91/promise-async"
+      "kevinhwang91/promise-async",
     },
   },
   ["glepnir/lspsaga.nvim"] = {
@@ -91,7 +112,7 @@ local my_plugins = {
   ["rebelot/kanagawa.nvim"] = {},
   ["nvim-lualine/lualine.nvim"] = {
     dependencies = {
-      {"kyazdani42/nvim-web-devicons", lazy = true },
+      { "kyazdani42/nvim-web-devicons", lazy = true },
     },
   },
 
@@ -211,6 +232,12 @@ local my_plugins = {
   },
 
   ["mbbill/undotree"] = {},
+  ["jidn/vim-dbml"] = {},
+  ["m4xshen/autoclose.nvim"] = {
+    config = function()
+      require("autoclose").setup({})
+    end,
+  },
 }
 
 local lazy_plugins = {}
