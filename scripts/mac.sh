@@ -31,7 +31,7 @@ defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 #{{{ Screen
 
 # Disable LCD Font Smoothing
-defaults -currentHost write -g AppleFontSmoothing -int 0
+defaults -currentHost write -g AppleFontSmoothing -int 1
 
 # Screenshots
 # Disable shadow in screenshots
@@ -66,6 +66,9 @@ defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 # Prevent Time Machine from prompting to use new hard drives as backup volume
 defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 
+# Drag windows everywhere by holding control + command
+defaults write -g NSWindowShouldDragOnGesture -bool true
+
 #}}}
 
-echo "Configurations have been applied."
+echo "Configurations have been applied. Please reboot or re-login to take effects."
