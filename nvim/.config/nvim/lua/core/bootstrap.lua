@@ -9,14 +9,8 @@ if not vim.loop.fs_stat(lazy_path) then
   vim.fn.delete(lazy_path, "rf")
 
   print(string.format("Cloning lazy.nvim to '%s'...", lazy_path))
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "--single-branch",
-    "https://github.com/folke/lazy.nvim.git",
-    lazy_path,
-  })
+  vim.fn.system({ "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", lazy_path })
+  vim.fn.system({ "git", "-C", lazy_path, "checkout", "tags/stable" })
 
   reload_required = true
 end
