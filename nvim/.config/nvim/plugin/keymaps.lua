@@ -75,9 +75,15 @@ xnoremap("<leader>d", [["_d]], { desc = "Delete without affecting the clipboard"
 xnoremap("<leader>p", [["_dP]], { desc = "Replace the selected line without losing the yank" })
 nnoremap("<leader>cj", "<cmd>cnext<CR>zz", { desc = "Navigate files in quickfix list blazingly fast" })
 nnoremap("<leader>ck", "<cmd>cprev<CR>zz", { desc = "Navigate files in quickfix list blazingly fast" })
+nnoremap("<leader>cq", "<cmd>cclose<CR>", { desc = "Close quickfix list" })
 
 nnoremap(
   "<leader>s",
   [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
   { desc = "Find the word in current buffer and create replace regex in a real quick" }
+)
+xnoremap(
+  "<leader>s",
+  [[:s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
+  { desc = "Find the word in selected visual zone and create replace regex in a real quick" }
 )
