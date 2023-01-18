@@ -3,46 +3,45 @@ local my_plugins = {
   ["lewis6991/impatient.nvim"] = {},
   ["nvim-lua/plenary.nvim"] = {},
   ["folke/noice.nvim"] = {
-    config = function()
-      require("noice").setup({
-        lsp = {
-          override = {
-            ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-            ["vim.lsp.util.stylize_markdown"] = true,
-            ["cmp.entry.get_documentation"] = true,
-          },
-        },
-        presets = {
-          bottom_search = true,
-          command_palette = true,
-          long_message_to_split = true,
-          lsp_doc_border = true,
-        },
-        views = {
-          cmdline_popup = {
-            border = {
-              style = "single",
-            },
-            position = {
-              row = "100%",
-              col = "100%",
-            },
-          },
-          popupmenu = {
-            border = {
-              style = "none",
-            },
-          },
-          popup = {
-            border = {
-              style = "none",
-            },
-          },
-        },
-      })
-
+    init = function()
       vim.opt.cmdheight = 0
     end,
+    opts = {
+      lsp = {
+        override = {
+          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+          ["vim.lsp.util.stylize_markdown"] = true,
+          ["cmp.entry.get_documentation"] = true,
+        },
+      },
+      presets = {
+        bottom_search = true,
+        command_palette = true,
+        long_message_to_split = true,
+        lsp_doc_border = true,
+      },
+      views = {
+        cmdline_popup = {
+          border = {
+            style = "single",
+          },
+          position = {
+            row = "100%",
+            col = "100%",
+          },
+        },
+        popupmenu = {
+          border = {
+            style = "none",
+          },
+        },
+        popup = {
+          border = {
+            style = "none",
+          },
+        },
+      },
+    },
     dependencies = {
       "MunifTanjim/nui.nvim",
       {
@@ -64,6 +63,11 @@ local my_plugins = {
       "nvim-treesitter/nvim-treesitter-textobjects",
     },
     build = ":TSUpdate",
+  },
+
+  -- Text Objects
+  ["chrisgrieser/nvim-various-textobjs"] = {
+    opts = { useDefaultKeymaps = true },
   },
 
   -- LSP and DAP
@@ -90,17 +94,13 @@ local my_plugins = {
   },
   ["glepnir/lspsaga.nvim"] = {
     branch = "main",
-    config = function()
-      require("lspsaga").init_lsp_saga({})
-    end,
+    config = true,
   },
   ["ray-x/lsp_signature.nvim"] = {
     enabled = false,
-    config = function()
-      require("lsp_signature").setup({
-        noice = true,
-      })
-    end,
+    opts = {
+      noice = true,
+    },
   },
   ["gpanders/editorconfig.nvim"] = {},
 
@@ -142,9 +142,7 @@ local my_plugins = {
   },
 
   ["lewis6991/gitsigns.nvim"] = {
-    config = function()
-      require("gitsigns").setup()
-    end,
+    config = true,
   },
   ["sindrets/diffview.nvim"] = {
     dependencies = {
@@ -165,20 +163,18 @@ local my_plugins = {
     end,
   },
   ["akinsho/bufferline.nvim"] = {
-    config = function()
-      require("bufferline").setup({
-        options = {
-          diagnostics = "nvim_lsp",
-          offsets = {
-            {
-              filetype = "NvimTree",
-              text = " File Explorer",
-              text_align = "left",
-            },
+    opts = {
+      options = {
+        diagnostics = "nvim_lsp",
+        offsets = {
+          {
+            filetype = "NvimTree",
+            text = " File Explorer",
+            text_align = "left",
           },
         },
-      })
-    end,
+      },
+    },
   },
 
   ["danymat/neogen"] = {
@@ -203,15 +199,11 @@ local my_plugins = {
   },
 
   ["numToStr/Comment.nvim"] = {
-    config = function()
-      require("Comment").setup()
-    end,
+    config = true,
   },
 
   ["simrat39/symbols-outline.nvim"] = {
-    config = function()
-      require("symbols-outline").setup()
-    end,
+    config = true,
   },
 
   ["TimUntersberger/neogit"] = {
@@ -234,9 +226,27 @@ local my_plugins = {
   ["mbbill/undotree"] = {},
   ["jidn/vim-dbml"] = {},
   ["m4xshen/autoclose.nvim"] = {
-    config = function()
-      require("autoclose").setup({})
-    end,
+    enabled = false,
+    config = true,
+  },
+
+  ["shortcuts/no-neck-pain.nvim"] = {
+    enabled = false,
+    version = "*",
+    opts = {
+      enableOnVimEnter = true,
+      width = 120,
+      integrations = {
+        NvimTree = { position = "right" },
+        undotree = { position = "left" },
+      },
+    },
+  },
+  ["roobert/search-replace.nvim"] = {
+    config = true,
+  },
+  ["asiryk/auto-hlsearch.nvim"] = {
+    config = true,
   },
 }
 
