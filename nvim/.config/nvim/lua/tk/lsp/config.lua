@@ -33,6 +33,23 @@ if schemastore then
   })
 end
 
+-- TODO: Can I store the exclude list in a private file or .env?
+config.intelephense = {
+  settings = {
+    intelephense = {
+      files = {
+        exclude = {
+          "**/.git/**",
+          "**/node_modules/**",
+          "**/bower_components/**",
+          "**/vendor/**/{Tests,tests}/**",
+          "**/vendor/**/vendor/**",
+        }
+      },
+    },
+  },
+}
+
 config.phpactor = {
   init_options = {
     ["language_server_phpstan.enabled"] = false,
