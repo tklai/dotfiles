@@ -60,6 +60,7 @@ local my_plugins = {
     dependencies = {
       "nvim-treesitter/nvim-treesitter-context",
       "nvim-treesitter/nvim-treesitter-textobjects",
+      "nvim-treesitter/playground",
     },
     build = ":TSUpdate",
   },
@@ -223,7 +224,9 @@ local my_plugins = {
   },
 
   ["mbbill/undotree"] = {},
-  ["jidn/vim-dbml"] = {},
+  ["jidn/vim-dbml"] = {
+    -- enabled = false,
+  },
   ["m4xshen/autoclose.nvim"] = {
     enabled = false,
     config = true,
