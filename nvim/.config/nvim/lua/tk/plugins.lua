@@ -1,6 +1,5 @@
 local my_plugins = {
   -- Core
-  ["lewis6991/impatient.nvim"] = {},
   ["nvim-lua/plenary.nvim"] = {},
   ["folke/noice.nvim"] = {
     init = function()
