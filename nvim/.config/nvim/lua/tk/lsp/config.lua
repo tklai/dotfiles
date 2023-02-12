@@ -57,7 +57,7 @@ config.phpactor = {
   }
 }
 
-config.sumneko_lua = {
+config.lua_ls = {
   settings = {
     Lua = {
       diagnostics = {

@@ -100,7 +100,7 @@ mason_lspconfig.setup({
     "intelephense",
     "jsonls",
     "rust_analyzer",
-    "sumneko_lua",
+    "lua_ls",
     "sqls",
     "tsserver",
     "vuels",
