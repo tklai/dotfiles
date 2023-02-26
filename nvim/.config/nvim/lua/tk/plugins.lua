@@ -200,16 +200,19 @@ local my_plugins = {
 
   ["numToStr/Comment.nvim"] = {
     config = true,
+    event = "BufEnter",
   },
 
   ["simrat39/symbols-outline.nvim"] = {
     config = true,
+    cmd = "SymbolsOutline",
   },
 
   ["TimUntersberger/neogit"] = {
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
+    cmd = "Neogit",
   },
 
   ["RRethy/vim-illuminate"] = {
@@ -223,9 +226,12 @@ local my_plugins = {
     end,
   },
 
-  ["mbbill/undotree"] = {},
+  ["mbbill/undotree"] = {
+   cmd = "UndotreeToggle",
+  },
   ["jidn/vim-dbml"] = {
     -- enabled = false,
+    ft = "dbml",
   },
   ["m4xshen/autoclose.nvim"] = {
     enabled = false,
