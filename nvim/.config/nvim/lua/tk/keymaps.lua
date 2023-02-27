@@ -7,8 +7,6 @@ local tnoremap = Keymap.tnoremap
 local xnoremap = Keymap.xnoremap
 
 nnoremap("<Space>", "<Nop>", { desc = "Occupied by leader Key" })
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
 
 -- Escape
 inoremap("<C-c>", "<ESC>", { desc = "Escape" })

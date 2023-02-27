@@ -15,6 +15,7 @@ local disabled_builtins = {
   "tar",
   "tarPlugin",
   "rrhelper",
+  "ruby_provider",
   "spellfile_plugin",
   "vimball",
   "vimballPlugin",
