@@ -4,7 +4,7 @@ if not tokyonight then
 end
 
 tokyonight.setup({
-  transparent = true,
+  -- transparent = true,
   dim_inactive = true,
   on_highlights = function(hl, color)
     if vim.F.npcall(require, "telescope") then

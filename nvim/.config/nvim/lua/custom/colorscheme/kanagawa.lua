@@ -82,7 +82,7 @@ kanagawa.setup({
   dimInactive = false,
   globalStatus = true,
   overrides = overrides,
-  transparent = true,
+  -- transparent = true,
 })
 
 vim.cmd.colorscheme("kanagawa")

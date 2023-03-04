@@ -4,7 +4,7 @@ if not catppuccin then
 end
 
 catppuccin.setup({
-  transparent_background = true,
+  -- transparent_background = true,
   dim_inactive = {
     enabled = true,
     shade = "dark",
