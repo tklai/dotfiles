@@ -18,7 +18,7 @@ REPORTTIME=15
 TIMEFMT='%J  %*U user %*S system %P cpu (%*E wasted time).'
 
 NEWLINE=$'\n'
-PROMPT="${NEWLINE}%F{204}%n%f@%F{248}%M%f [%D %*] %F{123}%~%f${NEWLINE}%# "
+PROMPT="${NEWLINE}%F{204}%n%f@%F{248}%M%f [%D %*] %F{39}%~%f${NEWLINE}%# "
 
 # Command Alias
 ## Directory Listing
