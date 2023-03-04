@@ -31,6 +31,5 @@ require("lazy").setup("custom.plugins")
 
 require("tk.keymaps")
 require("tk.lsp")
-require("tk.colorscheme")
 
 vim.opt.guifont="Liga SFMono Nerd Font:h12"

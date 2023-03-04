@@ -1,5 +1,9 @@
 return {
   {
+    "nvim-neo-tree/neo-tree.nvim",
+    enabled = false,
+  },
+  {
     "kyazdani42/nvim-tree.lua",
     cmd = "NvimTreeToggle",
     init = function()

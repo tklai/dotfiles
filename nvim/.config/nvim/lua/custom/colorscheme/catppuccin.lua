@@ -5,8 +5,18 @@ end
 
 catppuccin.setup({
   transparent_background = true,
+  dim_inactive = {
+    enabled = true,
+    shade = "dark",
+    percentage = 0.15,
+  },
+  color_overrides = {
+    latte = {
+      base = "#E1E2E6",
+    },
+  },
   highlight_overrides = {
-    all = function(latte)
+    all = function(color)
       local overrides = {
         --
       }
@@ -14,55 +24,55 @@ catppuccin.setup({
       if vim.F.npcall(require, "telescope") then
         overrides = vim.tbl_extend("force", overrides, {
           TelescopeNormal = {
-            bg = latte.surface1,
+            bg = color.surface1,
           },
           TelescopeSelection = {
-            fg = latte.mantle,
-            bg = latte.subtext1,
+            fg = color.mantle,
+            bg = color.subtext1,
           },
           TelescopeBorder = {
-            fg = latte.surface1,
-            bg = latte.surface1,
+            fg = color.surface1,
+            bg = color.surface1,
           },
           TelescopePromptBorder = {
-            fg = latte.mantle,
-            bg = latte.mantle,
+            fg = color.mantle,
+            bg = color.mantle,
           },
           TelescopePromptNormal = {
-            fg = latte.subtext1,
-            bg = latte.mantle,
+            fg = color.subtext1,
+            bg = color.mantle,
           },
           TelescopePromptPrefix = {
-            fg = latte.flamingo,
-            bg = latte.mantle,
+            fg = color.flamingo,
+            bg = color.mantle,
           },
           TelescopePromptTitle = {
-            fg = latte.mantle,
-            bg = latte.flamingo,
+            fg = color.mantle,
+            bg = color.flamingo,
           },
           TelescopePreviewTitle = {
-            fg = latte.mantle,
-            bg = latte.green,
+            fg = color.mantle,
+            bg = color.green,
           },
           TelescopePreviewNormal = {
-            fg = latte.text,
-            bg = latte.crust,
+            fg = color.text,
+            bg = color.crust,
           },
           TelescopePreviewBorder = {
-            fg = latte.crust,
-            bg = latte.crust,
+            fg = color.crust,
+            bg = color.crust,
           },
           TelescopeResultsTitle = {
-            fg = latte.mantle,
-            bg = latte.teal,
+            fg = color.mantle,
+            bg = color.teal,
           },
           TelescopeResultsNormal = {
-            fg = latte.text,
-            bg = latte.base,
+            fg = color.text,
+            bg = color.base,
           },
           TelescopeResultsBorder = {
-            fg = latte.base,
-            bg = latte.base,
+            fg = color.base,
+            bg = color.base,
           },
         })
       end
@@ -73,10 +83,9 @@ catppuccin.setup({
   integrations = {
     treesitter = true,
     telescope = true,
-    bufferline = true,
     cmp = true,
+    noice = true,
   },
 })
 
-vim.o.background = "light"
-vim.cmd.colorscheme("catppuccin")
+vim.cmd.colorscheme("catppuccin-latte")
