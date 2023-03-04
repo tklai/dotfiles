@@ -27,8 +27,8 @@ catppuccin.setup({
             bg = color.surface1,
           },
           TelescopeSelection = {
-            fg = color.mantle,
-            bg = color.subtext1,
+            fg = color.subtext0,
+            bg = color.surface0,
           },
           TelescopeBorder = {
             fg = color.surface1,
