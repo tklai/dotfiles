@@ -5,6 +5,71 @@ end
 
 catppuccin.setup({
   transparent_background = true,
+  highlight_overrides = {
+    all = function(latte)
+      local overrides = {
+        --
+      }
+
+      if vim.F.npcall(require, "telescope") then
+        overrides = vim.tbl_extend("force", overrides, {
+          TelescopeNormal = {
+            bg = latte.surface1,
+          },
+          TelescopeSelection = {
+            fg = latte.mantle,
+            bg = latte.subtext1,
+          },
+          TelescopeBorder = {
+            fg = latte.surface1,
+            bg = latte.surface1,
+          },
+          TelescopePromptBorder = {
+            fg = latte.mantle,
+            bg = latte.mantle,
+          },
+          TelescopePromptNormal = {
+            fg = latte.subtext1,
+            bg = latte.mantle,
+          },
+          TelescopePromptPrefix = {
+            fg = latte.flamingo,
+            bg = latte.mantle,
+          },
+          TelescopePromptTitle = {
+            fg = latte.mantle,
+            bg = latte.flamingo,
+          },
+          TelescopePreviewTitle = {
+            fg = latte.mantle,
+            bg = latte.green,
+          },
+          TelescopePreviewNormal = {
+            fg = latte.text,
+            bg = latte.crust,
+          },
+          TelescopePreviewBorder = {
+            fg = latte.crust,
+            bg = latte.crust,
+          },
+          TelescopeResultsTitle = {
+            fg = latte.mantle,
+            bg = latte.teal,
+          },
+          TelescopeResultsNormal = {
+            fg = latte.text,
+            bg = latte.base,
+          },
+          TelescopeResultsBorder = {
+            fg = latte.base,
+            bg = latte.base,
+          },
+        })
+      end
+
+      return overrides
+    end,
+  },
   integrations = {
     treesitter = true,
     telescope = true,
@@ -13,64 +78,5 @@ catppuccin.setup({
   },
 })
 
+vim.o.background = "light"
 vim.cmd.colorscheme("catppuccin")
-
-local color_palette = require("catppuccin.core.color_palette")
-local setHl = require("core.utils").set_highlights
-
-if vim.F.npcall(require, "telescope") then
-  local telescope_colors = {
-    TelescopeNormal = {
-      bg = color_palette.black2,
-    },
-    TelescopeSelection = {
-      bg = color_palette.black2,
-    },
-    TelescopeBorder = {
-      fg = color_palette.black2,
-      bg = color_palette.black2,
-    },
-    TelescopePromptBorder = {
-      fg = color_palette.black3,
-      bg = color_palette.black3,
-    },
-    TelescopePromptNormal = {
-      fg = color_palette.white,
-      bg = color_palette.black3,
-    },
-    TelescopePromptPrefix = {
-      fg = color_palette.red,
-      bg = color_palette.black3,
-    },
-    TelescopePromptTitle = {
-      fg = color_palette.black1,
-      bg = color_palette.flamingo,
-    },
-    TelescopePreviewTitle = {
-      fg = color_palette.black1,
-      bg = color_palette.green,
-    },
-    TelescopePreviewNormal = {
-      fg = color_palette.white,
-      bg = color_palette.black2,
-    },
-    TelescopePreviewBorder = {
-      fg = color_palette.black2,
-      bg = color_palette.black2,
-    },
-    TelescopeResultsTitle = {
-      fg = color_palette.black0,
-      bg = color_palette.teal,
-    },
-    TelescopeResultsNormal = {
-      fg = color_palette.white,
-      bg = color_palette.black1,
-    },
-    TelescopeResultsBorder = {
-      fg = color_palette.black1,
-      bg = color_palette.black1,
-    },
-  }
-
-  setHl(telescope_colors)
-end
