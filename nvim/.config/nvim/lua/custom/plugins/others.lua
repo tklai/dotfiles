@@ -114,4 +114,7 @@ return {
     config = true,
     event = "BufEnter",
   },
+  {
+    "chaoren/vim-wordmotion",
+  },
 }
