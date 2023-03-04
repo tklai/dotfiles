@@ -82,7 +82,7 @@ nnoremap(
 )
 xnoremap(
   "<leader>s",
-  [[:s/\<\>//gI<Left><Left><Left><Left><Left><Left>]],
+  [[:s//gI<Left><Left><Left>]],
   { desc = "Find the word in selected visual zone and create replace regex in a real quick" }
 )
 nnoremap(
