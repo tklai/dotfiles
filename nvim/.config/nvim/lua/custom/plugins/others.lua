@@ -1,10 +1,38 @@
 return {
   {
     "nvim-neo-tree/neo-tree.nvim",
-    enabled = false,
+    branch = "v2.x",
+    cmd = "Neotree",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+      "MunifTanjim/nui.nvim",
+    },
+    init = function()
+      require("tk.utils.keymap").nnoremap("<C-b>", "<cmd>Neotree toggle<CR>", { desc = "Toggle Neo-tree" })
+    end,
+    opts = {
+      window = {
+        position = "right",
+      },
+      filesystem = {
+        filtered_items = {
+          hide_dotfiles = false,
+          hide_gitignored = false,
+          hide_hidden = false,
+        },
+        follow_current_file = true,
+      },
+      source_selector = {
+        winbar = true,
+        statusline = false,
+        content_layout = "center",
+      },
+    },
   },
   {
-    "kyazdani42/nvim-tree.lua",
+    "nvim-tree/nvim-tree.lua",
+    enabled = false,
     cmd = "NvimTreeToggle",
     init = function()
       require("tk.utils.keymap").nnoremap("<C-b>", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle NvimTree" })

@@ -40,12 +40,19 @@ return {
       "MunifTanjim/nui.nvim",
       {
         "rcarriga/nvim-notify",
-        config = function()
-          require("notify").setup({
-            background_colour = "#000000",
-            stages = "fade",
-          })
-        end,
+        opts = {
+          background_colour = "#E1E2E6",
+          stages = "fade",
+        },
+        keys = {
+          {
+            "<leader>un",
+            function()
+              require("notify").dismiss({ silent = true, pending = true })
+            end,
+            desc = "Delete all Notifications",
+          },
+        },
       },
     },
   },

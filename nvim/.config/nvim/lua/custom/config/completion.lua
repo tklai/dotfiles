@@ -47,6 +47,7 @@ cmp.setup({
   mapping = cmp.mapping.preset.insert({
     ["<C-d>"] = cmp.mapping.scroll_docs(-4),
     ["<C-f>"] = cmp.mapping.scroll_docs(4),
+    ["<C-e>"] = cmp.mapping.abort(),
     ["<C-Space>"] = cmp.mapping.complete(),
     -- DO NOT SET `select` to true in `confirm()`.
     -- Otherwise, the first item will be selected even you didn't select anything.

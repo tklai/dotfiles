@@ -87,11 +87,8 @@ local telescope_builtin = require("telescope.builtin")
 
 -- Global Files
 nnoremap("<C-p>", telescope_builtin.find_files)
-nnoremap("<leader>ff", function()
-  telescope_builtin.find_files({ find_command = { "rg", "-i", "--files", "-g", "!.git" } })
-end)
 -- Find specific string in working directory (Global search)
-nnoremap("<leader>fg", telescope_builtin.live_grep)
+nnoremap("<C-/>", telescope_builtin.live_grep)
 -- Find the string under the cursor in working directory and filter the result (Scoped Search)
 nnoremap("<leader>fs", telescope_builtin.grep_string)
 nnoremap("<leader>fb", telescope_builtin.buffers)

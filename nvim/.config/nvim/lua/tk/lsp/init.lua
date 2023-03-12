@@ -124,11 +124,9 @@ if null_ls then
   null_ls.setup({
     sources = {
       -- Formatter
-      null_ls.builtins.formatting.prettier,
-      null_ls.builtins.formatting.stylua,
       null_ls.builtins.formatting.phpcsfixer,
-      -- Completion
-      null_ls.builtins.completion.spell,
+      null_ls.builtins.formatting.prettierd,
+      null_ls.builtins.formatting.stylua,
     },
   })
 end

@@ -1,5 +1,13 @@
 return {
-  "neovim/nvim-lspconfig",
+  {
+    "neovim/nvim-lspconfig",
+    dependencies = {
+      {
+        "b0o/schemastore.nvim",
+        version = false,
+      },
+    },
+  },
   "williamboman/mason.nvim",
   "williamboman/mason-lspconfig.nvim",
   "jose-elias-alvarez/null-ls.nvim",
@@ -12,7 +20,6 @@ return {
       "theHamsta/nvim-dap-virtual-text",
     },
   },
-  "b0o/schemastore.nvim",
   {
     "kevinhwang91/nvim-ufo",
     dependencies = {

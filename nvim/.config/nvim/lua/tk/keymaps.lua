@@ -44,7 +44,7 @@ nnoremap("Q", "<Nop>", { desc = "Ex-mode disabled" })
 -- Buffer Switching
 nnoremap("[b", ":bprevious<CR>", { desc = "Switch to previous buffer" })
 nnoremap("]b", ":bnext<CR>", { desc = "Switch to next buffer" })
-nnoremap("\\b", ":bd | bp<CR>", { desc = "Delete current buffer and show previous buffer" })
+nnoremap("\\b", ":bd<CR>", { desc = "Delete current buffer and show previous buffer" })
 
 -- Line moving
 vnoremap("J", ":m '>+1<CR>gv=gv", { desc = "Move the selected block down" })

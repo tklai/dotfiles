@@ -85,6 +85,7 @@ catppuccin.setup({
     telescope = true,
     cmp = true,
     noice = true,
+    neogit = true,
   },
 })
 
