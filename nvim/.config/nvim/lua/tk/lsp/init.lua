@@ -25,20 +25,20 @@ if ufo then
 end
 
 local functions_attach = {
-  lsp_highlight_document = function(client)
+  lsp_highlight_document = function(client, bufnr)
     -- Set autocommands conditional on server_capabilities
     if client.server_capabilities.document_highlight then
       vim.api.nvim_create_augroup("lsp_document_highlight", {})
       vim.api.nvim_create_autocmd("CursorHold", {
         group = "lsp_document_highlight",
         desc = "Show the document highlight",
-        buffer = 0,
+        buffer = bufnr,
         callback = vim.lsp.buf.document_highlight,
       })
       vim.api.nvim_create_autocmd("CursorMoved", {
         group = "lsp_document_highlight",
         desc = "Clear references",
-        buffer = 0,
+        buffer = bufnr,
         callback = vim.lsp.buf.clear_references,
       })
     end
@@ -46,25 +46,28 @@ local functions_attach = {
 }
 
 local custom_on_attach = function(client, bufnr)
-  nnoremap("gd", vim.lsp.buf.definition, { desc = "Go to definition" })
-  nnoremap("gD", vim.lsp.buf.declaration, { desc = "Go to declaration" })
-  nnoremap("gi", vim.lsp.buf.implementation, { desc = "Go to implementation" })
-  nnoremap("gf", vim.lsp.buf.references, { desc = "Find references" })
-  nnoremap("K", vim.lsp.buf.hover, { desc = "Show hover documentation" })
-  nnoremap("sh", vim.lsp.buf.signature_help, { desc = "Show signature help of the function under cursor" })
-  nnoremap("sd", vim.lsp.buf.hover, { desc = "Show documentation" })
-  nnoremap("<leader>D", vim.lsp.buf.type_definition, { desc = "Go to type definition" })
-  nnoremap("<leader>rn", vim.lsp.buf.rename, { desc = "Rename the thing under cursor in the buffer" })
+  nnoremap("gd", vim.lsp.buf.definition, { buffer = bufnr, desc = "Go to definition" })
+  nnoremap("gD", vim.lsp.buf.declaration, { buffer = bufnr, desc = "Go to declaration" })
+  nnoremap("gi", vim.lsp.buf.implementation, { buffer = bufnr, desc = "Go to implementation" })
+  nnoremap("gf", vim.lsp.buf.references, { buffer = bufnr, desc = "Find references" })
+  nnoremap("K", vim.lsp.buf.hover, { buffer = bufnr, desc = "Show hover documentation" })
+  nnoremap("sh", vim.lsp.buf.signature_help, { buffer = bufnr, desc = "Show signature help of the function under cursor" })
+  nnoremap("sd", vim.lsp.buf.hover, { buffer = bufnr, desc = "Show documentation" })
+  nnoremap("<leader>D", vim.lsp.buf.type_definition, { buffer = bufnr, desc = "Go to type definition" })
+  nnoremap("<leader>rn", vim.lsp.buf.rename, { buffer = bufnr, desc = "Rename the thing under cursor in the buffer" })
+  nnoremap("<leader>ca", vim.lsp.buf.code_action, { buffer = bufnr, desc = "Show code actions" })
+  nnoremap("<leader>rr", "<CMD>LspRestart<CR>", { buffer = bufnr, desc = "Restart LSP" })
   nnoremap("\\\\", function()
     vim.lsp.buf.format({ async = true })
   end, { desc = "Run code format" })
 
-  functions_attach.lsp_highlight_document(client)
+  functions_attach.lsp_highlight_document(client, bufnr)
 
   vim.api.nvim_create_augroup("lsp_diagnostic", {})
   vim.api.nvim_create_autocmd("CursorHold", {
     group = "lsp_diagnostic",
     desc = "Show diagnostic float",
+    buffer = bufnr,
     callback = function()
       vim.diagnostic.open_float()
     end,

@@ -45,6 +45,21 @@ nnoremap("Q", "<Nop>", { desc = "Ex-mode disabled" })
 nnoremap("[b", ":bprevious<CR>", { desc = "Switch to previous buffer" })
 nnoremap("]b", ":bnext<CR>", { desc = "Switch to next buffer" })
 nnoremap("\\b", ":bd<CR>", { desc = "Delete current buffer and show previous buffer" })
+nnoremap("\\B", function()
+  local nvimTreeView = vim.F.npcall(require, "nvim-tree.view")
+  local isNvimTreeOpened = nvimTreeView and nvimTreeView.is_visible()
+  local nvimTreeApi = vim.F.npcall(require, "nvim-tree.api")
+
+  if isNvimTreeOpened then
+    nvimTreeApi.tree.close()
+  end
+
+  vim.cmd("bufdo bd")
+
+  if isNvimTreeOpened then
+    nvimTreeApi.tree.open()
+  end
+end, { desc = "Delete all buffers" })
 
 -- Line moving
 vnoremap("J", ":m '>+1<CR>gv=gv", { desc = "Move the selected block down" })
@@ -75,18 +90,15 @@ nnoremap("<leader>cj", "<cmd>cnext<CR>zz", { desc = "Navigate files in quickfix 
 nnoremap("<leader>ck", "<cmd>cprev<CR>zz", { desc = "Navigate files in quickfix list blazingly fast" })
 nnoremap("<leader>cq", "<cmd>cclose<CR>", { desc = "Close quickfix list" })
 
-nnoremap(
-  "<leader>s",
-  [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
-  { desc = "Find the word in current buffer and create replace regex in a real quick" }
-)
-xnoremap(
-  "<leader>s",
-  [[:s//gI<Left><Left><Left>]],
-  { desc = "Find the word in selected visual zone and create replace regex in a real quick" }
-)
-nnoremap(
-  "<leader>n",
-  [[/<C-r><C-w><CR>]],
-  { desc = "Find the word in current buffer and create replace regex in a real quick" }
-)
+nnoremap("<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], {
+  desc = "Find the word in current buffer and create replace regex in a real quick",
+  silent = false,
+})
+xnoremap("<leader>s", [[:s//gI<Left><Left><Left>]], {
+  desc = "Find the word in selected visual zone and create replace regex in a real quick",
+  silent = false,
+})
+nnoremap("<leader>n", [[/<C-r><C-w><CR>]], {
+  desc = "Find the word in current buffer and create replace regex in a real quick",
+  silent = false,
+})

@@ -3,7 +3,7 @@ local M = {}
 M.get_default_opts = function()
   return {
     noremap = true,
-    silent = true,
+    -- silent = true,
   }
 end
 

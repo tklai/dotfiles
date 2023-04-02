@@ -11,7 +11,7 @@ end
 
 local previewers = require("telescope.previewers")
 
-local new_maker = function(filepath, bufnr, opts)
+local buffer_previewer_maker = function(filepath, bufnr, opts)
   opts = opts or {}
 
   filepath = vim.fn.expand(filepath)
@@ -19,6 +19,7 @@ local new_maker = function(filepath, bufnr, opts)
     if not stat then
       return
     end
+
     local max_size = 256000
     if stat.size > max_size then
       vim.schedule_wrap(require("telescope.previewers.utils").set_preview_message)(
@@ -44,7 +45,7 @@ telescope.setup({
       height = 0.9,
       preview_cutoff = 120,
     },
-    buffer_previewer_maker = new_maker,
+    buffer_previewer_maker = buffer_previewer_maker,
     file_ignore_patterns = {
       "public/",
     },
@@ -85,10 +86,9 @@ local nnoremap = Keymap.nnoremap
 
 local telescope_builtin = require("telescope.builtin")
 
--- Global Files
 nnoremap("<C-p>", telescope_builtin.find_files)
 -- Find specific string in working directory (Global search)
-nnoremap("<C-/>", telescope_builtin.live_grep)
+nnoremap("<leader>fg", telescope_builtin.live_grep)
 -- Find the string under the cursor in working directory and filter the result (Scoped Search)
 nnoremap("<leader>fs", telescope_builtin.grep_string)
 nnoremap("<leader>fb", telescope_builtin.buffers)
