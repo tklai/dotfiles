@@ -26,6 +26,8 @@ local icons = {
   Event = "",
   Operator = "",
   TypeParameter = "",
+  Copilot = "",
+  TabNine = "",
 }
 
 local cmp = require("cmp")
