@@ -1,6 +1,14 @@
 return {
   {
+    "tpope/vim-fugitive",
+    cmd = "Git",
+    init = function()
+      require("tk.utils.keymap").nnoremap("<leader>gg", "<CMD>Git<CR>")
+    end,
+  },
+  {
     "TimUntersberger/neogit",
+    enabled = false,
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
@@ -33,6 +41,7 @@ return {
   },
   {
     "sindrets/diffview.nvim",
+    enabled = false,
     cmd = "DiffviewOpen",
     dependencies = {
       "nvim-lua/plenary.nvim",

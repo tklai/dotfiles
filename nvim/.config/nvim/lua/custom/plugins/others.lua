@@ -1,6 +1,7 @@
 return {
   {
     "nvim-neo-tree/neo-tree.nvim",
+    enabled = false,
     branch = "v2.x",
     cmd = "Neotree",
     dependencies = {
@@ -32,7 +33,7 @@ return {
   },
   {
     "nvim-tree/nvim-tree.lua",
-    enabled = false,
+    -- enabled = false,
     cmd = "NvimTreeToggle",
     init = function()
       require("tk.utils.keymap").nnoremap("<C-b>", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle NvimTree" })
@@ -92,11 +93,6 @@ return {
     event = "BufEnter",
   },
   {
-    "simrat39/symbols-outline.nvim",
-    config = true,
-    cmd = "SymbolsOutline",
-  },
-  {
     "RRethy/vim-illuminate",
     event = "BufEnter",
     config = function()
@@ -128,10 +124,10 @@ return {
     enabled = false,
     version = "*",
     opts = {
-      enableOnVimEnter = true,
       width = 120,
       integrations = {
         NvimTree = { position = "right" },
+        NeoTree = { position = "right" },
         undotree = { position = "left" },
       },
     },
@@ -148,5 +144,20 @@ return {
   },
   {
     "chaoren/vim-wordmotion",
+  },
+  {
+    "codota/tabnine-nvim",
+    enabled = false,
+    build = "./dl_binaries.sh",
+    config = function()
+      require("tabnine").setup({
+        disable_auto_comment = true,
+        accept_keymap = "<C-[>",
+        dismiss_keymap = "<C-]>",
+        debounce_ms = 800,
+        suggestion_color = { gui = "#808080", cterm = 244 },
+        exclude_filetypes = { "TelescopePrompt" },
+      })
+    end,
   },
 }
