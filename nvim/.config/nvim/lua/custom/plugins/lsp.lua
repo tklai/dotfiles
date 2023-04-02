@@ -13,7 +13,6 @@ return {
   "jose-elias-alvarez/null-ls.nvim",
   {
     "mfussenegger/nvim-dap",
-    enabled = false,
     lazy = true,
     dependencies = {
       "rcarriga/nvim-dap-ui",

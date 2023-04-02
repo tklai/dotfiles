@@ -135,6 +135,7 @@ if null_ls then
 end
 
 local dap = vim.F.npcall(require, "dap")
+local dapui = vim.F.npcall(require, "dapui")
 if dap then
   dap.adapters.php = {
     type = "executable",
@@ -150,19 +151,34 @@ if dap then
       ignore = {
         "**/vendor/**/*.php",
       },
+      skipFiles = {
+        "**/vendor/**",
+      },
       pathMappings = {
         ["/var/www"] = "${workspaceFolder}/../../../projects",
       },
     },
   }
 
-  nnoremap("<M-b>", dap.toggle_breakpoint, { desc = "Toggle Breakpoint" })
-  nnoremap("<M-d>", dap.continue, { desc = "Start Debug" })
-  nnoremap("<F2>", dap.step_over, { desc = "Debug Step over" })
-  nnoremap("<F3>", dap.step_into, { desc = "Debug Step Into" })
-  nnoremap("<F4>", dap.step_out, { desc = "Debug Step up" })
+  vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "", linehl = "", numhl = "" })
+  vim.fn.sign_define("DapStopped", { text = "", texthl = "", linehl = "", numhl = "" })
 
-  local dapui = vim.F.npcall(require, "dapui")
+  nnoremap("<leader>db", dap.toggle_breakpoint, { desc = "Toggle Breakpoint" })
+  nnoremap("<leader>dB", dap.clear_breakpoints, { desc = "Clear Breakpoints" })
+  nnoremap("<leader>dc", dap.continue, { desc = "Start Debug" })
+  nnoremap("<leader>dC", dap.restart, { desc = "Restart Debug" })
+  nnoremap("<leader>dd", function()
+    dap.terminate()
+
+    -- In case DAP UI does not close
+    if dapui then
+      dapui.close()
+    end
+  end, { desc = "Terminate Debug" })
+  nnoremap("<leader>do", dap.step_over, { desc = "Debug Step over" })
+  nnoremap("<leader>di", dap.step_into, { desc = "Debug Step Into" })
+  nnoremap("<leader>dO", dap.step_out, { desc = "Debug Step up" })
+
   if dapui then
     dapui.setup({
       layouts = {
@@ -170,7 +186,7 @@ if dap then
           elements = {
             "scopes",
             "breakpoints",
-            "stacks",
+            -- "stacks",
             -- "watches",
             -- "repl",
           },
