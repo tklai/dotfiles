@@ -64,3 +64,5 @@ fi
 bindkey -s "^f" "tmux-sessionizer\n"
 
 alias \:q="exit"
+
+eval "$(starship init zsh)"
