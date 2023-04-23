@@ -64,7 +64,7 @@ opt.list = true
 opt.listchars:append({
   -- space = "·",
   trail = "×",
-  leadmultispace = "·",
+  -- leadmultispace = "·",
   tab = ">-",
   extends = ">",
   precedes = "<",

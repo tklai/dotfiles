@@ -34,9 +34,17 @@ return {
   {
     "nvim-tree/nvim-tree.lua",
     -- enabled = false,
-    cmd = "NvimTreeToggle",
+    cmd = {
+      "NvimTreeToggle",
+      "NvimTreeFindFile",
+    },
     init = function()
       require("tk.utils.keymap").nnoremap("<C-b>", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle NvimTree" })
+      require("tk.utils.keymap").nnoremap(
+        "<leader>tf",
+        "<cmd>NvimTreeFindFile<CR>",
+        { desc = "Navigate to file entry in NvimTree" }
+      )
     end,
     config = function()
       require("nvim-tree").setup({
@@ -159,5 +167,31 @@ return {
         exclude_filetypes = { "TelescopePrompt" },
       })
     end,
+  },
+  {
+    "Bekaboo/deadcolumn.nvim",
+  },
+  {
+    "chrisgrieser/nvim-early-retirement",
+    config = true,
+    event = "VeryLazy",
+  },
+  {
+    "JellyApple102/flote.nvim",
+    config = true,
+    cmd = "Flote",
+    init = function()
+      require("tk.utils.keymap").nnoremap("<leader>qq", "<cmd>Flote<CR>", { desc = "Note" })
+      require("tk.utils.keymap").nnoremap("<leader>qQ", "<cmd>Flote global<CR>", { desc = "Global Note" })
+    end,
+  },
+  {
+    "chrisgrieser/nvim-alt-substitute",
+    opts = true,
+    event = "CmdlineEnter",
+  },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    opts = true,
   },
 }

@@ -92,7 +92,7 @@ mason_lspconfig.setup({
   ensure_installed = {
     "bashls",
     "cssls",
-    "denols",
+    -- "denols",
     -- "diagnosticls",
     "dockerls",
     "emmet_ls",
@@ -104,7 +104,7 @@ mason_lspconfig.setup({
     "jsonls",
     "rust_analyzer",
     "lua_ls",
-    "sqls",
+    "sqlls",
     "tsserver",
     "vuels",
     "yamlls",

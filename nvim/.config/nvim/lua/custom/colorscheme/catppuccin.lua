@@ -12,7 +12,7 @@ catppuccin.setup({
   },
   color_overrides = {
     latte = {
-      base = "#E1E2E6",
+      -- base = "#E1E2E6",
     },
   },
   highlight_overrides = {
