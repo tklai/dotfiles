@@ -192,6 +192,8 @@ return {
   },
   {
     "lukas-reineke/indent-blankline.nvim",
-    opts = true,
+    opts = {
+      char = "▏",
+    },
   },
 }
