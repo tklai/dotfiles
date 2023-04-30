@@ -94,6 +94,10 @@ nnoremap("<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], {
   desc = "Find the word in current buffer and create replace regex in a real quick",
   silent = false,
 })
+nnoremap("<leader>S", [[:%s/\<<C-r><C-w>\>//gI<Left><Left><Left>]], {
+  desc = "Find the word in current buffer and create replace regex without replacement in a real quick",
+  silent = false,
+})
 xnoremap("<leader>s", [[:s//gI<Left><Left><Left>]], {
   desc = "Find the word in selected visual zone and create replace regex in a real quick",
   silent = false,
