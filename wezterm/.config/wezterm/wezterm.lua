@@ -17,7 +17,12 @@ return {
   font = JetBrainsMono,
   harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
   use_fancy_tab_bar = false,
-  window_background_opacity = 0.95,
+  window_padding = {
+    left = 0,
+    right = 0,
+    top = 0,
+    bottom = 0,
+  },
   -- hide_tab_bar_if_only_one_tab = true,
 
   -- Kanagawa
