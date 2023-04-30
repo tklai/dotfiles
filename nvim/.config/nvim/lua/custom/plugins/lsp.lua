@@ -39,4 +39,11 @@ return {
       noice = true,
     },
   },
+  {
+    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+    config = true,
+    init = function()
+      require("tk.utils.keymap").nnoremap("<leader>L", require("lsp_lines").toggle, { desc = "Toggle LSP Lines" })
+    end,
+  }
 }

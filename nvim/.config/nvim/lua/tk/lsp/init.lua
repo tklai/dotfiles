@@ -63,19 +63,19 @@ local custom_on_attach = function(client, bufnr)
 
   functions_attach.lsp_highlight_document(client, bufnr)
 
-  vim.api.nvim_create_augroup("lsp_diagnostic", {})
-  vim.api.nvim_create_autocmd("CursorHold", {
-    group = "lsp_diagnostic",
-    desc = "Show diagnostic float",
-    buffer = bufnr,
-    callback = function()
-      vim.diagnostic.open_float()
-    end,
-  })
+  -- vim.api.nvim_create_augroup("lsp_diagnostic", {})
+  -- vim.api.nvim_create_autocmd("CursorHold", {
+  --   group = "lsp_diagnostic",
+  --   desc = "Show diagnostic float",
+  --   buffer = bufnr,
+  --   callback = function()
+  --     vim.diagnostic.open_float()
+  --   end,
+  -- })
 end
 
 vim.diagnostic.config({
-  -- I use float.
+  -- I use float / lsp lines.
   virtual_text = false,
   float = {
     focusable = false,

@@ -102,3 +102,8 @@ nnoremap("<leader>n", [[/<C-r><C-w><CR>]], {
   desc = "Find the word in current buffer and create replace regex in a real quick",
   silent = false,
 })
+
+nnoremap("<leader>d", vim.diagnostic.open_float, {
+  desc = "Open diagnostic float",
+  silent = true,
+})
