@@ -45,5 +45,14 @@ return {
     init = function()
       require("tk.utils.keymap").nnoremap("<leader>L", require("lsp_lines").toggle, { desc = "Toggle LSP Lines" })
     end,
-  }
+  },
+  {
+    "dmmulroy/tsc.nvim",
+    config = true,
+    ft = {
+      "typescript",
+      "typescriptreact",
+      "typescript.tsx",
+    },
+  },
 }
