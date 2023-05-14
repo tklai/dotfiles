@@ -3,18 +3,26 @@ if not status_ok then
   return {}
 end
 
-local JetBrainsMono = wezterm.font({
-  family = "JetBrainsMono Nerd Font Mono",
+-- local JetBrainsMono = wezterm.font({
+--   family = "JetBrainsMono Nerd Font Mono",
+--   weight = "DemiBold",
+-- })
+
+-- local SFMono = wezterm.font({
+--   family = "Liga SFMono Nerd Font",
+--   weight = "DemiBold",
+-- })
+
+local Meslo = wezterm.font({
+  family = "MesloLGS NF",
   weight = "DemiBold",
 })
 
--- local SFMono = {
---   family = "Liga SFMono Nerd Font",
--- }
-
 return {
   audible_bell = "Disabled",
-  font = JetBrainsMono,
+  -- font = JetBrainsMono,
+  -- font = SFMono,
+  font = Meslo,
   harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
   use_fancy_tab_bar = false,
   window_padding = {
