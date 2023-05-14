@@ -4,6 +4,7 @@ vim.g.maplocalleader = " "
 local opt = vim.opt
 
 opt.autoread = true
+opt.autoindent = true
 opt.clipboard = "unnamedplus"
 opt.cursorline = true
 opt.fileencoding = "utf-8"

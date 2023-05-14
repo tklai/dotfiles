@@ -55,4 +55,11 @@ return {
       "typescript.tsx",
     },
   },
+  {
+    "rmagatti/goto-preview",
+    config = true,
+    init = function()
+      require("tk.utils.keymap").nnoremap("gpd", require('goto-preview').goto_preview_definition, { desc = "Go to definition in float" })
+    end,
+  },
 }
