@@ -1,3 +1,14 @@
+# Homebrew
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  if [ "$(arch)" = "arm64" ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+    export HOMEBREW_PREFIX=$(brew --prefix)
+  elif [ "$(arch)" = "i386" ]; then
+    eval "$(/usr/local/bin/brew shellenv)"
+    export HOMEBREW_PREFIX=$(brew --prefix)
+  fi
+fi
+
 # Zshell
 # Enable colors by default (?)
 autoload -U colors

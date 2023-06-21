@@ -15,12 +15,6 @@ fi
 # Keep Emacs mode in shell. Vi mode breaks sometimes.
 bindkey -e
 
-# Homebrew
-if [[ "$OSTYPE" == "darwin"* ]]; then
-    eval "$(/opt/homebrew/bin/brew shellenv)"
-    export HOMEBREW_PREFIX=$(brew --prefix)
-fi
-
 export PATH=$HOME/.local/scripts:$PATH
 
 # NVM
