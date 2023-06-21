@@ -27,7 +27,6 @@ local icons = {
   Operator = "",
   TypeParameter = "",
   Copilot = "",
-  TabNine = "",
 }
 
 local cmp = require("cmp")
@@ -66,7 +65,6 @@ cmp.setup({
   sources = cmp.config.sources({
     { name = "nvim_lsp" },
     { name = "luasnip" },
-    { name = "cmp_tabnine" },
   }, {
     { name = "path" },
     { name = "buffer", keyword_length = 4 },

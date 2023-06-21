@@ -2,7 +2,7 @@ return {
   {
     "catppuccin/nvim",
     name = "catppuccin",
-    enabled = true,
+    enabled = false,
     lazy = false,
     config = function()
       require("custom.colorscheme.catppuccin")
@@ -10,7 +10,7 @@ return {
   },
   {
     "rebelot/kanagawa.nvim",
-    enabled = false,
+    -- enabled = false,
     lazy = false,
     config = function()
       require("custom.colorscheme.kanagawa")
