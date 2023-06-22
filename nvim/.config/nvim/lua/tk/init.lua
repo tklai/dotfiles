@@ -1,20 +1,20 @@
-if vim.fn.has('nvim-0.8') == 0 then
-  error("This configuration can only be run on neovim >=0.8.")
+if vim.fn.has("nvim-0.9") == 0 then
+  vim.notify("This configuration can only be run on neovim >=0.9.", vim.log.levels.ERROR)
 end
 
-vim.F.npcall(require, "impatient")
+vim.loader.enable()
 
 require("core.disable_builtins")
 require("tk.options")
 
 local lazy_path = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazy_path) then
-  print("lazy.nvim was not existed or loaded")
+  vim.notify("lazy.nvim was not existed or loaded", vim.log.levels.INFO)
 
   -- Remove the folder / file before cloning
   vim.fn.delete(lazy_path, "rf")
 
-  print(string.format("Cloning lazy.nvim to '%s'...", lazy_path))
+  vim.notify("Cloning lazy.nvim to " .. lazy_path .. "...", vim.log.levels.INFO)
   vim.fn.system({
     "git",
     "clone",
@@ -32,4 +32,4 @@ require("lazy").setup("custom.plugins")
 require("tk.keymaps")
 require("tk.lsp")
 
-vim.opt.guifont="Liga SFMono Nerd Font:h12"
+vim.opt.guifont = "Liga SFMono Nerd Font:h12"

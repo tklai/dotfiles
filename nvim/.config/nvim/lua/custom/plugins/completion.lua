@@ -33,6 +33,6 @@ return {
       suggestion = {
         auto_trigger = true,
       },
-    }
+    },
   },
 }

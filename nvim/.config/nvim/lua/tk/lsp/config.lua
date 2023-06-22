@@ -44,7 +44,7 @@ config.intelephense = {
           "**/bower_components/**",
           "**/vendor/**/{Tests,tests}/**",
           "**/vendor/**/vendor/**",
-        }
+        },
       },
     },
   },
@@ -54,7 +54,7 @@ config.phpactor = {
   init_options = {
     ["language_server_phpstan.enabled"] = false,
     ["language_server_psalm.enabled"] = false,
-  }
+  },
 }
 
 config.lua_ls = {
