@@ -182,13 +182,26 @@ return {
     },
   },
   {
-    "ggandor/leap.nvim",
-    dependencies = {
-      "tpope/vim-repeat",
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    opts = {},
+    keys = {
+      {
+        "s",
+        mode = { "n", "x", "o" },
+        function()
+          -- default options: exact mode, multi window, all directions, with a backdrop
+          require("flash").jump()
+        end,
+      },
+      {
+        "S",
+        mode = { "n", "o", "x" },
+        function()
+          require("flash").treesitter()
+        end,
+      },
     },
-    config = function()
-      require("leap").add_default_mappings()
-    end,
   },
   {
     "tzachar/highlight-undo.nvim",
