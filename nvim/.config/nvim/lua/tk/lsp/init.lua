@@ -97,7 +97,7 @@ mason_lspconfig.setup({
     "dockerls",
     "emmet_ls",
     "eslint",
-    "gopls",
+    -- "gopls",
     "html",
     -- "phpactor",
     "intelephense",
