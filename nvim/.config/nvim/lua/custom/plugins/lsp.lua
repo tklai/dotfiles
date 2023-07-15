@@ -46,6 +46,7 @@ return {
   {
     "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
     config = true,
+    event = "BufRead",
     init = function()
       require("tk.utils.keymap").nnoremap("<leader>L", require("lsp_lines").toggle, { desc = "Toggle LSP Lines" })
     end,
@@ -61,6 +62,7 @@ return {
   },
   {
     "rmagatti/goto-preview",
+    event = "BufEnter",
     config = true,
     init = function()
       require("tk.utils.keymap").nnoremap(
@@ -75,6 +77,7 @@ return {
   {
     "folke/trouble.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
+    cmd = "Trouble",
     config = true,
   }
 }

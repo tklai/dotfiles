@@ -123,9 +123,11 @@ return {
   },
   {
     "chaoren/vim-wordmotion",
+    event = "BufEnter",
   },
   {
     "Bekaboo/deadcolumn.nvim",
+    event = "InsertEnter",
   },
   {
     "folke/flash.nvim",
