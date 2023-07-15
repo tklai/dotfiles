@@ -20,6 +20,10 @@ nnoremap("<C-j>", "<C-w>j", { desc = "Move cursor to the lower window" })
 nnoremap("<C-k>", "<C-w>k", { desc = "Move cursor to the upper window" })
 nnoremap("<C-l>", "<C-w>l", { desc = "Move cursor to the right window" })
 
+-- H/L to start and end of line
+nnoremap("H", "^", { desc = "Move cursor to the start of line" })
+nnoremap("L", "$", { desc = "Move cursor to the end of line" })
+
 -- Pane
 nnoremap("<A-->", ":resize -10<CR>", { desc = "Decrease the height of current pane" })
 nnoremap("<A-=>", ":resize +10<CR>", { desc = "Increase the height of current pane" })

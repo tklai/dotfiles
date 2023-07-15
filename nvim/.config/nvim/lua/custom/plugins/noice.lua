@@ -1,6 +1,7 @@
 return {
   {
     "folke/noice.nvim",
+    enabled = false,
     event = "UIEnter",
     init = function()
       vim.opt.cmdheight = 0

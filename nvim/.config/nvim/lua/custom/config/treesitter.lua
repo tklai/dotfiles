@@ -16,6 +16,9 @@ require("nvim-treesitter.configs").setup({
     "vim",
   },
   auto_install = true,
+  autotag = {
+    enable = true,
+  },
   highlight = {
     enable = true,
   },

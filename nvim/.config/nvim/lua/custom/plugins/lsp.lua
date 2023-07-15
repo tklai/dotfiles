@@ -8,8 +8,12 @@ return {
       },
     },
   },
-  "williamboman/mason.nvim",
-  "williamboman/mason-lspconfig.nvim",
+  {
+    "williamboman/mason.nvim",
+    dependencies = {
+      "williamboman/mason-lspconfig.nvim",
+    },
+  },
   "jose-elias-alvarez/null-ls.nvim",
   {
     "mfussenegger/nvim-dap",
@@ -59,7 +63,18 @@ return {
     "rmagatti/goto-preview",
     config = true,
     init = function()
-      require("tk.utils.keymap").nnoremap("gpd", require('goto-preview').goto_preview_definition, { desc = "Go to definition in float" })
+      require("tk.utils.keymap").nnoremap(
+        "gpd",
+        require('goto-preview').goto_preview_definition,
+        {
+          desc = "Go to definition in float",
+        }
+      )
     end,
   },
+  {
+    "folke/trouble.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = true,
+  }
 }

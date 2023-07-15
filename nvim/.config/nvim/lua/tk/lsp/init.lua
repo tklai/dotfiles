@@ -53,6 +53,7 @@ local custom_on_attach = function(client, bufnr)
   nnoremap("K", vim.lsp.buf.hover, { buffer = bufnr, desc = "Show hover documentation" })
   nnoremap("sh", vim.lsp.buf.signature_help, { buffer = bufnr, desc = "Show signature help of the function under cursor" })
   nnoremap("sd", vim.lsp.buf.hover, { buffer = bufnr, desc = "Show documentation" })
+  nnoremap("se", vim.diagnostic.open_float, { buffer = bufnr, desc = "Show error" })
   nnoremap("<leader>D", vim.lsp.buf.type_definition, { buffer = bufnr, desc = "Go to type definition" })
   nnoremap("<leader>rn", vim.lsp.buf.rename, { buffer = bufnr, desc = "Rename the thing under cursor in the buffer" })
   nnoremap("<leader>ca", vim.lsp.buf.code_action, { buffer = bufnr, desc = "Show code actions" })
@@ -105,6 +106,7 @@ mason_lspconfig.setup({
     "rust_analyzer",
     "lua_ls",
     "sqlls",
+    "svelte",
     "tsserver",
     "vuels",
     "yamlls",

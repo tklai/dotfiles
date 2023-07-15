@@ -117,35 +117,6 @@ return {
     cmd = "UndotreeToggle",
   },
   {
-    "jidn/vim-dbml",
-    -- enabled = false,
-    ft = "dbml",
-  },
-  {
-    "m4xshen/autoclose.nvim",
-    enabled = false,
-    config = true,
-  },
-
-  {
-    "shortcuts/no-neck-pain.nvim",
-    enabled = false,
-    version = "*",
-    opts = {
-      width = 120,
-      integrations = {
-        NvimTree = { position = "right" },
-        NeoTree = { position = "right" },
-        undotree = { position = "left" },
-      },
-    },
-  },
-  {
-    "roobert/search-replace.nvim",
-    event = "BufEnter",
-    config = true,
-  },
-  {
     "asiryk/auto-hlsearch.nvim",
     config = true,
     event = "BufEnter",
@@ -155,31 +126,6 @@ return {
   },
   {
     "Bekaboo/deadcolumn.nvim",
-  },
-  {
-    "chrisgrieser/nvim-early-retirement",
-    config = true,
-    event = "VeryLazy",
-  },
-  {
-    "JellyApple102/flote.nvim",
-    config = true,
-    cmd = "Flote",
-    init = function()
-      require("tk.utils.keymap").nnoremap("<leader>qq", "<cmd>Flote<CR>", { desc = "Note" })
-      require("tk.utils.keymap").nnoremap("<leader>qQ", "<cmd>Flote global<CR>", { desc = "Global Note" })
-    end,
-  },
-  {
-    "chrisgrieser/nvim-alt-substitute",
-    opts = true,
-    event = "CmdlineEnter",
-  },
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    opts = {
-      char = "▏",
-    },
   },
   {
     "folke/flash.nvim",
@@ -204,10 +150,24 @@ return {
     },
   },
   {
-    "tzachar/highlight-undo.nvim",
-    event = "BufEnter",
-    opts = {
-      duration = 500,
-    },
+    'tomiis4/Hypersonic.nvim',
+    event = "CmdlineEnter",
+    cmd = "Hypersonic",
+    opts = {},
+  },
+  {
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = {},
+  },
+  {
+    'windwp/nvim-autopairs',
+    event = "InsertEnter",
+    opts = {},
+  },
+  {
+    "folke/twilight.nvim",
+    cmd = "Twilight",
+    opts = {},
   },
 }

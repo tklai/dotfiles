@@ -7,8 +7,10 @@ return {
       "nvim-treesitter/nvim-treesitter-textobjects",
       {
         "nvim-treesitter/playground",
+        enabled = false,
         cmd = "TSPlaygroundToggle",
       },
+      "windwp/nvim-ts-autotag",
     },
     build = ":TSUpdate",
     config = function()
