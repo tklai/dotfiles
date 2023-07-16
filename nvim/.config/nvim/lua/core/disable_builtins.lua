@@ -4,7 +4,7 @@ local disabled_builtins = {
   "getscriptPlugin",
   "gzip",
   "logipat",
-  "matchit",
+  -- "matchit",
   "netrw",
   "netrwPlugin",
   "netrwSettings",

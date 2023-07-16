@@ -1,28 +1,66 @@
 return {
   {
     "nvim-neo-tree/neo-tree.nvim",
-    enabled = false,
-    branch = "v2.x",
+    -- enabled = false,
+    branch = "v3.x",
     cmd = "Neotree",
     dependencies = {
       "nvim-lua/plenary.nvim",
-      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+      "nvim-tree/nvim-web-devicons",
       "MunifTanjim/nui.nvim",
+      {
+        's1n7ax/nvim-window-picker',
+        version = "v1.*",
+        config = function()
+          require('window-picker').setup({
+            autoselect_one = true,
+            include_current = false,
+            filter_rules = {
+              bo = {
+                filetype = { 'neo-tree', "neo-tree-popup", "notify" },
+                buftype = { 'terminal', "quickfix" },
+              },
+            },
+            other_win_hl_color = '#E46876',
+          })
+        end,
+      }
     },
     init = function()
       require("tk.utils.keymap").nnoremap("<C-b>", "<cmd>Neotree toggle<CR>", { desc = "Toggle Neo-tree" })
+      require("tk.utils.keymap").nnoremap(
+        "<leader>tf",
+        "<cmd>Neotree reveal<CR>",
+        { desc = "Navigate to file entry in Neo-tree" }
+      )
     end,
     opts = {
+      sources = {
+        "filesystem",
+        "buffers",
+        "git_status",
+        "document_symbols",
+      },
       window = {
         position = "right",
+        mappings = {
+          ["S"] = "split_with_window_picker",
+          ["s"] = "vsplit_with_window_picker",
+        },
       },
       filesystem = {
         filtered_items = {
-          hide_dotfiles = false,
-          hide_gitignored = false,
-          hide_hidden = false,
+          always_show = {
+            ".ebextensions",
+            ".elasticbeanstalk",
+            ".env",
+            ".gitignore",
+          },
+          never_show = {
+            ".DS_Store",
+            "thumbs.db",
+          },
         },
-        follow_current_file = true,
       },
       source_selector = {
         winbar = true,
@@ -33,7 +71,7 @@ return {
   },
   {
     "nvim-tree/nvim-tree.lua",
-    -- enabled = false,
+    enabled = false,
     cmd = {
       "NvimTreeToggle",
       "NvimTreeFindFile",
@@ -78,23 +116,17 @@ return {
     dependencies = {
       { "nvim-treesitter/nvim-treesitter" },
     },
-    config = function()
-      require("neogen").setup()
-      local opts = { noremap = true, silent = true }
-      vim.keymap.set("n", "<leader>af", function()
-        require("neogen").generate({ type = "func" })
-      end, opts)
-
-      vim.keymap.set("n", "<leader>ac", function()
-        require("neogen").generate({ type = "class" })
-      end, opts)
-
-      vim.keymap.set("n", "<leader>at", function()
-        require("neogen").generate({ type = "type" })
-      end, opts)
-    end,
+    keys = {
+      {
+        "<leader>aa",
+        mode = "n",
+        function()
+          require("neogen").generate()
+        end,
+      }
+    },
+    opts = {},
   },
-
   {
     "numToStr/Comment.nvim",
     config = true,
@@ -136,9 +168,8 @@ return {
     keys = {
       {
         "s",
-        mode = { "n", "x", "o" },
+        mode = { "n", "o", "x" },
         function()
-          -- default options: exact mode, multi window, all directions, with a backdrop
           require("flash").jump()
         end,
       },
@@ -171,5 +202,31 @@ return {
     "folke/twilight.nvim",
     cmd = "Twilight",
     opts = {},
+  },
+  {
+    'Wansmer/treesj',
+    keys = {
+      {
+        '<leader>m',
+        '<cmd>TSJToggle<CR>',
+        { desc = 'Join / Split' },
+      },
+    },
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    opts = {
+      use_default_keymaps = true,
+    },
+  },
+  {
+    "folke/zen-mode.nvim",
+    cmd = "ZenMode",
+    opts = {
+      plugins = {
+        gitsigns = true,
+        tmux = true,
+        kitty = { enabled = false, font = "+2" },
+      },
+    },
+    keys = { { "<leader>z", "<cmd>ZenMode<cr>", desc = "Zen Mode" } },
   },
 }

@@ -27,7 +27,16 @@ end
 
 vim.opt.runtimepath:prepend(lazy_path)
 
-require("lazy").setup("custom.plugins")
+require("lazy").setup({
+  spec = {
+    { import = "custom.plugins" },
+  },
+  defaults = { lazy = true },
+  performance = {
+    cache = { enabled = true },
+    debug = false,
+  },
+})
 
 require("tk.keymaps")
 require("tk.lsp")
