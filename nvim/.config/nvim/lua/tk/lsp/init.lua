@@ -47,6 +47,7 @@ local functions_attach = {
 
 local custom_on_attach = function(client, bufnr)
   nnoremap("gd", vim.lsp.buf.definition, { buffer = bufnr, desc = "Go to definition" })
+  nnoremap("do", vim.lsp.buf.definition, { buffer = bufnr, desc = "Go to definition" })
   nnoremap("gD", vim.lsp.buf.declaration, { buffer = bufnr, desc = "Go to declaration" })
   nnoremap("gi", vim.lsp.buf.implementation, { buffer = bufnr, desc = "Go to implementation" })
   nnoremap("gf", vim.lsp.buf.references, { buffer = bufnr, desc = "Find references" })

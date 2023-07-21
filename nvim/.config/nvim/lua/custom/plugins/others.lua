@@ -44,8 +44,11 @@ return {
       window = {
         position = "right",
         mappings = {
-          ["S"] = "split_with_window_picker",
-          ["s"] = "vsplit_with_window_picker",
+          ["S"] = "noop",
+          ["s"] = "noop",
+          ["<CR>"] = "open_with_window_picker",
+          ["<C-x>"] = "split_with_window_picker",
+          ["<C-v>"] = "vsplit_with_window_picker",
         },
       },
       filesystem = {

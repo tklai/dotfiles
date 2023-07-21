@@ -66,10 +66,17 @@ return {
     config = true,
     init = function()
       require("tk.utils.keymap").nnoremap(
-        "gpd",
+        "dp",
         require('goto-preview').goto_preview_definition,
         {
           desc = "Go to definition in float",
+        }
+      )
+      require("tk.utils.keymap").nnoremap(
+        "dP",
+        require('goto-preview').close_all_win,
+        {
+          desc = "Close all preview windows",
         }
       )
     end,
