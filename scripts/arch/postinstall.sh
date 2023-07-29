@@ -50,13 +50,8 @@ sudo pacman -S \
 echo "Installing GUI packages..."
 sudo pacman -S \
     flatpak \
-    # Terminals
-    # alacritty \
     kitty \
-    # wezterm \
-    # Browsers
     firefox \
-    # IME
     fcitx5-im \
     fcitx5-rime \
     librime \
@@ -65,20 +60,11 @@ sudo pacman -S \
     ;
 
 # Check r8168 is required for the network card
-if [ lspci | grep -i ethernet | grep -i realtek | grep -i 8168 ]; then
+if [[ -n "$(lspci | grep -i ethernet | grep -i realtek | grep -i 8168)" ]]; then
     echo "Installing r8168 for the network card..."
     sudo pacman -S r8168
     sudo echo "blacklist r8169" > /etc/modprobe.d/blacklist_r8169.conf
     sudo mkinitcpio -p linux
-fi
-
-# Check CPU vendor and install corresponding microcode
-if [ grep -i intel /proc/cpuinfo ]; then
-    echo "Installing intel-ucode..."
-    sudo pacman -S intel-ucode
-elif [ grep -i amd /proc/cpuinfo ]; then
-    echo "Installing amd-ucode..."
-    sudo pacman -S amd-ucode
 fi
 
 # Install yay
