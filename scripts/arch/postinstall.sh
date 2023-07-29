@@ -35,6 +35,7 @@ sudo pacman -S \
     stow \
     exa \
     starship \
+    man-db \
     ;
 
 # Install fonts
