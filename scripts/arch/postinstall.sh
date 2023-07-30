@@ -10,55 +10,61 @@ fi
 echo "Please enter your password for sudo use."
 sudo -v
 
+essentials=(
+    zsh
+    htop
+    neofetch
+    wget
+    curl
+    git
+    vi
+    vim
+    neovim
+    python
+    ripgrep
+    fzf
+    unzip
+    p7zip
+    ufw
+    stow
+    exa
+    starship
+    man-db
+)
+
+fonts=(
+    noto-fonts
+    noto-fonts-cjk
+    noto-fonts-emoji
+    ttf-jetbrains-mono-nerd
+)
+
+guis=(
+    flatpak
+    kitty
+    firefox
+    fcitx5-im
+    fcitx5-rime
+    librime
+    rime-cangjie
+    rime-quick
+)
+
 # Update package list
 echo "Updating package list..."
 sudo pacman -Sy
 
 # Install essential packages
 echo "Installing essential packages..."
-sudo pacman -S \
-    zsh \
-    htop \
-    neofetch \
-    wget \
-    curl \
-    git \
-    vi \
-    vim \
-    neovim \
-    python \
-    ripgrep \
-    fzf \
-    unzip \
-    p7zip \
-    ufw \
-    stow \
-    exa \
-    starship \
-    man-db \
-    ;
+sudo pacman -S ${essentials[@]}
 
 # Install fonts
 echo "Installing fonts..."
-sudo pacman -S \
-    noto-fonts \
-    noto-fonts-cjk \
-    noto-fonts-emoji \
-    ttf-jetbrains-mono-nerd \
-    ;
+sudo pacman -S ${fonts[@]}
 
 # Install GUI packages
 echo "Installing GUI packages..."
-sudo pacman -S \
-    flatpak \
-    kitty \
-    firefox \
-    fcitx5-im \
-    fcitx5-rime \
-    librime \
-    rime-cangjie \
-    rime-quick \
-    ;
+sudo pacman -S ${guis[@]}
 
 # Check r8168 is required for the network card
 if [[ -n "$(lspci | grep -i ethernet | grep -i realtek | grep -i 8168)" ]]; then
