@@ -50,6 +50,10 @@ fi
 ## SSH Fix
 [ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
 
+# ZSH
+SYNTAX_HIGHLIGHTING_PATH=/opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+[ -f "$SYNTAX_HIGHLIGHTING_PATH" ] && . "$SYNTAX_HIGHLIGHTING_PATH"
+
 # Private
 [ -f "$HOME/.private.config" ] && . "$HOME/.private.config"
 [ -f "$HOME/.private.credentials" ] && . "$HOME/.private.credentials"

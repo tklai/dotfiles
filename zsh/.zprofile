@@ -7,6 +7,13 @@ export XDG_DATA_HOME="$HOME/.local/share"
 HISTSIZE=20000
 HISTFILE="$HOME/.zsh_history"
 SAVEHIST=30000000
+HISTDUP=erase
+setopt sharehistory
+setopt incappendhistory
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
 
 # When the system runs the command longer than REPORTTIME, the shell will print
 # the elasped time.
