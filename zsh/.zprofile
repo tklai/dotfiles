@@ -25,3 +25,13 @@ bindkey -e
 
 # Just in case
 alias \:q="exit"
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    # Copy with clone
+    alias cp="cp -c"
+
+    alias rm="echo Please install 'trash' via homebrew or use full path to use 'rm'"
+    if [ -x "$(command -v trash)" ]; then
+        alias rm="trash -F"
+    fi
+fi
