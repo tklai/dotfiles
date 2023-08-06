@@ -6,5 +6,5 @@ Use `stow`
 
 # Want to setup arch?
 ```sh
-bash -c "$(curl -fsSL https://tklai.dev/setup-arch)"
+bash -c "$(curl -fsSL https://url.tklai.dev/setup-arch)"
 ```
