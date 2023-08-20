@@ -55,6 +55,7 @@ local custom_on_attach = function(client, bufnr)
   nnoremap("sh", vim.lsp.buf.signature_help, { buffer = bufnr, desc = "Show signature help of the function under cursor" })
   nnoremap("sd", vim.lsp.buf.hover, { buffer = bufnr, desc = "Show documentation" })
   nnoremap("se", vim.diagnostic.open_float, { buffer = bufnr, desc = "Show error" })
+  nnoremap("ca", vim.lsp.buf.code_action, { buffer = bufnr, desc = "Show code actions" })
   nnoremap("<leader>D", vim.lsp.buf.type_definition, { buffer = bufnr, desc = "Go to type definition" })
   nnoremap("<leader>rn", vim.lsp.buf.rename, { buffer = bufnr, desc = "Rename the thing under cursor in the buffer" })
   nnoremap("<leader>ca", vim.lsp.buf.code_action, { buffer = bufnr, desc = "Show code actions" })
@@ -62,6 +63,13 @@ local custom_on_attach = function(client, bufnr)
   nnoremap("\\\\", function()
     vim.lsp.buf.format({ async = true })
   end, { desc = "Run code format" })
+  -- nnoremap("<leader>uh", function()
+  --   if false and vim.lsp.inlay_hint and client.server_capabilities.inlayHintProvider then
+  --     vim.lsp.inlay_hint(0, nil)
+  --   else
+  --     print('LSP server does not support inlay hints.')
+  --   end
+  -- end, { buffer = bufnr, desc = "Toggle Inlay Hints" })
 
   functions_attach.lsp_highlight_document(client, bufnr)
 
@@ -74,6 +82,10 @@ local custom_on_attach = function(client, bufnr)
   --     vim.diagnostic.open_float()
   --   end,
   -- })
+
+  -- if vim.lsp.inlay_hint and client.server_capabilities.inlayHintProvider then
+  --   vim.lsp.inlay_hint(bufnr, true)
+  -- end
 end
 
 vim.diagnostic.config({
@@ -111,6 +123,7 @@ mason_lspconfig.setup({
     "tsserver",
     "vuels",
     "yamlls",
+    "zls",
   },
   automatic_installation = true,
 })
