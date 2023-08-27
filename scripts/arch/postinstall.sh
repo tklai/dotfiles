@@ -39,6 +39,7 @@ essentials=(
     exa
     starship
     man-db
+    wl-clipboard
 )
 
 fonts=(
@@ -95,14 +96,17 @@ fi
 
 # Install yay
 echo ""
-echo "$info Installing yay..."
+echo "$info Installing yay (yay-bin)..."
 echo ""
 sudo pacman -S --needed base-devel git
 mkdir -p ~/Tools
 cd ~/Tools
-git clone https://aur.archlinux.org/yay.git
-cd yay
+git clone --depth=1 https://aur.archlinux.org/yay-bin.git
+cd yay-bin
 makepkg -si
+echo "$info Cleaning up folder... (yay can manage itself)"
+cd
+rm -rf ~/Tools/yay-bin
 
 # Fix systemd-boot menu resolution
 # Seems fixed in recent systemd-boot, previously need to add "console-mode keep" to /boot/loader/loader.conf
@@ -116,8 +120,7 @@ echo ""
 echo "$info Installing plymouth..."
 echo ""
 sudo pacman -S plymouth
-if [ grep -qE ' ?plymouth ?' /etc/mkinitcpio.conf ]; then
-else
+if [ 0 != "$(grep -qE ' ?plymouth ?' /etc/mkinitcpio.conf)" ]; then
     echo ""
     echo "$info Adding plymouth to mkinitcpio hooks..."
     echo ""
