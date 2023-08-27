@@ -141,10 +141,10 @@ XftAntialias=true
 XftHintStyle=hintslight
 XftSubPixel=rgb
 fixed=JetBrainsMono Nerd Font Mono,10,-1,5,50,0,0,0,0,0
-font=SF Pro Display,10,-1,5,50,0,0,0,0,0
-menuFont=SF Pro Display,10,-1,5,50,0,0,0,0,0
-smallestReadableFont=SF Pro Display,8,-1,5,50,0,0,0,0,0
-toolBarFont=SF Pro Display,10,-1,5,50,0,0,0,0,0
+font=Hiragino Sans GB,10,-1,5,25,0,0,0,0,0,W3
+menuFont=Hiragino Sans GB,10,-1,5,25,0,0,0,0,0,W3
+smallestReadableFont=Hiragino Sans GB,8,-1,5,25,0,0,0,0,0,W3
+toolBarFont=Hiragino Sans GB,10,-1,5,25,0,0,0,0,0,W3
 
 [KDE]
 SingleClick=false
@@ -152,7 +152,7 @@ SingleClick=false
 [WM]
 activeBackground=227,229,231
 activeBlend=227,229,231
-activeFont=SF Pro Display,10,-1,5,50,0,0,0,0,0
+activeFont=Hiragino Sans GB,10,-1,5,25,0,0,0,0,0,W3
 activeForeground=35,38,41
 inactiveBackground=239,240,241
 inactiveBlend=239,240,241
