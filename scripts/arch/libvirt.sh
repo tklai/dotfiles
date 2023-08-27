@@ -27,19 +27,33 @@ echo ""
 echo $hr
 echo "$info Installing libvirt and virt-manager..."
 echo $hr
-sudo pacman -S libvirt virt-manager
+# libvirt       - VM server
+# virt-manager  - VM client
+# qemu          - Hypervisor
+# edk2-ovmf     - Enables UEFI support
+# dnsmasq       - For NAT/DHCP networking
+sudo pacman -S libvirt virt-manager qemu edk2-ovmf dnsmasq
 
-echo ""
-echo $hr
-echo "$info Enabling libvirtd service..."
-echo $hr
-sudo systemctl enable libvirtd
+# libvirtd uses polkit or user groups by default. Just for references.
+# Reference: https://wiki.archlinux.org/title/libvirt#Set_up_authentication
+# sed -ie '/#unix_sock_group/s/#//' /etc/libvirt/libvirtd.conf
+# sed -ie '/#unix_sock_ro_perms/s/0777/0770/' /etc/libvirt/libvirtd.conf
+# sed -ie '/#unix_sock_ro_perms/s/#//' /etc/libvirt/libvirtd.conf
+# sed -ie '/#unix_sock_rw_perms/s/#//' /etc/libvirt/libvirtd.conf
+# sed -ie '/#auth_unix_ro/s/#//' /etc/libvirt/libvirtd.conf
+# sed -ie '/#auth_unix_rw/s/#//' /etc/libvirt/libvirtd.conf
 
 echo ""
 echo $hr
 echo "$info Adding user to group libvirt..."
 echo $hr
 sudo usermod -aG libvirt "$USER"
+
+echo ""
+echo $hr
+echo "$info Enabling libvirtd service..."
+echo $hr
+sudo systemctl enable libvirtd
 
 echo ""
 echo $hr
