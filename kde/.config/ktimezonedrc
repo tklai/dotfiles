@@ -1,4 +1,0 @@
-[TimeZones]
-LocalZone=Asia/Hong_Kong
-ZoneinfoDir=/usr/share/zoneinfo
-Zonetab=/usr/share/zoneinfo/zone.tab

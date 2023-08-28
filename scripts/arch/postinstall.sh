@@ -131,5 +131,19 @@ echo ""
 sudo mkinitcpio -P
 
 echo ""
+echo "$info Checking if KDE installed..."
+sudo pacman -Qi plasma-desktop > /dev/null
+if [ $? -eq 0 ]; then
+    echo ""
+    echo "$info KDE installed. Installing konsave via AUR..."
+    echo ""
+    yay -S konsave
+else
+    echo ""
+    echo "$info KDE not installed."
+    echo ""
+fi
+
+echo ""
 echo "$success All done!"
 echo ""
