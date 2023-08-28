@@ -99,14 +99,10 @@ echo ""
 echo "$info Installing yay (yay-bin)..."
 echo ""
 sudo pacman -S --needed base-devel git
-mkdir -p ~/Tools
-cd ~/Tools
+cd /tmp
 git clone --depth=1 https://aur.archlinux.org/yay-bin.git
 cd yay-bin
 makepkg -si
-echo "$info Cleaning up folder... (yay can manage itself)"
-cd
-rm -rf ~/Tools/yay-bin
 
 # Fix systemd-boot menu resolution
 # Seems fixed in recent systemd-boot, previously need to add "console-mode keep" to /boot/loader/loader.conf
@@ -120,7 +116,8 @@ echo ""
 echo "$info Installing plymouth..."
 echo ""
 sudo pacman -S plymouth
-if [ 0 != "$(grep -qE ' ?plymouth ?' /etc/mkinitcpio.conf)" ]; then
+grep -qE ' ?plymouth ?' /etc/mkinitcpio.conf
+if [ $? -ne 0 ]; then
     echo ""
     echo "$info Adding plymouth to mkinitcpio hooks..."
     echo ""
