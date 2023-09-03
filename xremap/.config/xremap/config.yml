@@ -1,0 +1,6 @@
+modmap:
+  - name: Caps Lock as Esc on tap, Ctrl on held
+    remap:
+      KEY_CAPSLOCK:
+        alone: KEY_ESC
+        held: KEY_LEFTCTRL
