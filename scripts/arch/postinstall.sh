@@ -21,6 +21,12 @@ echo "Please enter your password for sudo use."
 echo ""
 sudo -v
 
+echo ""
+echo "$info Adjust pacman configurations before installing packages..."
+echo ""
+sudo sed -ie 's/#Color/Color/' /etc/pacman.conf
+sudo sed -ie 's/#ParallelDownloads/ParallelDownloads/' /etc/pacman.conf
+
 essentials=(
     zsh
     htop
