@@ -16,14 +16,6 @@ return {
   },
   "jose-elias-alvarez/null-ls.nvim",
   {
-    "mfussenegger/nvim-dap",
-    lazy = true,
-    dependencies = {
-      "rcarriga/nvim-dap-ui",
-      "theHamsta/nvim-dap-virtual-text",
-    },
-  },
-  {
     "kevinhwang91/nvim-ufo",
     dependencies = {
       "kevinhwang91/promise-async",

@@ -166,6 +166,7 @@ return {
   },
   {
     "folke/flash.nvim",
+    enabled = false,
     event = "VeryLazy",
     opts = {},
     keys = {
@@ -202,11 +203,6 @@ return {
     opts = {},
   },
   {
-    "folke/twilight.nvim",
-    cmd = "Twilight",
-    opts = {},
-  },
-  {
     'Wansmer/treesj',
     keys = {
       {
@@ -217,7 +213,7 @@ return {
     },
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
     opts = {
-      use_default_keymaps = true,
+      use_default_keymaps = false,
     },
   },
   {
