@@ -1,5 +1,7 @@
 #!/bin/bash
 
+AUR_HELPER="$(echo ${AUR_HELPER:-'paru'} | tr '[:upper:]' '[:lower:]')"
+
 error="$(tput setaf 1)[ERROR]$(tput sgr0)"
 success="$(tput setaf 2)[SUCCESS]$(tput sgr0)"
 warning="$(tput setaf 3)[WARNING]$(tput sgr0)"
@@ -94,15 +96,28 @@ if [[ -n "$(lspci | grep -i ethernet | grep -i realtek | grep -i 8168)" ]]; then
     sudo mkinitcpio -p linux
 fi
 
-# Install yay
-echo ""
-echo "$info Installing yay (yay-bin)..."
-echo ""
-sudo pacman -S --needed base-devel git
-cd /tmp
-git clone --depth=1 https://aur.archlinux.org/yay-bin.git
-cd yay-bin
-makepkg -si
+# AUR Helper
+if [[ "$AUR_HELPER" == "yay" ]]; then
+    # Install yay
+    echo ""
+    echo "$info Installing yay (yay-bin)..."
+    echo ""
+    sudo pacman -S --needed base-devel git
+    cd /tmp
+    git clone --depth=1 https://aur.archlinux.org/yay-bin.git
+    cd yay-bin
+    makepkg -si
+else
+    # Install paru
+    echo ""
+    echo "$info Installing paru (paru-bin)..."
+    echo ""
+    sudo pacman -S --needed base-devel git
+    cd /tmp
+    git clone --depth=1 https://aur.archlinux.org/paru-bin.git
+    cd paru-bin
+    makepkg -si
+fi
 
 # Fix systemd-boot menu resolution
 # Seems fixed in recent systemd-boot, previously need to add "console-mode keep" to /boot/loader/loader.conf
