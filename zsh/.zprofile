@@ -25,6 +25,7 @@ bindkey -e
 
 # Just in case
 alias \:q="exit"
+alias q="exit"
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
     # Copy with clone
