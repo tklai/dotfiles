@@ -61,6 +61,13 @@ local configs = {
 
 
 -- Catppuccin
-configs.color_scheme = "Catppuccin Latte"
+-- configs.color_scheme = "Catppuccin Latte"
+
+-- Flexoki
+local colors, _ = wezterm.color.load_scheme(
+  wezterm.config_dir .. "/schemes/flexoki-light.toml"
+)
+
+configs.colors = colors
 
 return configs
