@@ -8,6 +8,11 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 fi
 
 # Setup local scripts
+if [ -d "$HOME/.local/bin" ]; then
+  export PATH=$HOME/.local/bin:$PATH
+fi
+
+# Setup local scripts
 if [ -d "$HOME/.local/scripts" ]; then
   export PATH=$HOME/.local/scripts:$PATH
 
