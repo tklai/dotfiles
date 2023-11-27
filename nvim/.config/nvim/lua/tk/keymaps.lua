@@ -10,6 +10,7 @@ nnoremap("<Space>", "<Nop>", { desc = "Occupied by leader Key" })
 
 -- Escape
 inoremap("<C-c>", "<ESC>", { desc = "Escape" })
+inoremap("jj", "<ESC>", { desc = "Escape" })
 
 -- Save file
 nnoremap("<leader>w", ":w<CR>", { desc = "Save current buffer" })
@@ -19,6 +20,10 @@ nnoremap("<C-h>", "<C-w>h", { desc = "Move cursor to the left window" })
 nnoremap("<C-j>", "<C-w>j", { desc = "Move cursor to the lower window" })
 nnoremap("<C-k>", "<C-w>k", { desc = "Move cursor to the upper window" })
 nnoremap("<C-l>", "<C-w>l", { desc = "Move cursor to the right window" })
+
+-- Splits
+nnoremap("ss", ":split<CR>", { desc = "Split window horizontally" })
+nnoremap("sv", ":vsplit<CR>", { desc = "Split window vertically" })
 
 -- H/L to start and end of line
 nnoremap("H", "^", { desc = "Move cursor to the start of line" })
@@ -90,9 +95,9 @@ nnoremap("<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>", { silent = true
 
 xnoremap("<leader>d", [["_d]], { desc = "Delete without affecting the clipboard" })
 xnoremap("<leader>p", [["_dP]], { desc = "Replace the selected line without losing the yank" })
-nnoremap("<leader>cj", "<cmd>cnext<CR>zz", { desc = "Navigate files in quickfix list blazingly fast" })
-nnoremap("<leader>ck", "<cmd>cprev<CR>zz", { desc = "Navigate files in quickfix list blazingly fast" })
-nnoremap("<leader>cq", "<cmd>cclose<CR>", { desc = "Close quickfix list" })
+nnoremap("[q", "<cmd>cprev<CR>zz", { desc = "Navigate files in quickfix list blazingly fast" })
+nnoremap("]q", "<cmd>cnext<CR>zz", { desc = "Navigate files in quickfix list blazingly fast" })
+nnoremap("qq", "<cmd>cclose<CR>", { desc = "Close quickfix list" })
 
 nnoremap("<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], {
   desc = "Find the word in current buffer and create replace regex in a real quick",

@@ -42,7 +42,7 @@ return {
         "document_symbols",
       },
       window = {
-        position = "right",
+        -- position = "right",
         mappings = {
           ["S"] = "noop",
           ["s"] = "noop",
@@ -92,7 +92,7 @@ return {
         update_cwd = true,
         view = {
           width = 50,
-          side = "right",
+          -- side = "right",
         },
       })
     end,
@@ -233,5 +233,12 @@ return {
     version = "*",
     event = "VeryLazy",
     opts = {},
+  },
+  {
+    "miversen33/sunglasses.nvim",
+    event = "UIEnter",
+    opts = {
+      filter_percent = 0.1,
+    },
   },
 }

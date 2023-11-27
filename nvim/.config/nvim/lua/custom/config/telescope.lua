@@ -76,11 +76,11 @@ local nnoremap = Keymap.nnoremap
 
 local telescope_builtin = require("telescope.builtin")
 
-nnoremap("<C-p>", telescope_builtin.find_files)
+nnoremap("ff", telescope_builtin.find_files)
 -- Find specific string in working directory (Global search)
-nnoremap("<leader>fg", telescope_builtin.live_grep)
+nnoremap("fg", telescope_builtin.live_grep)
 -- Find the string under the cursor in working directory and filter the result (Scoped Search)
-nnoremap("<leader>fs", telescope_builtin.grep_string)
-nnoremap("<leader>fb", telescope_builtin.buffers)
+nnoremap("fw", telescope_builtin.grep_string)
+nnoremap("fb", telescope_builtin.buffers)
 nnoremap("<leader>vh", telescope_builtin.help_tags)
 nnoremap("<leader>ds", telescope_builtin.lsp_document_symbols)

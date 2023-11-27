@@ -24,4 +24,12 @@ return {
       require("custom.colorscheme.tokyonight")
     end,
   },
+  {
+    "kepano/flexoki-neovim",
+    enabled = false,
+    lazy = false,
+    config = function()
+      require("custom.colorscheme.flexoki")
+    end,
+  },
 }
