@@ -2,7 +2,7 @@ return {
   {
     "catppuccin/nvim",
     name = "catppuccin",
-    -- enabled = false,
+    enabled = false,
     lazy = false,
     config = function()
       require("custom.colorscheme.catppuccin")
@@ -26,8 +26,9 @@ return {
   },
   {
     "kepano/flexoki-neovim",
-    enabled = false,
+    -- enabled = false,
     lazy = false,
+    as = 'flexoki',
     config = function()
       require("custom.colorscheme.flexoki")
     end,

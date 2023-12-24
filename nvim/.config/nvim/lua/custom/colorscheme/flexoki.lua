@@ -3,8 +3,4 @@ if not flexoki then
   return
 end
 
-flexoki.setup({
-  variant = 'light',
-})
-
 vim.cmd.colorscheme("flexoki-light")
