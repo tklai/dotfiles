@@ -22,8 +22,8 @@ nnoremap("<C-k>", "<C-w>k", { desc = "Move cursor to the upper window" })
 nnoremap("<C-l>", "<C-w>l", { desc = "Move cursor to the right window" })
 
 -- Splits
-nnoremap("ss", ":split<CR>", { desc = "Split window horizontally" })
-nnoremap("sv", ":vsplit<CR>", { desc = "Split window vertically" })
+-- nnoremap("ss", ":split<CR>", { desc = "Split window horizontally" })
+-- nnoremap("sv", ":vsplit<CR>", { desc = "Split window vertically" })
 
 -- H/L to start and end of line
 nnoremap("H", "^", { desc = "Move cursor to the start of line" })
