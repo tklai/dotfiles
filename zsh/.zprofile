@@ -27,16 +27,6 @@ bindkey -e
 alias \:q="exit"
 alias q="exit"
 
-if [[ "$OSTYPE" == "darwin"* ]]; then
-    # Copy with clone
-    alias cp="cp -c"
-
-    alias rm="echo Please install 'trash' via homebrew or use full path to use 'rm'"
-    if [ -x "$(command -v trash)" ]; then
-        alias rm="trash -F"
-    fi
-fi
-
 if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
     export MOZ_ENABLE_WAYLAND=1
 fi

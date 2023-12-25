@@ -1,12 +1,3 @@
-# Homebrew
-if [[ "$OSTYPE" == "darwin"* ]]; then
-  if [ "$(arch)" = "arm64" ]; then
-    eval "$(/opt/homebrew/bin/brew shellenv)"
-  elif [ "$(arch)" = "i386" ]; then
-    eval "$(/usr/local/bin/brew shellenv)"
-  fi
-fi
-
 # Setup local scripts
 if [ -d "$HOME/.local/bin" ]; then
   export PATH=$HOME/.local/bin:$PATH
@@ -17,6 +8,27 @@ if [ -d "$HOME/.local/scripts" ]; then
   export PATH=$HOME/.local/scripts:$PATH
 
   bindkey -s ^f "tmux-sessionizer\n"
+fi
+
+setup_darwin () {
+  # Homebrew
+  if [ "$(arch)" = "arm64" ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+  elif [ "$(arch)" = "i386" ]; then
+    eval "$(/usr/local/bin/brew shellenv)"
+  fi
+
+  # Copy with clone
+  alias cp="cp -c"
+
+  alias rm="echo Please install 'trash' via homebrew or use full path to use 'rm'"
+  if [ -x "$(command -v trash)" ]; then
+      alias rm="trash -F"
+  fi
+}
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    setup_darwin
 fi
 
 # Editor
@@ -33,7 +45,7 @@ fi
 
 # Command Alias
 ## Directory Listing
-EXECUTABLE_LS="ls"
+EXECUTABLE_LS="ls --color=auto"
 if [ -x "$(command -v exa)" ]; then
     EXECUTABLE_LS="exa"
 fi
