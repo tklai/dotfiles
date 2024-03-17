@@ -59,10 +59,6 @@ if [ -x "$(command -v fnm)" ]; then
   eval "$(fnm env --use-on-cd)"
 fi
 
-if [ -x "$(command -v starship)" ]; then
-  eval "$(starship init $0[2,-1])"
-fi
-
 # Terminal
 ## SSH Fix
 [ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
@@ -74,3 +70,25 @@ SYNTAX_HIGHLIGHTING_PATH=/opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-
 # Private
 [ -f "$HOME/.private.config" ] && . "$HOME/.private.config"
 [ -f "$HOME/.private.credentials" ] && . "$HOME/.private.credentials"
+
+if [ -x "$(command -v starship)" ]; then
+  eval "$(starship init $0[2,-1])"
+fi
+
+if [ -x "$(command -v zoxide)" ]; then
+  eval "$(zoxide init zsh)"
+  alias cd="z"
+fi
+
+if [ -x "$(command -v docker)" ]; then
+  # Attach container
+  dac() {
+    local compose_file
+    compose_file=$(find . -maxdepth 1 -name "docker-compose.yml" -o -name "docker-compose.yaml" -o -name "compose.yml" -o -name "compose.yaml" | head -n 1)
+    if [ -n "$compose_file" ]; then
+        docker compose exec "$1" "${@:2}"
+    else
+        docker exec -it "$1" "${@:2}"
+    fi
+  }
+fi

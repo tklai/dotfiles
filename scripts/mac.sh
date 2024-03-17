@@ -61,6 +61,16 @@ defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 
 #}}}
 
+#{{{ Dock
+
+# Show docker immediately
+defaults write com.apple.dock autohide-delay -int 0
+
+# Speed up animations
+defaults write com.apple.dock autohide-time-modifier -float 0.25;
+
+#}}}
+
 #{{{ Misc
 
 # Prevent Time Machine from prompting to use new hard drives as backup volume
