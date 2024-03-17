@@ -59,10 +59,6 @@ if [ -x "$(command -v fnm)" ]; then
   eval "$(fnm env --use-on-cd)"
 fi
 
-if [ -x "$(command -v starship)" ]; then
-  eval "$(starship init $0[2,-1])"
-fi
-
 # Terminal
 ## SSH Fix
 [ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
@@ -74,3 +70,12 @@ SYNTAX_HIGHLIGHTING_PATH=/opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-
 # Private
 [ -f "$HOME/.private.config" ] && . "$HOME/.private.config"
 [ -f "$HOME/.private.credentials" ] && . "$HOME/.private.credentials"
+
+if [ -x "$(command -v starship)" ]; then
+  eval "$(starship init $0[2,-1])"
+fi
+
+if [ -x "$(command -v zoxide)" ]; then
+  eval "$(zoxide init zsh)"
+  alias cd="z"
+fi
