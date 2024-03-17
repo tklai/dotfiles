@@ -42,7 +42,7 @@ opt.shiftround = true
 opt.colorcolumn = "80"
 -- Fold
 -- opt.foldmethod = "marker"
-opt.foldcolumn = "1"
+opt.foldcolumn = "0"
 opt.foldlevel = 20
 opt.foldenable = true
 
