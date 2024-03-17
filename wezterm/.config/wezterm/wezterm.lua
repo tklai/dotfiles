@@ -11,27 +11,26 @@ local configs = {
     {
       family = "CommitMono Nerd Font",
       weight = "Bold",
-      harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
     },
     {
       family = "MonaspiceNe Nerd Font",
       weight = "Bold",
-      harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
     },
     {
       family = "JetBrainsMono Nerd Font",
       weight = "Bold",
-      harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
     },
     {
       family = "Liga SFMono Nerd Font",
       weight = "DemiBold",
-      harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
     },
     {
       family = "MesloLGS NF",
       weight = "DemiBold",
-      harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
+    },
+    {
+      family = "Heiti TC",
+      weight = "DemiBold",
     },
   }),
   harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
@@ -42,9 +41,10 @@ local configs = {
     top = 0,
     bottom = 0,
   },
+  window_decorations = "RESIZE",
   -- hide_tab_bar_if_only_one_tab = true,
 
-  window_background_opacity = 0.95,
+  -- window_background_opacity = 0.95,
 }
 
 -- Themes
@@ -74,10 +74,6 @@ local configs = {
 -- configs.color_scheme = "Catppuccin Latte"
 
 -- Flexoki
-local colors, _ = wezterm.color.load_scheme(
-  wezterm.config_dir .. "/schemes/flexoki-light.toml"
-)
-
-configs.colors = colors
+configs.color_scheme = 'flexoki-light'
 
 return configs
