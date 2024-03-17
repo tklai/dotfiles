@@ -8,6 +8,7 @@ return {
       end
 
       kanagawa.setup({
+        transparent = true,
         dimInactive = true,
         overrides = function(colors)
           local theme = colors.theme
