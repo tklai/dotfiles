@@ -16,13 +16,10 @@ return {
   },
   {
     "danymat/neogen",
-    event = "BufEnter",
-    dependencies = {
-      { "nvim-treesitter/nvim-treesitter" },
-    },
-    opts = {},
+    keys = { "<leader>aa" },
     init = function()
       vim.keymap.set("n", "<leader>aa", require("neogen").generate, { desc = "Generate annotations" })
     end,
+    opts = {},
   },
 }

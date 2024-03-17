@@ -8,7 +8,6 @@ local xnoremap = Keymap.bind("x")
 
 -- Escape
 inoremap("<C-c>", "<ESC>", { desc = "Escape" })
-inoremap("jj", "<ESC>", { desc = "Escape" })
 
 -- No more highlight after search please
 nnoremap("<ESC>", "<cmd>nohlsearch<CR>", { silent = true, desc = "Disable highlight search on escape" })

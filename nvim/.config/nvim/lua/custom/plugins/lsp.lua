@@ -6,7 +6,6 @@ return {
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
-      { "j-hui/fidget.nvim", opts = {} },
     },
     config = function()
       require("mason").setup()
@@ -113,11 +112,9 @@ return {
   {
     "kevinhwang91/nvim-ufo",
     dependencies = { "kevinhwang91/promise-async" },
-    event = "BufEnter",
   },
   {
     "stevearc/conform.nvim",
-    event = "BufEnter",
     opts = {
       formatters_by_ft = {
         lua = { "stylua" },
