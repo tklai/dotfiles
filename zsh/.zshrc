@@ -79,3 +79,16 @@ if [ -x "$(command -v zoxide)" ]; then
   eval "$(zoxide init zsh)"
   alias cd="z"
 fi
+
+if [ -x "$(command -v docker)" ]; then
+  # Attach container
+  dac() {
+    local compose_file
+    compose_file=$(find . -maxdepth 1 -name "docker-compose.yml" -o -name "docker-compose.yaml" -o -name "compose.yml" -o -name "compose.yaml" | head -n 1)
+    if [ -n "$compose_file" ]; then
+        docker compose exec "$1" "${@:2}"
+    else
+        docker exec -it "$1" "${@:2}"
+    fi
+  }
+fi
