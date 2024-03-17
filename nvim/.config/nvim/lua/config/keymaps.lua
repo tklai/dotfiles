@@ -1,16 +1,17 @@
-local Keymap = require("tk.utils.keymap")
+local Keymap = require("utils.keymap")
 
-local inoremap = Keymap.inoremap
-local nnoremap = Keymap.nnoremap
-local vnoremap = Keymap.vnoremap
-local tnoremap = Keymap.tnoremap
-local xnoremap = Keymap.xnoremap
-
-nnoremap("<Space>", "<Nop>", { desc = "Occupied by leader Key" })
+local inoremap = Keymap.bind("i")
+local nnoremap = Keymap.bind("n")
+local vnoremap = Keymap.bind("v")
+local tnoremap = Keymap.bind("t")
+local xnoremap = Keymap.bind("x")
 
 -- Escape
 inoremap("<C-c>", "<ESC>", { desc = "Escape" })
 inoremap("jj", "<ESC>", { desc = "Escape" })
+
+-- No more highlight after search please
+nnoremap("<ESC>", "<cmd>nohlsearch<CR>", { silent = true, desc = "Disable highlight search on escape" })
 
 -- Save file
 nnoremap("<leader>w", ":w<CR>", { desc = "Save current buffer" })
@@ -59,14 +60,19 @@ nnoremap("\\B", function()
   local isNvimTreeOpened = nvimTreeView and nvimTreeView.is_visible()
   local nvimTreeApi = vim.F.npcall(require, "nvim-tree.api")
 
-  if isNvimTreeOpened then
-    nvimTreeApi.tree.close()
-  end
+  if vim.F.npcall(require, "bufferline") then
+    vim.cmd("BufferLineCloseOthers")
+  else
+    if isNvimTreeOpened and nvimTreeApi then
+      nvimTreeApi.tree.close()
+    end
 
-  vim.cmd("bufdo bd")
+    -- TODO: To have a native implementation for closing other buffers
+    vim.cmd("bufdo bd")
 
-  if isNvimTreeOpened then
-    nvimTreeApi.tree.open()
+    if isNvimTreeOpened and nvimTreeApi then
+      nvimTreeApi.tree.open()
+    end
   end
 end, { desc = "Delete all buffers" })
 
@@ -87,9 +93,6 @@ vnoremap(">", ">gv", { desc = "Increase indentation level" })
 -- Terminal
 tnoremap("<ESC>", "<C-\\><C-n>", { desc = "Escape TERM mode using <Escape> key" })
 
--- No more highlight after search please
-nnoremap("<ESC>", "<ESC>:noh<CR>", { silent = true, desc = "Disable highlight search on escape" })
-
 -- Call tmux-sessionizer without creating extra shell
 nnoremap("<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>", { silent = true, desc = "Tmux sessionizer" })
 
@@ -99,15 +102,15 @@ nnoremap("[q", "<cmd>cprev<CR>zz", { desc = "Navigate files in quickfix list bla
 nnoremap("]q", "<cmd>cnext<CR>zz", { desc = "Navigate files in quickfix list blazingly fast" })
 nnoremap("qq", "<cmd>cclose<CR>", { desc = "Close quickfix list" })
 
-nnoremap("<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], {
+nnoremap("<leader>x", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], {
   desc = "Find the word in current buffer and create replace regex in a real quick",
   silent = false,
 })
-nnoremap("<leader>S", [[:%s/\<<C-r><C-w>\>//gI<Left><Left><Left>]], {
+nnoremap("<leader>X", [[:%s/\<<C-r><C-w>\>//gI<Left><Left><Left>]], {
   desc = "Find the word in current buffer and create replace regex without replacement in a real quick",
   silent = false,
 })
-xnoremap("<leader>s", [[:s//gI<Left><Left><Left>]], {
+xnoremap("<leader>x", [[:s//gI<Left><Left><Left>]], {
   desc = "Find the word in selected visual zone and create replace regex in a real quick",
   silent = false,
 })

@@ -1,10 +1,11 @@
-local disabled_builtins = {
-  "2html_plugin",
+local builtin_plugins_to_disable = {
   "getscript",
   "getscriptPlugin",
-  "gzip",
+  "2html_plugin",
   "logipat",
   -- "matchit",
+  "rrhelper",
+  "spellfile_plugin",
   "netrw",
   "netrwPlugin",
   "netrwSettings",
@@ -12,17 +13,16 @@ local disabled_builtins = {
   "perl_provider",
   "python_provider",
   "python3_provider",
+  "ruby_provider",
+  "gzip",
   "tar",
   "tarPlugin",
-  "rrhelper",
-  "ruby_provider",
-  "spellfile_plugin",
   "vimball",
   "vimballPlugin",
   "zip",
   "zipPlugin",
 }
 
-for _, plugin in pairs(disabled_builtins) do
+for _, plugin in pairs(builtin_plugins_to_disable) do
   vim.g["loaded_" .. plugin] = 1
 end

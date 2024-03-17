@@ -8,7 +8,7 @@ M.get_default_opts = function()
 end
 
 -- Thank you, ThePrimeagen
-local function bind(mode, default_opts)
+M.bind = function(mode, default_opts)
   default_opts = default_opts or M.get_default_opts()
 
   return function(lhs, rhs, opts)
@@ -17,11 +17,5 @@ local function bind(mode, default_opts)
     vim.keymap.set(mode, lhs, rhs, opts)
   end
 end
-
-M.inoremap = bind("i")
-M.nnoremap = bind("n")
-M.vnoremap = bind("v")
-M.tnoremap = bind("t")
-M.xnoremap = bind("x")
 
 return M

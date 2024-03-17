@@ -1,12 +1,7 @@
-local lspconfig = vim.F.npcall(require, "lspconfig")
-if not lspconfig then
-  return {}
-end
-
 local config = {}
 
 config.eslint = {
-  root_dir = lspconfig.util.root_pattern(
+  root_dir = require("lspconfig").util.root_pattern(
     ".eslintrc.js",
     ".eslintrc.cjs",
     ".eslintrc.yaml",
@@ -67,6 +62,11 @@ config.phpactor = {
 config.lua_ls = {
   settings = {
     Lua = {
+      telemetry = { enable = false },
+      completion = {
+        workspaceWord = true,
+        callSnippet = "Replace",
+      },
       diagnostics = {
         globals = { "vim" },
       },
@@ -75,6 +75,9 @@ config.lua_ls = {
           [vim.fn.expand("$VIMRUNTIME/lua")] = true,
           [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
         },
+      },
+      format = {
+        enable = false,
       },
     },
   },

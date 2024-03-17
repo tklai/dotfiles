@@ -1,15 +1,6 @@
-if vim.fn.has("nvim-0.9") == 0 then
-  vim.notify("This configuration can only be run on neovim >=0.9.", vim.log.levels.ERROR)
-end
-
-vim.loader.enable()
-
-require("core.disable_builtins")
-require("tk.options")
-
 local lazy_path = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazy_path) then
-  vim.notify("lazy.nvim was not existed or loaded", vim.log.levels.INFO)
+  vim.notify("lazy.nvim cannot be found or loaded", vim.log.levels.INFO)
 
   -- Remove the folder / file before cloning
   vim.fn.delete(lazy_path, "rf")
@@ -21,6 +12,7 @@ if not vim.loop.fs_stat(lazy_path) then
     "--filter=blob:none",
     "--single-branch",
     "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable",
     lazy_path,
   })
 end
@@ -30,15 +22,9 @@ vim.opt.runtimepath:prepend(lazy_path)
 require("lazy").setup({
   spec = {
     { import = "custom.plugins" },
+    { import = "custom.languages" },
+    { import = "custom.colorschemes" },
   },
-  defaults = { lazy = true },
-  performance = {
-    cache = { enabled = true },
-    debug = false,
-  },
+  change_detection = { notify = false },
+  ui = { border = "rounded" },
 })
-
-require("tk.keymaps")
-require("tk.lsp")
-
-vim.opt.guifont = "Liga SFMono Nerd Font:h12"

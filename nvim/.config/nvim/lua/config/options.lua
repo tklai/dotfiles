@@ -10,7 +10,6 @@ opt.cursorline = true
 opt.fileencoding = "utf-8"
 opt.hlsearch = true
 opt.ignorecase = true
--- opt.inccommand = "split"
 opt.laststatus = 3
 opt.mouse = "a"
 opt.number = true

@@ -1,6 +1,5 @@
-local term_group = vim.api.nvim_create_augroup("term_emu", { clear = true })
 vim.api.nvim_create_autocmd("TermOpen", {
-  group = term_group,
+  group = vim.api.nvim_create_augroup("term_emu", { clear = true }),
   desc = "Settings for terminal emulator",
   pattern = "term://*",
   callback = function()
