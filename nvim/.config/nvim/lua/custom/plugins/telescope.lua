@@ -25,7 +25,7 @@ return {
       vim.keymap.set("n", "<leader>fb", builtin.buffers)
       vim.keymap.set("n", "<leader>vh", builtin.help_tags)
       vim.keymap.set("n", "<leader>ds", builtin.lsp_document_symbols)
-      vim.keymap.set("n", "<leader>dS", builtin.lsp_workspace_symbols)
+      -- vim.keymap.set("n", "<leader>dS", builtin.lsp_dynamic_workspace_symbols)
       vim.keymap.set("n", "\"", builtin.registers)
     end,
     opts = {

@@ -77,7 +77,7 @@ return {
           vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to declaration" })
           vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "Go to implementation" })
           vim.keymap.set("n", "gf", vim.lsp.buf.references, { desc = "Find references" })
-          vim.keymap.set("n", "<C-k>", vim.lsp.buf.hover, { desc = "Show hover documentation" })
+          vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Show hover documentation" })
           -- vim.keymap.set("n", "sh", vim.lsp.buf.signature_help, { desc = "Show signature help of the function under cursor" })
           -- vim.keymap.set("n", "sd", vim.lsp.buf.hover, { desc = "Show documentation" })
           vim.keymap.set("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Show error" })
@@ -155,5 +155,17 @@ return {
     opts = {
       show_success_message = true,
     },
+  },
+  {
+    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+    event = "VeryLazy",
+    opts = {},
+    init = function()
+      vim.keymap.set("n", "<Leader>L", require("lsp_lines").toggle, { desc = "Toggle lsp_lines" })
+
+      vim.diagnostic.config({
+        virtual_text = false,
+      })
+    end,
   },
 }
