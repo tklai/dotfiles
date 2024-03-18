@@ -23,6 +23,10 @@ TIMEFMT='%J  %*U user %*S system %P cpu (%*E wasted time).'
 # Keep Emacs mode in shell. Vi mode breaks sometimes.
 bindkey -e
 
+# Prevent meta+backspace from deleting the entire path
+autoload -U select-word-style
+select-word-style bash
+
 # Just in case
 alias \:q="exit"
 alias q="exit"
