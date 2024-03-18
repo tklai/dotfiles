@@ -37,6 +37,9 @@ return {
           },
           preview_cutoff = 120,
         },
+        file_ignore_patterns = {
+          "public/packages/",
+        },
       },
       pickers = {
         buffers = {
@@ -49,8 +52,10 @@ return {
         },
       },
     },
-    config = function()
+    config = function(_, opts)
       local telescope = require("telescope")
+      telescope.setup(opts)
+
       local telescope_extensions = {
         "fzf",
       }
