@@ -5,12 +5,12 @@ return {
     config = function()
       require('mini.surround').setup({
         mappings = {
-          add = '<C-r>a',
-          delete = '<C-r>d',
+          add = '<leader>sa',
+          delete = '<leader>sd',
           find = '',
           find_left = '',
-          highlight = '<C-r>h',
-          replace = '<C-r>r',
+          highlight = '<leader>sh',
+          replace = '<leader>sr',
           update_n_lines = '',
 
           suffix_last = '',
