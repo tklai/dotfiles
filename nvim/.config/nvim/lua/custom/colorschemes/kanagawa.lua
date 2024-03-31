@@ -1,6 +1,7 @@
 return {
   {
     "rebelot/kanagawa.nvim",
+    enabled = false,
     config = function()
       local kanagawa = vim.F.npcall(require, "kanagawa")
       if not kanagawa then
