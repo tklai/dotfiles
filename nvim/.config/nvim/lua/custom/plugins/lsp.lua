@@ -145,20 +145,8 @@ return {
       "nvim-treesitter/nvim-treesitter",
     },
     init = function()
-      vim.keymap.set("x", "<leader>re", function()
-        require("refactoring").refactor("Extract Function")
-      end)
-      vim.keymap.set("x", "<leader>rv", function()
-        require("refactoring").refactor("Extract Variable")
-      end)
-      vim.keymap.set("n", "<leader>rI", function()
-        require("refactoring").refactor("Inline Function")
-      end)
-      vim.keymap.set({ "n", "x" }, "<leader>ri", function()
-        require("refactoring").refactor("Inline Variable")
-      end)
-      vim.keymap.set("n", "<leader>rb", function()
-        require("refactoring").refactor("Extract Block")
+      vim.keymap.set("v", "<leader>rr", function()
+        require("refactoring").select_refactor()
       end)
     end,
     opts = {

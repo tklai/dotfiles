@@ -1,4 +1,4 @@
-import = ["~/.config/alacritty/themes/flexoki-light.toml"]
+import = ["~/.config/alacritty/themes/catppuccin-latte.toml"]
 
 [env]
 TERM = "xterm-256color"
@@ -14,7 +14,7 @@ x = 0
 y = 2
 
 [window]
-opacity = 0.95
+# opacity = 0.95
 startup_mode = "Maximized"
 option_as_alt = "Both"
 # padding = { x = 8, y = 8 }
