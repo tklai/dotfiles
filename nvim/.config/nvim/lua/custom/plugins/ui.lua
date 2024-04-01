@@ -48,4 +48,14 @@ return {
       },
     },
   },
+  {
+   'mcauley-penney/visual-whitespace.nvim',
+    event = "VeryLazy",
+    config = true
+  },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
+    opts = {},
+  },
 }

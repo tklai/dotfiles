@@ -39,7 +39,7 @@ opt.tabstop = 4
 opt.softtabstop = 4
 opt.smartindent = true
 opt.shiftround = true
-opt.colorcolumn = "120"
+opt.colorcolumn = "80,120"
 -- Fold
 -- opt.foldmethod = "marker"
 opt.foldcolumn = "0"

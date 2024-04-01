@@ -48,11 +48,17 @@ return {
         Copilot = "",
       }
 
+      local has_words_before = function()
+        local line, col = table.unpack(vim.api.nvim_win_get_cursor(0))
+
+        return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+      end
+
       local cmp = require("cmp")
       local luasnip = require("luasnip")
-      require("luasnip.loaders.from_vscode").lazy_load {
-        paths = { snippets_dir }
-      }
+      require("luasnip.loaders.from_vscode").lazy_load({
+        paths = { snippets_dir },
+      })
 
       cmp.setup({
         snippet = {
@@ -67,22 +73,30 @@ return {
           ["<C-Space>"] = cmp.mapping.complete(),
           -- DO NOT SET `select` to true in `confirm()`.
           -- Otherwise, the first item will be selected even you didn't select anything.
-          ["<CR>"] = cmp.mapping.confirm({ select = false }),
+          ["<CR>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false }),
           -- Item Selection
-          ["<C-j>"] = cmp.mapping(function(fallback)
+          ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_next_item()
+            -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
+            -- that way you will only jump inside the snippet region
+            elseif luasnip.expand_or_jumpable() then
+              luasnip.expand_or_jump()
+            elseif has_words_before() then
+              cmp.complete()
             else
               fallback()
             end
-          end),
-          ["<C-k>"] = cmp.mapping(function(fallback)
+          end, { "i", "s" }),
+          ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_prev_item()
+            elseif luasnip.jumpable(-1) then
+              luasnip.jump(-1)
             else
               fallback()
             end
-          end),
+          end, { "i", "s" }),
         }),
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
@@ -98,42 +112,20 @@ return {
         formatting = {
           fields = { "kind", "abbr", "menu" },
           format = function(_, vim_item)
-            -- Set icons and kinds in kind field
-            vim_item.kind = string.format('%s %s', icons[vim_item.kind], vim_item.kind)
-            -- And prefer no additional text in menu field
-            vim_item.menu = ""
+            vim_item.menu = string.format("%s %s", icons[vim_item.kind], vim_item.kind)
+            vim_item.kind = ""
 
             return vim_item
           end,
         },
         window = {
-          documentation = {
-            border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-          },
-        },
-        sorting = {
-          comparators = {
-            cmp.config.compare.offset,
-            cmp.config.compare.exact,
-            cmp.config.compare.score,
-
-            function(entry1, entry2)
-              local _, entry1_under = entry1.completion_item.label:find("^_+")
-              local _, entry2_under = entry2.completion_item.label:find("^_+")
-              entry1_under = entry1_under or 0
-              entry2_under = entry2_under or 0
-              if entry1_under > entry2_under then
-                return false
-              elseif entry1_under < entry2_under then
-                return true
-              end
-            end,
-
-            cmp.config.compare.kind,
-            cmp.config.compare.sort_text,
-            cmp.config.compare.length,
-            cmp.config.compare.order,
-          },
+          completion = cmp.config.window.bordered({
+            border = { "", "", "", "", "", "", "", "" },
+            winhighlight = "Normal:Normal,FloatBorder:Normal,CursorLine:Visual,Search:None",
+          }),
+          documentation = cmp.config.window.bordered({
+            winhighlight = "Normal:Normal,FloatBorder:Normal,CursorLine:Visual,Search:None",
+          }),
         },
         experimental = {
           native_menu = false,
@@ -163,5 +155,10 @@ return {
         auto_trigger = true,
       },
     },
+  },
+  {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    config = true,
   },
 }
