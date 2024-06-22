@@ -1,5 +1,5 @@
 vim.filetype.add({
   filename = {
-    ['tsconfig.json'] = 'jsonc',
+    ['terraform.tfstate'] = 'json',
   }
 })

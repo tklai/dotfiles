@@ -1,1 +1,5 @@
-vim.opt_local.filetype = "dbml"
+vim.filetype.add({
+  extension = {
+    dbml = 'dbml'
+  },
+})
