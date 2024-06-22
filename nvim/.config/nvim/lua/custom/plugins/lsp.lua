@@ -70,6 +70,7 @@ return {
           -- "gopls",
           "html",
           -- "phpactor",
+          "psalm",
           "intelephense",
           "jsonls",
           "rust_analyzer",
@@ -135,16 +136,30 @@ return {
           end, { desc = "Run code format" })
 
           local client = vim.lsp.get_client_by_id(event.data.client_id)
-          if client and client.server_capabilities.documentHighlightProvider then
-            vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-              buffer = event.buf,
-              callback = vim.lsp.buf.document_highlight,
-            })
+          if client then
+            if client.server_capabilities.documentHighlightProvider then
+              vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+                buffer = event.buf,
+                callback = vim.lsp.buf.document_highlight,
+              })
 
-            vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
-              buffer = event.buf,
-              callback = vim.lsp.buf.clear_references,
-            })
+              vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+                buffer = event.buf,
+                callback = vim.lsp.buf.clear_references,
+              })
+            end
+
+            vim.keymap.set("n", "<leader>uh", function()
+              if vim.lsp.inlay_hint and client.server_capabilities.inlayHintProvider then
+                local new_status = not vim.lsp.inlay_hint.is_enabled({})
+
+                vim.lsp.inlay_hint.enable(new_status, {})
+
+                vim.notify("LSP inlay_hint status: " .. (new_status and "Enabled" or "Disabled"), vim.log.levels.INFO)
+              else
+                vim.notify("This LSP server does not support inlay hints.", vim.log.levels.WARN)
+              end
+            end)
           end
         end,
       })

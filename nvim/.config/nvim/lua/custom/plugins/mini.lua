@@ -17,11 +17,6 @@ return {
           suffix_next = '',
         },
       })
-
-      require('mini.statusline').setup({
-        -- Prevent mini overwriting the settings
-        set_vim_settings = false,
-      })
     end,
   },
 }

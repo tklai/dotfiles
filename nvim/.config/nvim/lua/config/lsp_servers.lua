@@ -79,6 +79,9 @@ config.lua_ls = {
       format = {
         enable = false,
       },
+      hint = {
+        enable = true,
+      },
     },
   },
 }
@@ -93,7 +96,7 @@ config.tsserver = {
       includeInlayPropertyDeclarationTypeHints = true,
       includeInlayFunctionLikeReturnTypeHints = true,
       includeInlayEnumMemberValueHints = true,
-      importModuleSpecifierPreference = 'non-relative'
+      importModuleSpecifierPreference = "non-relative",
     },
   },
 }

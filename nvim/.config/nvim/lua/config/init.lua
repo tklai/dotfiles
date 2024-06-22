@@ -1,6 +1,6 @@
-require('config.disable_builtins')
-require('config.options')
-require('config.keymaps')
-require('config.autocmds')
+require("config.disable_builtins")
+require("config.options")
+require("config.keymaps")
+require("config.autocmds")
 
-require('config.lazy_setup')
+require("config.lazy_setup")

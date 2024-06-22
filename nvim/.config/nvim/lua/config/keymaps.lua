@@ -12,9 +12,6 @@ inoremap("<C-c>", "<ESC>", { desc = "Escape" })
 -- No more highlight after search please
 nnoremap("<ESC>", "<cmd>nohlsearch<CR>", { silent = true, desc = "Disable highlight search on escape" })
 
--- Save file
-nnoremap("<leader>w", ":w<CR>", { desc = "Save current buffer" })
-
 -- Window navigation
 nnoremap("<C-h>", "<C-w>h", { desc = "Move cursor to the left window" })
 nnoremap("<C-j>", "<C-w>j", { desc = "Move cursor to the lower window" })

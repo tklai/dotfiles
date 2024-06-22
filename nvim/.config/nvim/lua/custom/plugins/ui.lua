@@ -49,9 +49,9 @@ return {
     },
   },
   {
-   'mcauley-penney/visual-whitespace.nvim',
+    "mcauley-penney/visual-whitespace.nvim",
     event = "VeryLazy",
-    config = true
+    config = true,
   },
   {
     "lukas-reineke/indent-blankline.nvim",

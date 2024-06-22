@@ -40,6 +40,8 @@ return {
             },
           },
         },
+        highlight = { enable = true },
+        indent = { enable = true },
       })
 
       require("treesitter-context").setup({
