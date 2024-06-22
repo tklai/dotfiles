@@ -11,14 +11,31 @@ return {
         opts = {
           formatters_by_ft = {
             lua = { "stylua" },
-            php = { "php-cs-fixer" },
-            javascript = { { "prettierd", "prettier" } },
-            typescript = { { "prettierd", "prettier" } },
+            php = { "php_cs_fixer" },
+            javascript = { "prettierd" },
+            typescript = { "prettierd" },
           },
           format_on_save = false,
           format_after_save = false,
+          formatters = {
+            ["php_cs_fixer"] = {
+              append_args = function(_, ctx)
+                local args = {}
+
+                local config_location = vim.fs.find(".php-cs-fixer.dist.php", {
+                  upward = true,
+                  path = ctx.dirname,
+                })[1]
+
+                if config_location then
+                  table.insert(args, "--config=" .. config_location)
+                end
+
+                return args
+              end,
+            },
+          },
         },
-        config = true,
       },
     },
     config = function()
