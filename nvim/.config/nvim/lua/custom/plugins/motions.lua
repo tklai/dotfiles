@@ -32,10 +32,4 @@ return {
     "mg979/vim-visual-multi",
     event = "VeryLazy",
   },
-  {
-    "tris203/hawtkeys.nvim",
-    event = "VeryLazy",
-    config = true,
-    opts = {},
-  },
 }
