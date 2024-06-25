@@ -42,15 +42,27 @@ REPORTTIME=60
 TIMEFMT='%J  %*U user %*S system %P cpu (%*E wasted time).'
 
 ## Better Prompt for me
+function git_status() {
+    GITSTATUS=$(git status -sb --untracked-files=no --ignore-submodules 2> /dev/null | awk '
+    /^##/ { split(substr($0, 4), branches, /\.\.\./); branch = branches[1] }
+    /^[[:space:]]+[A-Z]/ { count += gsub(/[[:upper:]]/, "", $1) }
+    END { if (count > 0) printf("%s *%d", branch, count); else printf("%s", branch)}
+    ')
+    if [ "$GITSTATUS" != "" ]; then
+        echo " $GITSTATUS"
+    fi
+}
+
 function precmd() {
   if [ "$NEW_LINE_BEFORE_PROMPT" -eq 1 ]; then
-      echo ""; return
+    echo ""
+  else
+    NEW_LINE_BEFORE_PROMPT=1
   fi
 
-  NEW_LINE_BEFORE_PROMPT=1
+  PROMPT="%F{204}%n%f@%F{244}%M%f:%F{40}%(5~|%-1~/…/%3~|%4~)%f $(git_status) "$'\n'"%F{250}(%?)%f %# "
+  RPROMPT="[%D{%Y-%m-%d %H:%M:%S}]"
 }
-PROMPT="%F{204}%n%f@%F{244}%M%f:%F{40}%~%f"$'\n'"%F{250}(%?)%f %# "
-RPROMPT="[%D{%Y-%m-%d %H:%M:%S}]"
 
 
 
@@ -84,6 +96,10 @@ function setup_darwin() {
   if [ -x "$(command -v trash)" ]; then
       alias rm="trash -F"
   fi
+
+  bindkey  "^[[1~"   beginning-of-line
+  bindkey  "^[[4~"   end-of-line
+  bindkey  "^[[3~"   delete-char
 }
 
 function setup_linux() {
