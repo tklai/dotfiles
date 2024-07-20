@@ -83,10 +83,18 @@ fi
 # Setup platform
 function setup_darwin() {
   # Homebrew
-  if [ "$(arch)" = "arm64" ]; then
+  if [[ -x "$(command -v /opt/homebrew/bin/brew)" && "$(arch)" = "arm64" ]]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
-  elif [ "$(arch)" = "i386" ]; then
+  elif [[ -x "$(command -v /usr/local/bin/brew)" && "$(arch)" = "i386" ]]; then
     eval "$(/usr/local/bin/brew shellenv)"
+  fi
+
+  if [ -d "$HOMEBREW_PREFIX/opt/ruby/bin" ]; then
+    export PATH="$HOMEBREW_PREFIX/opt/ruby/bin:$PATH"
+  fi
+
+  if [ -d "$HOMEBREW_PREFIX/opt/openjdk/bin" ]; then
+    export PATH="$HOMEBREW_PREFIX/opt/openjdk/bin:$PATH"
   fi
 
   # Copy with clone
@@ -167,6 +175,8 @@ fi
 
 ## Docker
 if [ -x "$(command -v docker)" ]; then
+  alias dcom="docker compose"
+
   # Attach container
   function dac() {
     local compose_file=$(find . -maxdepth 1 -name "docker-compose.yml" -o -name "docker-compose.yaml" -o -name "compose.yml" -o -name "compose.yaml" | head -n 1)
