@@ -102,11 +102,44 @@ return {
         },
       })
 
+      local definition_on_list = function(split_cmd)
+        split_cmd = split_cmd or "vsplit"
+
+        return function(options)
+          -- if there are multiple items, warn the user
+          if #options.items > 1 then
+            vim.notify("Multiple items found, opening first one", vim.log.levels.WARN)
+          end
+
+          -- Same file will be opened, notify and exit
+          if options.items[1].filename == vim.api.nvim_buf_get_name(0) then
+            vim.notify("No definition found.", vim.log.levels.INFO)
+
+            return
+          end
+
+          -- Open the first item in a vertical split
+          local item = options.items[1]
+          local cmd = split_cmd .. " +" .. item.lnum .. " " .. item.filename .. "|" .. "normal " .. item.col .. "|"
+
+          vim.cmd(cmd)
+        end
+      end
+
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("CustomLspAttach", { clear = true }),
         callback = function(event)
-          vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
-          vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to declaration" })
+          vim.keymap.set("n", "gd", function()
+            vim.lsp.buf.definition({ on_list = definition_on_list() })
+          end, { desc = "Go to definition" })
+          vim.keymap.set("n", "gdv", function()
+            vim.lsp.buf.definition({ on_list = definition_on_list() })
+          end, { desc = "Go to definition (Split Vertical)" })
+          vim.keymap.set("n", "gdx", function()
+            vim.lsp.buf.definition({ on_list = definition_on_list("split") })
+          end, { desc = "Go to definition (Split Horizontal)" })
+
+          -- vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to declaration" })
           vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "Go to implementation" })
           vim.keymap.set("n", "gf", vim.lsp.buf.references, { desc = "Find references" })
           vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Show hover documentation" })
@@ -161,6 +194,17 @@ return {
               end
             end)
           end
+
+          local betterDiag = vim.F.npcall(require, "better-diagnostic-virtual-text.api")
+          if betterDiag then
+            betterDiag.setup_buf(event.buf, {})
+
+            vim.keymap.set("n", "<Leader>L", function ()
+              local new_status = not vim.diagnostic.is_enabled({ bufnr = event.buf })
+
+              vim.diagnostic.enable(new_status, {bufnr = event.buf})
+            end, { desc = "Toggle lsp_lines" })
+          end
         end,
       })
     end,
@@ -187,6 +231,7 @@ return {
   },
   {
     "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+    enabled = false,
     event = "VeryLazy",
     opts = {},
     init = function()
@@ -196,5 +241,20 @@ return {
         virtual_text = false,
       })
     end,
+  },
+  {
+    "sontungexpt/better-diagnostic-virtual-text",
+    event = "LspAttach",
+    init = function()
+      vim.diagnostic.config({
+        virtual_text = false,
+      })
+    end,
+  },
+  {
+    "hedyhli/outline.nvim",
+    lazy = true,
+    config = true,
+    cmd = "Outline",
   },
 }

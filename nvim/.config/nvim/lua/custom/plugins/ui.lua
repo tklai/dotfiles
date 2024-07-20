@@ -30,6 +30,33 @@ return {
             text_align = "left",
           },
         },
+        show_buffer_close_icons = false,
+        show_close_icon = false,
+      },
+    },
+  },
+  {
+    "nvim-lualine/lualine.nvim",
+    event = "UIEnter",
+    dependencies = {
+      { "nvim-tree/nvim-web-devicons", lazy = true },
+    },
+    opts = {
+      sections = {
+        lualine_a = {
+          "mode",
+        },
+        lualine_b = {
+          "branch",
+          "diff",
+          "diagnostics",
+        },
+        lualine_c = {
+          { "filename", path = 1 },
+        },
+        lualine_x = { "encoding", "fileformat", "filetype" },
+        lualine_y = {},
+        lualine_z = { "location", "progress" },
       },
     },
   },
@@ -44,7 +71,6 @@ return {
       update_cwd = true,
       view = {
         width = 50,
-        side = "right",
       },
     },
   },
@@ -57,5 +83,76 @@ return {
     "lukas-reineke/indent-blankline.nvim",
     main = "ibl",
     opts = {},
+  },
+  {
+    "rmagatti/goto-preview",
+    event = "BufEnter",
+    config = true,
+    init = function()
+      vim.keymap.set("n", "<M-Space>", require("goto-preview").goto_preview_definition)
+    end,
+  },
+  {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    init = function()
+      vim.opt.cmdheight = 0
+    end,
+    opts = {
+      lsp = {
+        override = {
+          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+          ["vim.lsp.util.stylize_markdown"] = true,
+          ["cmp.entry.get_documentation"] = true,
+        },
+      },
+      presets = {
+        bottom_search = true,
+        -- command_palette = true,
+        long_message_to_split = true,
+        lsp_doc_border = true,
+      },
+    },
+  },
+  {
+    "MunifTanjim/nui.nvim",
+  },
+  {
+    "rcarriga/nvim-notify",
+    opts = {
+      timeout = 5000,
+      stages = "fade",
+    },
+    keys = {
+      {
+        "<leader>un",
+        function()
+          require("notify").dismiss({ silent = true, pending = true })
+        end,
+        desc = "Delete all Notifications",
+      },
+    },
+  },
+  {
+    "b0o/incline.nvim",
+    event = "BufReadPre",
+    priority = 1200,
+    config = function()
+      require("incline").setup({
+        window = { margin = { vertical = 0, horizontal = 1 } },
+        hide = {
+          cursorline = true,
+        },
+        render = function(props)
+          local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ":t")
+          if vim.bo[props.buf].modified then
+            filename = "[+] " .. filename
+          end
+
+          local icon, color = require("nvim-web-devicons").get_icon_color(filename)
+          return { { icon, guifg = color }, { " " }, { filename } }
+        end,
+      })
+    end,
   },
 }

@@ -25,17 +25,22 @@ return {
       end)
       vim.keymap.set("n", "<leader>fb", builtin.buffers)
       vim.keymap.set("n", "<leader>vh", builtin.help_tags)
-      vim.keymap.set("n", "<leader>ds", builtin.lsp_document_symbols)
+      vim.keymap.set("n", "<leader>ds", builtin.lsp_dynamic_workspace_symbols)
       vim.keymap.set("n", '<leader>"', builtin.registers)
     end,
     opts = {
       defaults = {
-        layout_strategy = "flex",
+        -- layout_strategy = "flex",
+        layout_strategy = "vertical",
         layout_config = {
           horizontal = {
             preview_width = 0.4,
+            preview_cutoff = 120,
           },
-          preview_cutoff = 120,
+          vertical = {
+            prompt_position = "top",
+            width = 0.5,
+          },
         },
         file_ignore_patterns = {
           "public/packages/",
