@@ -8,6 +8,14 @@ end
 local configs = {
   audible_bell = "Disabled",
   font = wezterm.font_with_fallback({
+    -- {
+    --   family = "GeistMono Nerd Font",
+    --   weight = "Bold",
+    -- },
+    {
+      family = "CommitMonoTK Nerd Font",
+      weight = "Bold",
+    },
     {
       family = "CommitMono Nerd Font",
       weight = "Bold",
@@ -69,9 +77,9 @@ local configs = {
 
 
 -- Catppuccin
--- configs.color_scheme = "Catppuccin Latte"
+configs.color_scheme = "Catppuccin Latte"
 
 -- Flexoki
-configs.color_scheme = 'flexoki-light'
+-- configs.color_scheme = 'flexoki-light'
 
 return configs
