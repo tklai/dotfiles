@@ -106,14 +106,25 @@ return {
         split_cmd = split_cmd or "vsplit"
 
         return function(options)
-          -- if there are multiple items, warn the user
-          if #options.items > 1 then
-            vim.notify("Multiple items found, opening first one", vim.log.levels.WARN)
+          if #options.items == 0 then
+            vim.notify("No definition found.", vim.log.levels.INFO)
+
+            return
           end
 
+          -- if there are multiple items, warn the user
+          if #options.items > 1 then
+            vim.notify("Multiple items found, opening first one...", vim.log.levels.WARN)
+          end
+
+          local meta = options.items[1]
+
           -- Same file will be opened, notify and exit
-          if options.items[1].filename == vim.api.nvim_buf_get_name(0) then
-            vim.notify("No definition found.", vim.log.levels.INFO)
+          if
+            meta.filename == vim.api.nvim_buf_get_name(0)
+            and meta.lnum == vim.api.nvim_win_get_cursor(0)[1]
+          then
+            vim.notify("Self-referencing definition", vim.log.levels.INFO)
 
             return
           end
@@ -130,7 +141,7 @@ return {
         group = vim.api.nvim_create_augroup("CustomLspAttach", { clear = true }),
         callback = function(event)
           vim.keymap.set("n", "gd", function()
-            vim.lsp.buf.definition({ on_list = definition_on_list() })
+            vim.lsp.buf.definition()
           end, { desc = "Go to definition" })
           vim.keymap.set("n", "gdv", function()
             vim.lsp.buf.definition({ on_list = definition_on_list() })
@@ -163,8 +174,10 @@ return {
             local conform = vim.F.npcall(require, "conform")
             if conform then
               conform.format({ async = true, lsp_fallback = true })
+              vim.notify("Formatted code with Conform", vim.log.levels.INFO)
             else
               vim.lsp.buf.format({ async = true })
+              vim.notify("Formatted code with LSP", vim.log.levels.INFO)
             end
           end, { desc = "Run code format" })
 
@@ -197,7 +210,9 @@ return {
 
           local betterDiag = vim.F.npcall(require, "better-diagnostic-virtual-text.api")
           if betterDiag then
-            betterDiag.setup_buf(event.buf, {})
+            betterDiag.setup_buf(event.buf, {
+              inline = false,
+            })
 
             vim.keymap.set("n", "<Leader>L", function ()
               local new_status = not vim.diagnostic.is_enabled({ bufnr = event.buf })
