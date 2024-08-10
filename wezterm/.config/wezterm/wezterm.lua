@@ -5,58 +5,53 @@ if not ok then
   os.exit()
 end
 
-local configs = {
-  audible_bell = "Disabled",
-  font = wezterm.font_with_fallback({
-    -- {
-    --   family = "GeistMono Nerd Font",
-    --   weight = "Bold",
-    -- },
-    {
-      family = "CommitMonoTK Nerd Font",
-      weight = "Bold",
-    },
-    {
-      family = "CommitMono Nerd Font",
-      weight = "Bold",
-    },
-    {
-      family = "MonaspiceNe Nerd Font",
-      weight = "Bold",
-    },
-    {
-      family = "JetBrainsMono Nerd Font",
-      weight = "Bold",
-    },
-    {
-      family = "Liga SFMono Nerd Font",
-      weight = "DemiBold",
-    },
-    {
-      family = "MesloLGS NF",
-      weight = "DemiBold",
-    },
-    {
-      family = "Heiti TC",
-      weight = "DemiBold",
-    },
-  }),
-  use_fancy_tab_bar = false,
-  tab_max_width = 64,
-  show_new_tab_button_in_tab_bar = false,
-  window_padding = {
-    left = 0,
-    right = 0,
-    top = 0,
-    bottom = 0,
+local config = wezterm.config_builder()
+
+config.audible_bell = "Disabled"
+config.font = wezterm.font_with_fallback({
+  {
+    family = "CommitMonoTK Nerd Font",
+    weight = "Bold",
   },
-  -- window_background_opacity = 0.95,
+  {
+    family = "CommitMono Nerd Font",
+    weight = "Bold",
+  },
+  {
+    family = "MonaspiceNe Nerd Font",
+    weight = "Bold",
+  },
+  {
+    family = "JetBrainsMono Nerd Font",
+    weight = "Bold",
+  },
+  {
+    family = "Liga SFMono Nerd Font",
+    weight = "DemiBold",
+  },
+  {
+    family = "MesloLGS NF",
+    weight = "DemiBold",
+  },
+  {
+    family = "Heiti TC",
+    weight = "DemiBold",
+  },
+})
+config.use_fancy_tab_bar = false
+config.tab_max_width = 64
+config.show_new_tab_button_in_tab_bar = false
+config.window_padding = {
+  left = 0,
+  right = 0,
+  top = 0,
+  bottom = 0,
 }
 
 -- Themes
 -- Kanagawa
--- configs.force_reverse_video_cursor = true
--- configs.colors = {
+-- config.force_reverse_video_cursor = true
+-- config.colors = {
 --   foreground = "#dcd7ba",
 --   background = "#1f1f28",
 --
@@ -75,11 +70,13 @@ local configs = {
 --   indexed = { [16] = "#ffa066", [17] = "#ff5d62" },
 -- }
 
-
 -- Catppuccin
-configs.color_scheme = "Catppuccin Latte"
+-- config.color_scheme = "Catppuccin Latte"
 
 -- Flexoki
--- configs.color_scheme = 'flexoki-light'
+-- config.color_scheme = 'flexoki-light'
 
-return configs
+-- Everforst
+config.color_scheme = "Everforest Light (Medium)"
+
+return config
