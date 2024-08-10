@@ -70,7 +70,10 @@ return {
     opts = {
       update_cwd = true,
       view = {
-        width = 50,
+        width = "20%",
+        float = {
+          enable = true,
+        },
       },
     },
   },
