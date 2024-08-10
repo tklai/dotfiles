@@ -41,6 +41,8 @@ return {
     config = function()
       require("mason").setup()
 
+      vim.opt.rtp:append(vim.fn.stdpath("data") .. "/mason/bin")
+
       local servers = vim.F.npcall(require, "config.lsp_servers") or {}
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       local cmp_lsp = vim.F.npcall(require, "cmp_nvim_lsp")
