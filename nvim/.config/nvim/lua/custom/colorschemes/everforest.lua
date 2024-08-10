@@ -22,6 +22,9 @@ return {
         hl.TelescopeResultsBorder = { fg = palette.bg3, bg = palette.bg3 }
       end,
     },
+    init = function ()
+      vim.o.background = 'light'
+    end,
     config = function(_, opts)
       require("everforest").setup(opts)
 
