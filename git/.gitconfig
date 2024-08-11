@@ -1,18 +1,34 @@
 [init]
     defaultBranch = main
+
 [core]
     editor = nvim
     excludesFile = ~/.gitignore
-[pull]
-    rebase = false
+    pager = delta
+
 [include]
     path = ~/.private.gitconfig
+
+[pull]
+    rebase = false
+
 [diff]
     algorithm = patience
+    colorMoved = default
+
 [merge]
-    conflictstyle = diff3
+    conflictstyle = zdiff3
+
 [alias]
     tnylog = log --oneline --graph --decorate
     tnylognm = tnylog --no-merges
     fixup = "!f() { TARGET=$(git rev-parse "$1"); git commit --fixup=$TARGET ${@:2} && EDITOR=true git rebase -i --autostash --autosquash $TARGET^; }; f"
     helpme = "!f() { git tnylog $(git fsck --no-reflog | awk '/dangling commit/ {print $3}'); }; f"
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true
+    line-numbers = true
+    side-by-side = true
