@@ -74,10 +74,14 @@ nnoremap("\\B", function()
 end, { desc = "Delete all buffers" })
 
 -- Line moving
-vnoremap("J", ":m '>+1<CR>gv=gv", { desc = "Move the selected block down" })
-vnoremap("K", ":m '<-2<CR>gv=gv", { desc = "Move the selected block up" })
-nnoremap("<A-j>", ":m .+1<CR>", { desc = "Move the current link down" })
-nnoremap("<A-k>", ":m .-2<CR>", { desc = "Move the current link up" })
+-- vnoremap("J", ":m '>+1<CR>gv=gv", { desc = "Move the selected block down" })
+-- vnoremap("K", ":m '<-2<CR>gv=gv", { desc = "Move the selected block up" })
+-- nnoremap("<A-j>", ":m .+1<CR>", { desc = "Move the current link down" })
+-- nnoremap("<A-k>", ":m .-2<CR>", { desc = "Move the current link up" })
+vnoremap("[e", ":m '<-2<CR>gv=gv", { desc = "Move the selected block up" })
+vnoremap("]e", ":m '>+1<CR>gv=gv", { desc = "Move the selected block down" })
+nnoremap("[e", ":m .-2<CR>", { desc = "Move the current link up" })
+nnoremap("]e", ":m .+1<CR>", { desc = "Move the current link down" })
 
 -- Keep the search highlight centered
 nnoremap("n", "nzzzv", { desc = "Select next occurrence and centered on the screen" })

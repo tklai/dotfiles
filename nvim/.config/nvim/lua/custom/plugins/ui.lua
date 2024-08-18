@@ -71,9 +71,24 @@ return {
       update_cwd = true,
       view = {
         width = "20%",
-        float = {
-          enable = true,
-        },
+        side = "right",
+        -- float = {
+        --   enable = true,
+        --   open_win_config = function()
+        --     local function size(max, value)
+        --       return value > 1 and math.min(value, max) or math.floor(max * value)
+        --     end
+        --
+        --     return {
+        --       relative = "editor",
+        --       border = "rounded",
+        --       width = size(vim.o.columns, 0.2),
+        --       height = size(vim.o.lines, 0.8),
+        --       row = 1,
+        --       col = 1,
+        --     }
+        --   end,
+        -- },
       },
     },
   },
