@@ -47,7 +47,7 @@ config.intelephense = {
 
 config.phpactor = {
   init_options = {
-    ["language_server_phpstan.enabled"] = false,
+    ["language_server_phpstan.enabled"] = true,
     ["language_server_psalm.enabled"] = false,
     ["language_server_worse_reflection.inlay_hints.enable"] = false,
     ["indexer.exclude_patterns"] = {
@@ -86,7 +86,7 @@ config.lua_ls = {
   },
 }
 
-config.tsserver = {
+config.ts_ls = {
   init_options = {
     preferences = {
       includeInlayParameterNameHints = "all",

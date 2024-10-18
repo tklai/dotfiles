@@ -79,13 +79,18 @@ return {
           "lua_ls",
           "sqlls",
           "svelte",
-          "tsserver",
+          "ts_ls",
           "vuels",
           "yamlls",
           "zls",
         },
         handlers = {
           function(server_name)
+            -- Temp fix for tsserver rename
+            if server_name == "tsserver" then
+              server_name = "ts_ls"
+            end
+
             local server = servers[server_name] or {}
             server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
 
@@ -122,10 +127,7 @@ return {
           local meta = options.items[1]
 
           -- Same file will be opened, notify and exit
-          if
-            meta.filename == vim.api.nvim_buf_get_name(0)
-            and meta.lnum == vim.api.nvim_win_get_cursor(0)[1]
-          then
+          if meta.filename == vim.api.nvim_buf_get_name(0) and meta.lnum == vim.api.nvim_win_get_cursor(0)[1] then
             vim.notify("Self-referencing definition", vim.log.levels.INFO)
 
             return
@@ -143,6 +145,9 @@ return {
         group = vim.api.nvim_create_augroup("CustomLspAttach", { clear = true }),
         callback = function(event)
           vim.keymap.set("n", "gd", function()
+            vim.lsp.buf.definition()
+          end, { desc = "Go to definition" })
+          vim.keymap.set("n", "gdn", function()
             vim.lsp.buf.definition()
           end, { desc = "Go to definition" })
           vim.keymap.set("n", "gdv", function()
@@ -216,10 +221,10 @@ return {
               inline = false,
             })
 
-            vim.keymap.set("n", "<Leader>L", function ()
+            vim.keymap.set("n", "<Leader>L", function()
               local new_status = not vim.diagnostic.is_enabled({ bufnr = event.buf })
 
-              vim.diagnostic.enable(new_status, {bufnr = event.buf})
+              vim.diagnostic.enable(new_status, { bufnr = event.buf })
             end, { desc = "Toggle lsp_lines" })
           end
         end,

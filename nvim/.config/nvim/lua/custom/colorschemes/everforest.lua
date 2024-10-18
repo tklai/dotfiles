@@ -20,10 +20,41 @@ return {
         hl.TelescopeResultsTitle = { fg = palette.bg3, bg = palette.grey0 }
         hl.TelescopeResultsNormal = { fg = palette.grey2, bg = palette.bg3 }
         hl.TelescopeResultsBorder = { fg = palette.bg3, bg = palette.bg3 }
+
+        local line_number_change_mode = vim.F.npcall(require, "line-number-change-mode")
+        if line_number_change_mode ~= nil then
+          line_number_change_mode.setup({
+            i = {
+              bg = palette.statusline2,
+              fg = palette.bg0,
+              bold = true,
+            },
+            n = {
+              bg = palette.statusline1,
+              fg = palette.bg0,
+              bold = true,
+            },
+            R = {
+              bg = palette.orange,
+              fg = palette.bg0,
+              bold = true,
+            },
+            v = {
+              bg = palette.statusline3,
+              fg = palette.bg0,
+              bold = true,
+            },
+            V = {
+              bg = palette.statusline3,
+              fg = palette.bg0,
+              bold = true,
+            },
+          })
+        end
       end,
     },
-    init = function ()
-      vim.o.background = 'light'
+    init = function()
+      vim.o.background = "light"
     end,
     config = function(_, opts)
       require("everforest").setup(opts)

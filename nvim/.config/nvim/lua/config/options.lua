@@ -7,6 +7,7 @@ opt.autoread = true
 opt.autoindent = true
 opt.clipboard = "unnamedplus"
 opt.cursorline = true
+opt.cursorlineopt = "number,line"
 opt.fileencoding = "utf-8"
 opt.hlsearch = true
 opt.ignorecase = true

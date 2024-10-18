@@ -173,4 +173,17 @@ return {
       })
     end,
   },
+  {
+    "sethen/line-number-change-mode.nvim",
+    event = "UIEnter",
+  },
+  {
+    "shellRaining/hlchunk.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    opts = {
+      chunk = {
+        enable = true,
+      },
+    },
+  },
 }
