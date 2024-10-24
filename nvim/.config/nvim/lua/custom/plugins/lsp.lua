@@ -253,7 +253,6 @@ return {
   },
   {
     "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-    enabled = false,
     event = "VeryLazy",
     opts = {},
     init = function()
@@ -264,15 +263,15 @@ return {
       })
     end,
   },
-  {
-    "sontungexpt/better-diagnostic-virtual-text",
-    event = "LspAttach",
-    init = function()
-      vim.diagnostic.config({
-        virtual_text = false,
-      })
-    end,
-  },
+  -- {
+  --   "sontungexpt/better-diagnostic-virtual-text",
+  --   event = "LspAttach",
+  --   init = function()
+  --     vim.diagnostic.config({
+  --       virtual_text = false,
+  --     })
+  --   end,
+  -- },
   {
     "hedyhli/outline.nvim",
     lazy = true,

@@ -10,7 +10,6 @@ if not vim.loop.fs_stat(lazy_path) then
     "git",
     "clone",
     "--filter=blob:none",
-    "--single-branch",
     "https://github.com/folke/lazy.nvim.git",
     "--branch=stable",
     lazy_path,

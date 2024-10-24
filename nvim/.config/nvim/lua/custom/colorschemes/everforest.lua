@@ -24,30 +24,32 @@ return {
         local line_number_change_mode = vim.F.npcall(require, "line-number-change-mode")
         if line_number_change_mode ~= nil then
           line_number_change_mode.setup({
-            i = {
-              bg = palette.statusline2,
-              fg = palette.bg0,
-              bold = true,
-            },
-            n = {
-              bg = palette.statusline1,
-              fg = palette.bg0,
-              bold = true,
-            },
-            R = {
-              bg = palette.orange,
-              fg = palette.bg0,
-              bold = true,
-            },
-            v = {
-              bg = palette.statusline3,
-              fg = palette.bg0,
-              bold = true,
-            },
-            V = {
-              bg = palette.statusline3,
-              fg = palette.bg0,
-              bold = true,
+            mode = {
+              i = {
+                bg = palette.statusline2,
+                fg = palette.bg0,
+                bold = true,
+              },
+              n = {
+                bg = palette.statusline1,
+                fg = palette.bg0,
+                bold = true,
+              },
+              R = {
+                bg = palette.orange,
+                fg = palette.bg0,
+                bold = true,
+              },
+              v = {
+                bg = palette.statusline3,
+                fg = palette.bg0,
+                bold = true,
+              },
+              V = {
+                bg = palette.statusline3,
+                fg = palette.bg0,
+                bold = true,
+              },
             },
           })
         end

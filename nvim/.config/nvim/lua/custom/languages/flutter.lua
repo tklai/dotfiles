@@ -1,7 +1,8 @@
 return {
-  { "mfussenegger/nvim-dap" },
   {
     "akinsho/flutter-tools.nvim",
+    ft = "dart",
+    
     dependencies = { "nvim-lua/plenary.nvim", "stevearc/dressing.nvim" },
     config = function()
       require("flutter-tools").setup({
@@ -40,5 +41,6 @@ return {
   },
   {
     "dart-lang/dart-vim-plugin",
+    ft = "dart",
   },
 }

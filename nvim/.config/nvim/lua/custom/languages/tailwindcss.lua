@@ -1,6 +1,7 @@
 return {
-  {
-    "luckasRanarison/tailwind-tools.nvim",
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
-  },
+  -- {
+  --   "luckasRanarison/tailwind-tools.nvim",
+  --   build = ":UpdateRemotePlugins",
+  --   dependencies = { "nvim-treesitter/nvim-treesitter" },
+  -- },
 }
