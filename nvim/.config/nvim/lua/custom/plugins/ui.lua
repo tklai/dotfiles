@@ -1,19 +1,43 @@
 return {
+  -- {
+  --   "folke/zen-mode.nvim",
+  --   cmd = "ZenMode",
+  --   opts = {
+  --     window = {
+  --       width = 0.7,
+  --     },
+  --     plugins = {
+  --       gitsigns = true,
+  --       tmux = true,
+  --     },
+  --   },
+  --   init = function()
+  --     vim.keymap.set("n", "<leader>z", "<cmd>ZenMode<cr>", { desc = "Zen Mode" })
+  --   end,
+  -- },
   {
-    "folke/zen-mode.nvim",
-    cmd = "ZenMode",
+    "Pocco81/true-zen.nvim",
+    event = "VeryLazy",
+    init = function ()
+      vim.keymap.set("n", "<leader>za", ":TZAtaraxis<CR>", { desc = "True Zen Ataraxis" })
+      vim.keymap.set("n", "<leader>zn", ":TZNarrow<CR>", { desc = "True Zen Smart Narrow" })
+      vim.keymap.set("v", "<leader>zn", ":'<,'>TZNarrow<CR>", { desc = "True Zen Selected Narrow" })
+    end,
     opts = {
-      window = {
-        width = 0.7,
-      },
-      plugins = {
-        gitsigns = true,
-        tmux = true,
+      modes = {
+        ataraxis = {
+          minimum_writing_area = {
+            width = 120,
+            height = 50,
+          },
+          quit_untoggles = true,
+          padding = {
+            left = 100,
+            right = 100,
+          },
+        },
       },
     },
-    init = function()
-      vim.keymap.set("n", "<leader>z", "<cmd>ZenMode<cr>", { desc = "Zen Mode" })
-    end,
   },
   {
     "akinsho/bufferline.nvim",

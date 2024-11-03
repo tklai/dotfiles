@@ -56,8 +56,6 @@ return {
           dynamicRegistration = false,
           lineFoldingOnly = true,
         }
-
-        ufo.setup()
       end
 
       local mason_lspconfig = require("mason-lspconfig")
@@ -98,6 +96,10 @@ return {
           end,
         },
       })
+
+      if ufo then
+        ufo.setup()
+      end
 
       require("mason-tool-installer").setup({
         ensure_installed = {
@@ -234,6 +236,12 @@ return {
   {
     "kevinhwang91/nvim-ufo",
     dependencies = { "kevinhwang91/promise-async" },
+    init = function()
+      vim.o.foldcolumn = "1" -- '0' is not bad
+      vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+      vim.o.foldlevelstart = 99
+      vim.o.foldenable = true
+    end,
   },
   {
     "ThePrimeagen/refactoring.nvim",
