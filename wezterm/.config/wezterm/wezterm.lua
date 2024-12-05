@@ -10,10 +10,6 @@ local config = wezterm.config_builder()
 config.audible_bell = "Disabled"
 config.font = wezterm.font_with_fallback({
   {
-    family = "CommitMonoTK Nerd Font",
-    weight = "Bold",
-  },
-  {
     family = "CommitMono Nerd Font",
     weight = "Bold",
   },
