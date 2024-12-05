@@ -70,4 +70,25 @@ return {
       end
     end,
   },
+  {
+    "danielfalk/smart-open.nvim",
+    branch = "0.2.x",
+    dependencies = {
+      "kkharji/sqlite.lua",
+      -- Only required if using match_algorithm fzf
+      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+    },
+    keys = {
+      {
+        "<leader><leader>",
+        function()
+          require("telescope").extensions.smart_open.smart_open()
+        end,
+        desc = "[Telescope] Smart Open",
+      },
+    },
+    config = function()
+      require("telescope").load_extension("smart_open")
+    end,
+  },
 }

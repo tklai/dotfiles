@@ -45,9 +45,14 @@ return {
 
       local servers = vim.F.npcall(require, "config.lsp_servers") or {}
       local capabilities = vim.lsp.protocol.make_client_capabilities()
-      local cmp_lsp = vim.F.npcall(require, "cmp_nvim_lsp")
-      if cmp_lsp then
-        capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+      -- local cmp_lsp = vim.F.npcall(require, "cmp_nvim_lsp")
+      -- if cmp_lsp then
+      --   capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+      -- end
+
+      local blink_cmp = vim.F.npcall(require, "blink.cmp")
+      if blink_cmp then
+        capabilities = blink_cmp.get_lsp_capabilities(capabilities)
       end
 
       local ufo = vim.F.npcall(require, "ufo")

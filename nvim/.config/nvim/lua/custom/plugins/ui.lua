@@ -1,43 +1,19 @@
 return {
-  -- {
-  --   "folke/zen-mode.nvim",
-  --   cmd = "ZenMode",
-  --   opts = {
-  --     window = {
-  --       width = 0.7,
-  --     },
-  --     plugins = {
-  --       gitsigns = true,
-  --       tmux = true,
-  --     },
-  --   },
-  --   init = function()
-  --     vim.keymap.set("n", "<leader>z", "<cmd>ZenMode<cr>", { desc = "Zen Mode" })
-  --   end,
-  -- },
   {
-    "Pocco81/true-zen.nvim",
-    event = "VeryLazy",
-    init = function ()
-      vim.keymap.set("n", "<leader>za", ":TZAtaraxis<CR>", { desc = "True Zen Ataraxis" })
-      vim.keymap.set("n", "<leader>zn", ":TZNarrow<CR>", { desc = "True Zen Smart Narrow" })
-      vim.keymap.set("v", "<leader>zn", ":'<,'>TZNarrow<CR>", { desc = "True Zen Selected Narrow" })
-    end,
+    "folke/zen-mode.nvim",
+    cmd = "ZenMode",
     opts = {
-      modes = {
-        ataraxis = {
-          minimum_writing_area = {
-            width = 120,
-            height = 50,
-          },
-          quit_untoggles = true,
-          padding = {
-            left = 100,
-            right = 100,
-          },
-        },
+      window = {
+        width = 0.7,
+      },
+      plugins = {
+        gitsigns = true,
+        tmux = true,
       },
     },
+    init = function()
+      vim.keymap.set("n", "<leader>z", "<cmd>ZenMode<cr>", { desc = "Zen Mode" })
+    end,
   },
   {
     "akinsho/bufferline.nvim",
@@ -135,47 +111,6 @@ return {
     end,
   },
   {
-    "folke/noice.nvim",
-    event = "VeryLazy",
-    init = function()
-      vim.opt.cmdheight = 0
-    end,
-    opts = {
-      lsp = {
-        override = {
-          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-          ["vim.lsp.util.stylize_markdown"] = true,
-          ["cmp.entry.get_documentation"] = true,
-        },
-      },
-      presets = {
-        bottom_search = true,
-        -- command_palette = true,
-        long_message_to_split = true,
-        lsp_doc_border = true,
-      },
-    },
-  },
-  {
-    "MunifTanjim/nui.nvim",
-  },
-  {
-    "rcarriga/nvim-notify",
-    opts = {
-      timeout = 5000,
-      stages = "fade",
-    },
-    keys = {
-      {
-        "<leader>un",
-        function()
-          require("notify").dismiss({ silent = true, pending = true })
-        end,
-        desc = "Delete all Notifications",
-      },
-    },
-  },
-  {
     "b0o/incline.nvim",
     event = "BufReadPre",
     priority = 1200,
@@ -200,14 +135,5 @@ return {
   {
     "sethen/line-number-change-mode.nvim",
     event = "UIEnter",
-  },
-  {
-    "shellRaining/hlchunk.nvim",
-    event = { "BufReadPre", "BufNewFile" },
-    opts = {
-      chunk = {
-        enable = true,
-      },
-    },
   },
 }

@@ -27,19 +27,6 @@ return {
           "vim",
           "vimdoc",
         },
-        textobjects = {
-          select = {
-            enable = true,
-            lookahead = true,
-            keymaps = {
-              ["af"] = "@function.outer",
-              ["if"] = "@function.inner",
-              ["ac"] = "@conditional.outer",
-              ["ic"] = "@conditional.inner",
-              ["ip"] = "@parameter.inner",
-            },
-          },
-        },
         highlight = { enable = true },
         indent = { enable = true },
       })

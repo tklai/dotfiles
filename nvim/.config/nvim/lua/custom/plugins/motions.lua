@@ -33,20 +33,8 @@ return {
     event = "VeryLazy",
   },
   {
-    "mawkler/demicolon.nvim",
-    event = "BufEnter",
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "nvim-treesitter/nvim-treesitter-textobjects",
-    },
-    opts = {
-      keymaps = {
-        horizontal_motions = false,
-      },
-    },
-  },
-  {
     "jinh0/eyeliner.nvim",
+    enabled = false,
     event = "BufEnter",
     config = function()
       require("eyeliner").setup({
