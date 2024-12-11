@@ -2,6 +2,9 @@ return {
   {
     "folke/zen-mode.nvim",
     cmd = "ZenMode",
+    keys = {
+      { "<leader>z", "<CMD>ZenMode<CR>", desc = "Zen Mode" },
+    },
     opts = {
       window = {
         width = 0.7,
@@ -11,9 +14,6 @@ return {
         tmux = true,
       },
     },
-    init = function()
-      vim.keymap.set("n", "<leader>z", "<cmd>ZenMode<cr>", { desc = "Zen Mode" })
-    end,
   },
   {
     "akinsho/bufferline.nvim",
@@ -63,10 +63,10 @@ return {
   {
     "nvim-tree/nvim-tree.lua",
     event = "VimEnter",
-    init = function()
-      vim.keymap.set("n", "<C-b>", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle NvimTree" })
-      vim.keymap.set("n", "<leader>tf", "<cmd>NvimTreeFindFile<CR>", { desc = "Navigate to file entry in NvimTree" })
-    end,
+    keys = {
+      { "<C-b>", "<cmd>NvimTreeToggle<CR>", desc = "Toggle NvimTree" },
+      { "<leader>tf", "<cmd>NvimTreeFindFile<CR>", desc = "Navigate to file entry in NvimTree" },
+    },
     opts = {
       update_cwd = true,
       view = {
@@ -105,10 +105,15 @@ return {
   {
     "rmagatti/goto-preview",
     event = "BufEnter",
+    keys = {
+      {
+        "<M-Space>",
+        function()
+          require("goto-preview").goto_preview_definition()
+        end,
+      },
+    },
     config = true,
-    init = function()
-      vim.keymap.set("n", "<M-Space>", require("goto-preview").goto_preview_definition)
-    end,
   },
   {
     "b0o/incline.nvim",

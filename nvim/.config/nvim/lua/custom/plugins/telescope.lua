@@ -1,3 +1,57 @@
+local bottom_pane = function(opts)
+  opts = opts or {}
+
+  local theme_opts = {
+    sorting_strategy = "ascending",
+
+    layout_strategy = "bottom_pane",
+    layout_config = {
+      height = 25,
+    },
+
+    border = true,
+    borderchars = {
+      prompt = { "─", " ", " ", " ", "─", "─", " ", " " },
+      results = { " " },
+      preview = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
+    },
+  }
+  if opts.layout_config and opts.layout_config.prompt_position == "bottom" then
+    theme_opts.borderchars = {
+      prompt = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
+      results = { "─", "│", "─", "│", "├", "┤", "┘", "└" },
+      preview = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
+    }
+  end
+
+  return vim.tbl_deep_extend("force", theme_opts, opts)
+end
+
+local function merge_config(opts)
+  opts.defaults = opts.defaults or {}
+  opts.theme = opts.theme or {}
+  return vim.tbl_deep_extend("force", opts.theme, opts.defaults)
+end
+
+local defaults = merge_config({
+  theme = bottom_pane(),
+  defaults = {
+    file_ignore_patterns = {
+      "public/packages/",
+    },
+    vimgrep_arguments = {
+      "rg",
+      "--color=never",
+      "--no-heading",
+      "--with-filename",
+      "--line-number",
+      "--column",
+      "--smart-case",
+      "--trim",
+    },
+  },
+})
+
 return {
   {
     "nvim-telescope/telescope.nvim",
@@ -12,6 +66,7 @@ return {
     init = function()
       local builtin = require("telescope.builtin")
 
+      vim.keymap.set("n", "<leader><leader>", builtin.find_files)
       vim.keymap.set("n", "<leader>ff", builtin.find_files)
       vim.keymap.set("n", "<leader>fg", builtin.live_grep)
       vim.keymap.set("n", "<leader>fs", function()
@@ -29,23 +84,7 @@ return {
       vim.keymap.set("n", '<leader>"', builtin.registers)
     end,
     opts = {
-      defaults = {
-        -- layout_strategy = "flex",
-        layout_strategy = "vertical",
-        layout_config = {
-          horizontal = {
-            preview_width = 0.4,
-            preview_cutoff = 120,
-          },
-          vertical = {
-            prompt_position = "top",
-            width = 0.5,
-          },
-        },
-        file_ignore_patterns = {
-          "public/packages/",
-        },
-      },
+      defaults = defaults,
       pickers = {
         buffers = {
           sort_lastused = true,
@@ -68,27 +107,6 @@ return {
       for _, name in pairs(telescope_extensions) do
         telescope.load_extension(name)
       end
-    end,
-  },
-  {
-    "danielfalk/smart-open.nvim",
-    branch = "0.2.x",
-    dependencies = {
-      "kkharji/sqlite.lua",
-      -- Only required if using match_algorithm fzf
-      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-    },
-    keys = {
-      {
-        "<leader><leader>",
-        function()
-          require("telescope").extensions.smart_open.smart_open()
-        end,
-        desc = "[Telescope] Smart Open",
-      },
-    },
-    config = function()
-      require("telescope").load_extension("smart_open")
     end,
   },
 }

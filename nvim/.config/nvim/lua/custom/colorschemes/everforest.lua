@@ -55,10 +55,9 @@ return {
         end
       end,
     },
-    init = function()
-      vim.o.background = "light"
-    end,
     config = function(_, opts)
+      vim.o.background = "light"
+
       require("everforest").setup(opts)
 
       vim.cmd.colorscheme("everforest")

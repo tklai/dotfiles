@@ -19,6 +19,7 @@ end
 vim.opt.runtimepath:prepend(lazy_path)
 
 require("lazy").setup({
+  defaults = { lazy = true },
   spec = {
     { import = "custom.plugins" },
     { import = "custom.languages" },
@@ -30,11 +31,11 @@ require("lazy").setup({
     loader = false,
     require = false,
   },
+  rocks = { enabled = false },
+  pkg = {
+    sources = { "lazy" },
+  },
   performance = {
-    cache = {
-      enabled = true,
-      -- disable_events = {},
-    },
     rtp = {
       disabled_plugins = {
         "getscript",
