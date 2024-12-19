@@ -55,6 +55,7 @@ local defaults = merge_config({
 return {
   {
     "nvim-telescope/telescope.nvim",
+    -- enabled = false,
     event = "VimEnter",
     dependencies = {
       "nvim-lua/plenary.nvim",

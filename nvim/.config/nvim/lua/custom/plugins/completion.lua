@@ -77,29 +77,21 @@ return {
     opts = {
       keymap = {
         preset = "default",
-        ['<C-b>'] = {}, -- <C-b> to <C-d>
-        ['<C-d>'] = { 'scroll_documentation_up', 'fallback' },
-        ['<C-f>'] = { 'scroll_documentation_down', 'fallback' },
+        ["<C-b>"] = {}, -- <C-b> to <C-d>
+        ["<C-d>"] = { "scroll_documentation_up", "fallback" },
+        ["<C-f>"] = { "scroll_documentation_down", "fallback" },
 
-        ['<C-p>'] = {}, -- <C-p> to <C-j>
-        ['<C-n>'] = {}, -- <C-n> to <C-k>
-        ['<C-j>'] = { 'select_next', 'fallback' },
-        ['<C-k>'] = { 'select_prev', 'fallback' },
+        ["<C-p>"] = {}, -- <C-p> to <C-j>
+        ["<C-n>"] = {}, -- <C-n> to <C-k>
+        ["<C-j>"] = { "select_next", "fallback" },
+        ["<C-k>"] = { "select_prev", "fallback" },
 
-        ['<C-y>'] = {}, -- <C-y> to <C-h>
-        ['<C-h>'] = { 'select_and_accept' },
+        ["<C-y>"] = {}, -- <C-y> to <C-h>
+        ["<C-h>"] = { "select_and_accept" },
       },
 
-      appearance = {
-        use_nvim_cmp_as_default = true,
-        nerd_font_variant = "mono",
-      },
-
-      sources = {
-        completion = {
-          enabled_providers = { "lsp", "path", "snippets", "buffer" },
-        },
-      },
+      documentation = { auto_show = true },
+      signature = { enabled = true },
     },
     opts_extend = {
       "sources.completion.enabled_providers",
