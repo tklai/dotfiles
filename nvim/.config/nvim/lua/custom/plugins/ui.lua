@@ -18,8 +18,8 @@ return {
   {
     "akinsho/bufferline.nvim",
     version = "*",
+    event = "UIEnter",
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    event = "VimEnter",
     opts = {
       options = {
         diagnostics = "nvim_lsp",
@@ -39,7 +39,7 @@ return {
     "nvim-lualine/lualine.nvim",
     event = "UIEnter",
     dependencies = {
-      { "nvim-tree/nvim-web-devicons", lazy = true },
+      { "nvim-tree/nvim-web-devicons" },
     },
     opts = {
       sections = {
@@ -62,7 +62,6 @@ return {
   },
   {
     "nvim-tree/nvim-tree.lua",
-    event = "VimEnter",
     keys = {
       { "<C-b>", "<cmd>NvimTreeToggle<CR>", desc = "Toggle NvimTree" },
       { "<leader>tf", "<cmd>NvimTreeFindFile<CR>", desc = "Navigate to file entry in NvimTree" },

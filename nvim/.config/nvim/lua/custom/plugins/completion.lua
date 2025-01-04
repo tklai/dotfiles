@@ -71,9 +71,8 @@ return {
   -- },
   {
     "saghen/blink.cmp",
-    lazy = false,
     dependencies = "rafamadriz/friendly-snippets",
-    version = "v0.*",
+    version = "*",
     opts = {
       keymap = {
         preset = "default",
@@ -89,26 +88,20 @@ return {
         ["<C-y>"] = {}, -- <C-y> to <C-h>
         ["<C-h>"] = { "select_and_accept" },
       },
-
-      documentation = { auto_show = true },
+      documentation = { auto_show = true, auto_show_delay_ms = 250 },
       signature = { enabled = true },
-    },
-    opts_extend = {
-      "sources.completion.enabled_providers",
     },
   },
   {
     "chrisgrieser/nvim-scissors",
-    dependencies = "nvim-telescope/telescope.nvim",
+    event = "VeryLazy",
     opts = {
       snippetDir = snippets_dir,
     },
-    init = function()
-      local scissors = require("scissors")
-
-      vim.keymap.set("n", ",se", scissors.editSnippet)
-      vim.keymap.set({ "n", "x" }, ",sa", scissors.addNewSnippet)
-    end,
+    keys = {
+      { ",se", function() require("scissors").editSnippet() end },
+      { ",sa", mode = { "n", "x" }, function() require("scissors").addNewSnippet() end },
+    },
   },
   {
     "windwp/nvim-autopairs",

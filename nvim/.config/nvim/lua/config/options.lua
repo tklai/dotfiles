@@ -7,7 +7,6 @@ opt.autoread = true
 opt.autoindent = true
 opt.clipboard = "unnamedplus"
 opt.cursorline = true
-opt.cursorlineopt = "number,line"
 opt.fileencoding = "utf-8"
 opt.hlsearch = true
 opt.ignorecase = true
@@ -73,6 +72,6 @@ opt.listchars:append({
   -- leadmultispace = "·",
 })
 
-if vim.fn.executable('rg') == 1 then
-  vim.o.grepprg = 'rg --vimgrep --hidden --smart-case'
+if vim.fn.executable("rg") == 1 then
+  vim.o.grepprg = "rg --vimgrep --hidden --smart-case"
 end

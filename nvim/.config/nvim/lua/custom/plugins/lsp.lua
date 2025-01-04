@@ -1,7 +1,7 @@
 return {
   {
     "neovim/nvim-lspconfig",
-    lazy = false,
+    event = "BufEnter",
     dependencies = {
       "b0o/schemastore.nvim",
       "williamboman/mason.nvim",
@@ -40,29 +40,16 @@ return {
       },
     },
     config = function()
+      local lspconfig = require('lspconfig')
+
       require("mason").setup()
 
       vim.opt.rtp:prepend(vim.fn.stdpath("data") .. "/mason/bin")
 
       local servers = vim.F.npcall(require, "config.lsp_servers") or {}
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
-      -- local cmp_lsp = vim.F.npcall(require, "cmp_nvim_lsp")
-      -- if cmp_lsp then
-      --   capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
-      -- end
 
-      local blink_cmp = vim.F.npcall(require, "blink.cmp")
-      if blink_cmp then
-        capabilities = blink_cmp.get_lsp_capabilities(capabilities)
-      end
-
+      -- Check external package
       local ufo = vim.F.npcall(require, "ufo")
-      if ufo then
-        capabilities.textDocument.foldingRange = {
-          dynamicRegistration = false,
-          lineFoldingOnly = true,
-        }
-      end
 
       local mason_lspconfig = require("mason-lspconfig")
       mason_lspconfig.setup({
@@ -90,15 +77,29 @@ return {
         },
         handlers = {
           function(server_name)
-            -- Temp fix for tsserver rename
-            if server_name == "tsserver" then
-              server_name = "ts_ls"
+            local server = servers[server_name] or {}
+
+            local capabilities = vim.lsp.protocol.make_client_capabilities()
+            -- local cmp_lsp = vim.F.npcall(require, "cmp_nvim_lsp")
+            -- if cmp_lsp then
+            --   capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+            -- end
+
+            local blink_cmp = vim.F.npcall(require, "blink.cmp")
+            if blink_cmp then
+              capabilities = blink_cmp.get_lsp_capabilities(capabilities)
             end
 
-            local server = servers[server_name] or {}
+            if ufo then
+              capabilities.textDocument.foldingRange = {
+                dynamicRegistration = false,
+                lineFoldingOnly = true,
+              }
+            end
+
             server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
 
-            require("lspconfig")[server_name].setup(server)
+            lspconfig[server_name].setup(server)
           end,
         },
       })
@@ -256,11 +257,15 @@ return {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
     },
-    init = function()
-      vim.keymap.set("v", "<leader>rr", function()
-        require("refactoring").select_refactor()
-      end)
-    end,
+    keys = {
+      {
+        "<leader>rr",
+        mode = { "v" },
+        function()
+          require("refactoring").select_refactor()
+        end,
+      },
+    },
     opts = {
       show_success_message = true,
     },
