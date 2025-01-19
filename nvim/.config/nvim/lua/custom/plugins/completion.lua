@@ -88,7 +88,12 @@ return {
         ["<C-y>"] = {}, -- <C-y> to <C-h>
         ["<C-h>"] = { "select_and_accept" },
       },
-      documentation = { auto_show = true, auto_show_delay_ms = 250 },
+      completion = {
+        documentation = {
+          auto_show = true,
+          auto_show_delay_ms = 500,
+        },
+      },
       signature = { enabled = true },
     },
   },
