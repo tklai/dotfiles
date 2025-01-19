@@ -12,7 +12,18 @@ return {
       { "<leader>dS", "<cmd>FzfLua lsp_live_workspace_symbols<cr>" },
       { "<leader>vh", "<cmd>FzfLua help_tags<cr>" },
     },
-    opts = {
+    opts = function(_, opts)
+      local fzf = require("fzf-lua")
+      local actions = fzf.actions
+
+      return {
+        fzf_colors = true,
+        fzf_opts = {
+          ["--no-scrollbar"] = true,
+        },
+        defaults = {
+          formatter = "path.dirname_first",
+        },
         winopts = {
           border = "none",
           row = 1,
@@ -24,6 +35,27 @@ return {
             title = false,
           },
         },
-      },
+        keymap = {
+          builtin = {
+            true,
+            ["<C-d>"] = "preview-page-down",
+            ["<C-u>"] = "preview-page-up",
+          },
+          fzf = {
+            true,
+            ["ctrl-d"] = "preview-page-down",
+            ["ctrl-u"] = "preview-page-up",
+            ["ctrl-q"] = "select-all+accept",
+          },
+        },
+        actions = {
+          files = {
+            true,
+            ["ctrl-s"] = false,
+            ["ctrl-x"] = actions.file_split,
+          },
+        },
+      }
+    end,
   },
 }
