@@ -16,6 +16,7 @@
   "incline.nvim": { "branch": "main", "commit": "16fc9c073e3ea4175b66ad94375df6d73fc114c0" },
   "indent-blankline.nvim": { "branch": "master", "commit": "259357fa4097e232730341fa60988087d189193a" },
   "lazy.nvim": { "branch": "main", "commit": "7c493713bc2cb392706866eeba53aaef6c8e9fc6" },
+  "lazygit.nvim": { "branch": "main", "commit": "77a0d42943d8265271e6e6beaed72da54eeb17e7" },
   "line-number-change-mode.nvim": { "branch": "main", "commit": "0237ad6bd85c5872df66e2e98d7bba27c906382e" },
   "lsp_lines.nvim": { "branch": "main", "commit": "f7f18b85360b8e85cd6a5418c9fbccb6a2ff4b1b" },
   "lualine.nvim": { "branch": "master", "commit": "2a5bae925481f999263d6f5ed8361baef8df4f83" },

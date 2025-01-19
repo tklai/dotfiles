@@ -2,10 +2,26 @@ return {
   {
     "tpope/vim-fugitive",
     cmd = { "Git", "G" },
-    init = function()
-      vim.keymap.set('n', '<leader>gg', '<cmd>Git<CR>')
-      vim.keymap.set('n', '<leader>gb', '<cmd>Git blame<CR>')
-    end,
+    keys = {
+      -- { "<leader>gg", "<cmd>Git<CR>" },
+      { "<leader>gb", "<cmd>Git blame<CR>" },
+    }
+  },
+  {
+    "kdheepak/lazygit.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    cmd = {
+      "LazyGit",
+      "LazyGitConfig",
+      "LazyGitCurrentFile",
+      "LazyGitFilter",
+      "LazyGitFilterCurrentFile",
+    },
+    keys = {
+      {"<leader>gg", "<cmd>LazyGit<CR>" },
+    },
   },
   {
     "lewis6991/gitsigns.nvim",
