@@ -19,8 +19,8 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   # Copy with clone
   alias cp="cp -c"
 
-  alias rm="echo Please install 'trash' via homebrew or use full path to use 'rm'"
-  if [ -x "$(command -v trash)" ]; then
+  if [ -d "$HOMEBREW_PREFIX/opt/trash/bin" ]; then
+      export PATH="$HOMEBREW_PREFIX/opt/trash/bin:$PATH"
       alias rm="trash -F"
   fi
 
