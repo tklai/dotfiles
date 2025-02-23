@@ -5,7 +5,9 @@ local opt = vim.opt
 
 opt.autoread = true
 opt.autoindent = true
-opt.clipboard = "unnamedplus"
+vim.schedule(function ()
+  opt.clipboard = "unnamedplus"
+end)
 opt.cursorline = true
 opt.fileencoding = "utf-8"
 opt.hlsearch = true

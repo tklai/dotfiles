@@ -10,4 +10,8 @@ return {
     },
     opts = {},
   },
+  {
+    "tpope/vim-sleuth",
+    lazy = false,
+  },
 }
