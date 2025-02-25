@@ -1,6 +1,7 @@
 return {
   {
     "EdenEast/nightfox.nvim",
+    enabled = false,
     lazy = false,
     opts = {
       palettes = {

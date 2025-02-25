@@ -1,11 +1,35 @@
 font-family = "CommitMono Nerd Font"
 font-size = 12
 
-theme = nordfox
-# nordfox custom
-background = #404651
-selection-background = #505c6c
-cursor-color = #bbbcbd
+# Yui
+palette = 0=#3d3c44
+palette = 1=#b22e32
+palette = 2=#346e27
+palette = 3=#b17900
+palette = 4=#3856d1
+palette = 5=#8f35bd
+palette = 6=#2c6a73
+palette = 7=#909098
+palette = 8=#3d3c44
+palette = 9=#b22e32
+palette = 10=#346e27
+palette = 11=#b17900
+palette = 12=#3856d1
+palette = 13=#8f35bd
+palette = 14=#2c6a73
+palette = 15=#909098
+background = #F1EDED
+foreground = #3d3c44
+cursor-color = #3d3c44
+cursor-text = #e6dfdf
+selection-background = #dcd2d2
+selection-foreground = #3d3c44
+
+# theme = nordfox
+# # nordfox custom
+# background = #404651
+# selection-background = #505c6c
+# cursor-color = #bbbcbd
 
 # theme = flexoki-light
 
