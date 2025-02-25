@@ -48,6 +48,6 @@ function precmd() {
     NEW_LINE_BEFORE_PROMPT=1
   fi
 
-  PROMPT="%F{204}%n%f@%F{244}%M%f:%F{40}%(5~|%-1~/…/%3~|%4~)%f $(git_status) "$'\n'"%F{250}(%?)%f %# "
+  PROMPT="%F{204}%n%f@%F{244}%M%f:%F{28}%(5~|%-1~/…/%3~|%4~)%f $(git_status) "$'\n'"%F{250}(%?)%f %# "
   RPROMPT="[%D{%Y-%m-%d %H:%M:%S}]"
 }
