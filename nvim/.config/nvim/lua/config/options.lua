@@ -15,9 +15,9 @@ opt.ignorecase = true
 opt.inccommand = "split"
 opt.laststatus = 3
 opt.mouse = "a"
-opt.number = true
 opt.pumheight = 10
-opt.relativenumber = true
+-- opt.number = true
+-- opt.relativenumber = true
 -- We will use status line instead.
 opt.scrolloff = 4
 opt.showtabline = 2
