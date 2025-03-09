@@ -71,6 +71,9 @@ defaults write com.apple.dock autohide-delay -int 0
 # Speed up animations
 defaults write com.apple.dock autohide-time-modifier -float 0.25;
 
+# Dock size
+defaults write com.apple.dock "tilesize" -int "36" && killall Dock
+
 #}}}
 
 #{{{ Misc
