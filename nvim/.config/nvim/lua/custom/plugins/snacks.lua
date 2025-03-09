@@ -15,6 +15,7 @@ return {
         enabled = true,
         animate = { enabled = false },
       },
+      statuscolumn = { enabled = true },
       scope = { enabled = true },
       scroll = { enabled = true },
       zen = {
