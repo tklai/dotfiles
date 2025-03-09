@@ -17,6 +17,27 @@ return {
       },
       scope = { enabled = true },
       scroll = { enabled = true },
+      zen = {
+        enabled = true,
+        show = { statusline = true, tabline = true },
+        win = {
+          border = "rounded",
+          backdrop = {
+            transparent = false,
+          },
+          height = 0.95,
+          width = 0.6,
+        },
+      },
+    },
+    keys = {
+      {
+        "<leader>z",
+        function()
+          Snacks.zen.zen()
+        end,
+        desc = "Zen Mode",
+      },
     },
   },
 }

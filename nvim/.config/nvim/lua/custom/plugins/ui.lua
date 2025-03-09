@@ -1,21 +1,5 @@
 return {
   {
-    "folke/zen-mode.nvim",
-    cmd = "ZenMode",
-    keys = {
-      { "<leader>z", "<CMD>ZenMode<CR>", desc = "Zen Mode" },
-    },
-    opts = {
-      window = {
-        width = 0.7,
-      },
-      plugins = {
-        gitsigns = true,
-        tmux = true,
-      },
-    },
-  },
-  {
     "akinsho/bufferline.nvim",
     version = "*",
     event = "UIEnter",
