@@ -49,8 +49,6 @@ return {
       local servers = vim.F.npcall(require, "config.lsp_servers") or {}
 
       -- Check external package
-      local ufo = vim.F.npcall(require, "ufo")
-
       local mason_lspconfig = require("mason-lspconfig")
       mason_lspconfig.setup({
         ensure_installed = {
@@ -90,23 +88,12 @@ return {
               capabilities = blink_cmp.get_lsp_capabilities(capabilities)
             end
 
-            if ufo then
-              capabilities.textDocument.foldingRange = {
-                dynamicRegistration = false,
-                lineFoldingOnly = true,
-              }
-            end
-
             server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
 
             lspconfig[server_name].setup(server)
           end,
         },
       })
-
-      if ufo then
-        ufo.setup()
-      end
 
       require("mason-tool-installer").setup({
         ensure_installed = {
@@ -238,16 +225,6 @@ return {
           end
         end,
       })
-    end,
-  },
-  {
-    "kevinhwang91/nvim-ufo",
-    dependencies = { "kevinhwang91/promise-async" },
-    init = function()
-      vim.o.foldcolumn = "1" -- '0' is not bad
-      vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
-      vim.o.foldlevelstart = 99
-      vim.o.foldenable = true
     end,
   },
   {
