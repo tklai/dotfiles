@@ -1,7 +1,7 @@
 return {
   {
     "jsit/toast.vim",
-    enabled = false,
+    -- enabled = false,
     lazy = false,
     config = function()
       vim.opt.background = "light"

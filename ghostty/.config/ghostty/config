@@ -1,29 +1,57 @@
 font-family = "CommitMono Nerd Font"
 font-size = 12
 
-# Yui
-palette = 0=#3d3c44
-palette = 1=#b22e32
-palette = 2=#346e27
-palette = 3=#b17900
-palette = 4=#3856d1
-palette = 5=#8f35bd
-palette = 6=#2c6a73
-palette = 7=#909098
-palette = 8=#3d3c44
-palette = 9=#b22e32
-palette = 10=#346e27
-palette = 11=#b17900
-palette = 12=#3856d1
-palette = 13=#8f35bd
-palette = 14=#2c6a73
-palette = 15=#909098
-background = #F1EDED
-foreground = #3d3c44
-cursor-color = #3d3c44
-cursor-text = #e6dfdf
+# Toast
+## Normal
+palette = 0=#323434
+palette = 1=#d12d00
+palette = 2=#427b00
+palette = 3=#b68200
+palette = 4=#006fd1
+palette = 5=#a53bce
+palette = 6=#119c97
+palette = 7=#e4e2d8
+## Bright
+palette = 8=#4f4a36
+palette = 9=#e74d23
+palette = 10=#7dc030
+palette = 11=#ffc233
+palette = 12=#5aa2e0
+palette = 13=#b968d9
+palette = 14=#15c1bb
+palette = 15=#f4f3ef
+background = #f4f3ef
+foreground = #323434
+cursor-color = #323434
+cursor-text = #f4f3ef
 selection-background = #dcd2d2
 selection-foreground = #3d3c44
+
+# # Yui
+# ## Normal
+# palette = 0=#3d3c44
+# palette = 1=#b22e32
+# palette = 2=#346e27
+# palette = 3=#b17900
+# palette = 4=#3856d1
+# palette = 5=#8f35bd
+# palette = 6=#2c6a73
+# palette = 7=#909098
+# ## Bright
+# palette = 8=#3d3c44
+# palette = 9=#b22e32
+# palette = 10=#346e27
+# palette = 11=#b17900
+# palette = 12=#3856d1
+# palette = 13=#8f35bd
+# palette = 14=#2c6a73
+# palette = 15=#909098
+# background = #F1EDED
+# foreground = #3d3c44
+# cursor-color = #3d3c44
+# cursor-text = #e6dfdf
+# selection-background = #dcd2d2
+# selection-foreground = #3d3c44
 
 # theme = nordfox
 # # nordfox custom

@@ -1,7 +1,7 @@
 return {
   {
     "cideM/yui",
-    -- enabled = false,
+    enabled = false,
     lazy = false,
     config = function ()
       vim.opt.background = 'light'
