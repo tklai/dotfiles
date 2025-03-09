@@ -43,10 +43,16 @@ opt.smartindent = true
 opt.shiftround = true
 opt.colorcolumn = "80,120"
 -- Fold
--- opt.foldmethod = "marker"
-opt.foldcolumn = "0"
-opt.foldlevel = 20
-opt.foldenable = true
+opt.foldlevel = 99
+if vim.fn.has("nvim-0.10") == 1 then
+  opt.smoothscroll = true
+  opt.foldexpr = "v:lua.require'utils.fold'.foldexpr()"
+  opt.foldmethod = "expr"
+  opt.foldtext = ""
+else
+  opt.foldmethod = "indent"
+  opt.foldtext = "v:lua.require'utils.fold'.foldtext()"
+end
 
 opt.belloff = "all"
 
@@ -60,6 +66,10 @@ opt.fillchars:append({
   vertleft = "╣",
   vertright = "╠",
   verthoriz = "╬",
+  foldopen = "",
+  foldclose = "",
+  fold = " ",
+  foldsep = " ",
 })
 
 opt.list = true
