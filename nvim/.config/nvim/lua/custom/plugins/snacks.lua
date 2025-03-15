@@ -17,7 +17,6 @@ return {
       },
       statuscolumn = { enabled = true },
       scope = { enabled = true },
-      scroll = { enabled = true },
       zen = {
         enabled = true,
         show = { statusline = true, tabline = true },
