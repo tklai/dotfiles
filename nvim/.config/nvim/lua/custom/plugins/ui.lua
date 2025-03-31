@@ -102,4 +102,8 @@ return {
     "sethen/line-number-change-mode.nvim",
     event = "UIEnter",
   },
+  -- {
+  --   'bhugovilela/palette.nvim',
+  --   cmd = { "Palette" },
+  -- }
 }
