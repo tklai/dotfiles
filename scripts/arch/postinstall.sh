@@ -46,16 +46,25 @@ essentials=(
     wget
     exa
     git
+    git-delta
+    gitui
+    lazygit
     python
     7zip
     # zip
     unzip
     stow
+    bat
+    yq
+    zoxide
 
     # Editors
     vi
     vim
     neovim
+
+    # Useful
+    aria2
 )
 
 fonts=(
@@ -85,6 +94,13 @@ guis=(
     librime
     rime-cangjie
     rime-quick
+
+    # Players
+    vlc
+)
+
+aurs=(
+    visual-studio-code-bin
 )
 
 # Update package list
@@ -116,16 +132,6 @@ echo ""
 echo "$info Installing GUI packages..."
 echo ""
 sudo pacman -S --needed ${guis[@]}
-
-# Check r8168 is required for the network card
-if [[ -n "$(lspci | grep -i ethernet | grep -i realtek | grep -i 8168)" ]]; then
-    echo ""
-    echo "$info Installing r8168 for the network card..."
-    echo ""
-    sudo pacman -S --needed r8168
-    sudo echo "blacklist r8169" > /etc/modprobe.d/blacklist_r8169.conf
-    sudo mkinitcpio -p linux
-fi
 
 # AUR Helper
 if [[ "$AUR_HELPER" == "yay" ]]; then
@@ -160,6 +166,23 @@ else
     fi
 fi
 
+# Install GUI packages
+echo ""
+echo "$info Installing AUR packages..."
+echo ""
+sudo pacman -S --needed ${aurs[@]}
+
+# Check r8168 is required for the network card
+if [[ -n "$(lspci | grep -i ethernet | grep -i realtek | grep -i 8168)" ]]; then
+    echo ""
+    echo "$info Installing r8168 for the network card..."
+    echo ""
+    sudo pacman -S --needed r8168
+    sudo echo "blacklist r8169" > /etc/modprobe.d/blacklist_r8169.conf
+    sudo mkinitcpio -p linux
+fi
+
+
 # Fix systemd-boot menu resolution
 # Seems fixed in recent systemd-boot, previously need to add "console-mode keep" to /boot/loader/loader.conf
 # echo ""
@@ -190,7 +213,7 @@ fi
 echo ""
 echo "$info Installing ly..."
 echo ""
-sudo pacman -S ly
+sudo pacman -S --needed ly
 sudo find /boot/loader/entries/ -type f -name "*linux*.conf" -exec sed -i '/^options /s/$/ quiet/' {} \;
 
 echo ""
@@ -198,9 +221,22 @@ echo "$info Checking if KDE installed..."
 sudo pacman -Qi plasma-desktop > /dev/null
 if [ $? -eq 0 ]; then
     echo ""
-    echo "$info KDE installed. Installing konsave via AUR..."
+    echo "$info KDE installed."
     echo ""
-    $AUR_HELPER -S konsave
+
+    kde=(
+        # Pacman
+        discover
+        partitionmanager
+
+        # AUR
+        konsave
+    )
+
+    echo ""
+    echo "$info Installing remaining KDE applications..."
+    echo ""
+    $AUR_HELPER -S --needed ${kde[@]}
 else
     echo ""
     echo "$info KDE not installed."
