@@ -1,5 +1,5 @@
 local lazy_path = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazy_path) then
+if not (vim.uv or vim.loop).fs_stat(lazy_path) then
   vim.notify("lazy.nvim cannot be found or loaded", vim.log.levels.INFO)
 
   -- Remove the folder / file before cloning
