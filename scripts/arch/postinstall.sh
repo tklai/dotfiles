@@ -28,39 +28,58 @@ sudo sed -ie 's/#Color/Color/' /etc/pacman.conf
 sudo sed -ie 's/#ParallelDownloads/ParallelDownloads/' /etc/pacman.conf
 
 essentials=(
+    # System
     zsh
+    man-db
+    man-pages
+    ufw
+    wl-clipboard
+
+    # Fuzzy Finders
+    ripgrep
+    fzf
+
+    # Essentials
+    fastfetch
     htop
-    neofetch
-    wget
     curl
+    wget
+    exa
     git
+    python
+    7zip
+    # zip
+    unzip
+    stow
+
+    # Editors
     vi
     vim
     neovim
-    python
-    ripgrep
-    fzf
-    unzip
-    p7zip
-    ufw
-    stow
-    exa
-    starship
-    man-db
-    wl-clipboard
 )
 
 fonts=(
     noto-fonts
     noto-fonts-cjk
     noto-fonts-emoji
+    noto-fonts-extra
     ttf-jetbrains-mono-nerd
 )
 
 guis=(
+    # Essentials
     flatpak
-    kitty
+
+    # Terminal
+    ghostty
+    # kitty
+    # wezterm
+
+    # Browser
     firefox
+    firefox-i18n-en-us
+
+    # IME
     fcitx5-im
     fcitx5-rime
     librime
@@ -73,6 +92,12 @@ echo ""
 echo "$info Updating package list..."
 echo ""
 sudo pacman -Sy
+
+# Insatll base development tools
+echo ""
+echo "$info Insatlling base development tools..."
+echo ""
+sudo pacman -S --needed base-devel git
 
 # Install essential packages
 echo ""
@@ -104,25 +129,35 @@ fi
 
 # AUR Helper
 if [[ "$AUR_HELPER" == "yay" ]]; then
-    # Install yay
-    echo ""
-    echo "$info Installing yay (yay-bin)..."
-    echo ""
-    sudo pacman -S --needed base-devel git
-    cd /tmp
-    git clone --depth=1 https://aur.archlinux.org/yay-bin.git
-    cd yay-bin
-    makepkg -si
+    if [ -x "$(command -v yay)" ]; then
+        echo ""
+        echo "$info yay is installed."
+        echo ""
+    else
+        # Install yay
+        echo ""
+        echo "$info Installing yay (yay-bin)..."
+        echo ""
+        cd /tmp
+        git clone --depth=1 https://aur.archlinux.org/yay-bin.git
+        cd yay-bin
+        makepkg -si
+    fi
 else
-    # Install paru
-    echo ""
-    echo "$info Installing paru (paru-bin)..."
-    echo ""
-    sudo pacman -S --needed base-devel git
-    cd /tmp
-    git clone --depth=1 https://aur.archlinux.org/paru-bin.git
-    cd paru-bin
-    makepkg -si
+    if [ -x "$(command -v paru)" ]; then
+        echo "" 
+        echo "$info paru is installed."
+        echo ""
+    else 
+        # Install paru
+        echo ""
+        echo "$info Installing paru (paru-bin)..."
+        echo ""
+        cd /tmp
+        git clone --depth=1 https://aur.archlinux.org/paru-bin.git
+        cd paru-bin
+        makepkg -si
+    fi
 fi
 
 # Fix systemd-boot menu resolution
@@ -133,23 +168,30 @@ fi
 # sudo echo "console-mode keep" >> /boot/loader/loader.conf
 
 # Install plymouth
+# echo ""
+# echo "$info Installing plymouth..."
+# echo ""
+# sudo pacman -S plymouth
+# grep -qE ' ?plymouth ?' /etc/mkinitcpio.conf
+# if [ $? -ne 0 ]; then
+#     echo ""
+#     echo "$info Adding plymouth to mkinitcpio hooks..."
+#     echo ""
+#     sudo sed -ie 's/HOOKS=\([^)]*\)/& plymouth/' /etc/mkinitcpio.conf
+# fi
+# # Only add `splash` to non-fallback entries
+# sudo find /boot/loader/entries/ -type f -name "*linux.conf" -exec sed -i '/^options /s/$/ quiet splash/' {} \;
+# echo ""
+# echo "$info Rebuilding initrd..."
+# echo ""
+# sudo mkinitcpio -P
+
+# Install ly
 echo ""
-echo "$info Installing plymouth..."
+echo "$info Installing ly..."
 echo ""
-sudo pacman -S plymouth
-grep -qE ' ?plymouth ?' /etc/mkinitcpio.conf
-if [ $? -ne 0 ]; then
-    echo ""
-    echo "$info Adding plymouth to mkinitcpio hooks..."
-    echo ""
-    sudo sed -ie 's/HOOKS=\([^)]*\)/& plymouth/' /etc/mkinitcpio.conf
-fi
-# Only add `splash` to non-fallback entries
-sudo find /boot/loader/entries/ -type f -name "*linux.conf" -exec sed -i '/^options /s/$/ quiet splash/' {} \;
-echo ""
-echo "$info Rebuilding initrd..."
-echo ""
-sudo mkinitcpio -P
+sudo pacman -S ly
+sudo find /boot/loader/entries/ -type f -name "*linux*.conf" -exec sed -i '/^options /s/$/ quiet/' {} \;
 
 echo ""
 echo "$info Checking if KDE installed..."
@@ -158,7 +200,7 @@ if [ $? -eq 0 ]; then
     echo ""
     echo "$info KDE installed. Installing konsave via AUR..."
     echo ""
-    yay -S konsave
+    $AUR_HELPER -S konsave
 else
     echo ""
     echo "$info KDE not installed."
