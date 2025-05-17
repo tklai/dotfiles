@@ -6,7 +6,10 @@ return {
     priority = 1000,
     lazy = false,
     opts = {
-      bigfile = { enabled = true },
+      bigfile = {
+        enabled = true,
+        notify = false,
+      },
       dim = {
         enabled = false,
         animate = { enabled = false },
@@ -19,13 +22,15 @@ return {
       scope = { enabled = true },
       zen = {
         enabled = true,
+        toggles = {
+            dim = false,
+        },
         show = { statusline = true, tabline = true },
         win = {
-          border = "rounded",
           backdrop = {
             transparent = false,
+            blend = 80,
           },
-          height = 0.95,
           width = 0.6,
         },
       },

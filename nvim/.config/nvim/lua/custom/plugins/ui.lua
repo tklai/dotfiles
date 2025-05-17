@@ -1,9 +1,9 @@
 return {
+  { "nvim-tree/nvim-web-devicons" },
   {
     "akinsho/bufferline.nvim",
     version = "*",
     event = "UIEnter",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = {
       options = {
         diagnostics = "nvim_lsp",
@@ -22,9 +22,6 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     event = "UIEnter",
-    dependencies = {
-      { "nvim-tree/nvim-web-devicons" },
-    },
     opts = {
       sections = {
         lualine_a = {
@@ -81,11 +78,6 @@ return {
     config = true,
   },
   {
-    "lukas-reineke/indent-blankline.nvim",
-    main = "ibl",
-    opts = {},
-  },
-  {
     "rmagatti/goto-preview",
     event = "BufEnter",
     keys = {
@@ -102,8 +94,4 @@ return {
     "sethen/line-number-change-mode.nvim",
     event = "UIEnter",
   },
-  -- {
-  --   'bhugovilela/palette.nvim',
-  --   cmd = { "Palette" },
-  -- }
 }
