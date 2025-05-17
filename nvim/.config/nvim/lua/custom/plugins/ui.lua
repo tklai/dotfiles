@@ -90,8 +90,4 @@ return {
     },
     config = true,
   },
-  {
-    "sethen/line-number-change-mode.nvim",
-    event = "UIEnter",
-  },
 }
