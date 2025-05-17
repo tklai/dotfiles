@@ -90,10 +90,11 @@ guis=(
 
     # IME
     fcitx5-im
-    fcitx5-rime
-    librime
-    rime-cangjie
-    rime-quick
+    fcitx5-breeze
+    fcitx5-chinese-addons
+    fcitx5-mozc
+    fcitx5-table-extra
+    fcitx5-table-other
 
     # Players
     vlc
