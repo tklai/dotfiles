@@ -38,6 +38,7 @@ essentials=(
     # Fuzzy Finders
     ripgrep
     fzf
+    fzy
 
     # Essentials
     fastfetch
@@ -57,6 +58,7 @@ essentials=(
     bat
     yq
     zoxide
+    tmux
 
     # Editors
     vi
