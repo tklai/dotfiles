@@ -229,6 +229,7 @@ if [ $? -eq 0 ]; then
         # Pacman
         discover
         partitionmanager
+        ksshaskpass
 
         # AUR
         konsave
@@ -238,11 +239,19 @@ if [ $? -eq 0 ]; then
     echo "$info Installing remaining KDE applications..."
     echo ""
     $AUR_HELPER -S --needed ${kde[@]}
+
+    mkdir -p $HOME/.config/environment.d
+    printf "SSH_ASKPASS=%s\nSSH_ASKPASS_REQUIRE=prefer\n" "$(which ksshaskpass)" | tee $HOME/.config/environment.d/ssh_askpass.conf
 else
     echo ""
     echo "$info KDE not installed."
     echo ""
 fi
+
+echo ""
+echo "$info Enabling ssh-agent with systemd..."
+echo ""
+sudo systemctl --user enable --now ssh-agent
 
 echo ""
 echo "$success All done!"
