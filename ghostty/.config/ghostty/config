@@ -1,31 +1,81 @@
-font-family = "CommitMono Nerd Font"
+font-family = "CaskaydiaCove Nerd Font"
 font-size = 12
 
-# Toast
+# Marukai Healer
 ## Normal
-palette = 0=#323434
-palette = 1=#d12d00
-palette = 2=#427b00
-palette = 3=#b68200
-palette = 4=#006fd1
-palette = 5=#a53bce
-palette = 6=#119c97
-palette = 7=#e4e2d8
+palette = 0=#000000
+palette = 1=#cc0000
+palette = 2=#51a150
+palette = 3=#3d76f3
+palette = 4=#ab31a9
+palette = 5=#976700
+palette = 6=#ab31a9
+palette = 7=#323640
 ## Bright
-palette = 8=#4f4a36
-palette = 9=#e74d23
-palette = 10=#7dc030
-palette = 11=#ffc233
-palette = 12=#5aa2e0
-palette = 13=#b968d9
-palette = 14=#15c1bb
-palette = 15=#f4f3ef
-background = #f4f3ef
-foreground = #323434
-cursor-color = #323434
-cursor-text = #f4f3ef
-selection-background = #dcd2d2
-selection-foreground = #3d3c44
+palette = 8=#a0a1a7
+palette = 9=#cc0000
+palette = 10=#51a150
+palette = 11=#3d76f3
+palette = 12=#ab31a9
+palette = 13=#976700
+palette = 14=#ab31a9
+palette = 15=#323640
+background = #f8f8fc
+foreground = #323640
+cursor-color = #d4a017
+cursor-text = #f8f8fc
+selection-background = #c6dbff
+selection-foreground = #000000
+
+# # Kanso
+# palette = 0=#24262D
+# palette = 1=#c84053
+# palette = 2=#6f894e
+# palette = 3=#77713f
+# palette = 4=#4d699b
+# palette = 5=#b35b79
+# palette = 6=#597b75
+# palette = 7=#545464
+# palette = 8=#6d6f6e
+# palette = 9=#d7474b
+# palette = 10=#6e915f
+# palette = 11=#836f4a
+# palette = 12=#6693bf
+# palette = 13=#624c83
+# palette = 14=#5e857a
+# palette = 15=#43436c
+#
+# background = #f2f1ef
+# foreground = #24262D
+# cursor-color = #24262D
+# selection-background = #e2e1df
+# selection-foreground = #24262D
+
+# # Toast
+# ## Normal
+# palette = 0=#323434
+# palette = 1=#d12d00
+# palette = 2=#427b00
+# palette = 3=#b68200
+# palette = 4=#006fd1
+# palette = 5=#a53bce
+# palette = 6=#119c97
+# palette = 7=#e4e2d8
+# ## Bright
+# palette = 8=#4f4a36
+# palette = 9=#e74d23
+# palette = 10=#7dc030
+# palette = 11=#ffc233
+# palette = 12=#5aa2e0
+# palette = 13=#b968d9
+# palette = 14=#15c1bb
+# palette = 15=#f4f3ef
+# background = #f4f3ef
+# foreground = #323434
+# cursor-color = #323434
+# cursor-text = #f4f3ef
+# selection-background = #dcd2d2
+# selection-foreground = #3d3c44
 
 # # Yui
 # ## Normal
