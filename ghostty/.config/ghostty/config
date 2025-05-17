@@ -7,17 +7,17 @@ palette = 0=#000000
 palette = 1=#cc0000
 palette = 2=#51a150
 palette = 3=#3d76f3
-palette = 4=#ab31a9
-palette = 5=#976700
+palette = 4=#976700
+palette = 5=#e35043
 palette = 6=#ab31a9
 palette = 7=#323640
-## Bright
+## bright
 palette = 8=#a0a1a7
 palette = 9=#cc0000
 palette = 10=#51a150
 palette = 11=#3d76f3
-palette = 12=#ab31a9
-palette = 13=#976700
+palette = 12=#976700
+palette = 13=#e35043
 palette = 14=#ab31a9
 palette = 15=#323640
 background = #f8f8fc
