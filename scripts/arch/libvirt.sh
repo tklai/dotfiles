@@ -46,6 +46,13 @@ packages=(
     qemu-hw-display-virtio-gpu-pci-gl
     qemu-hw-display-virtio-vga
     qemu-hw-display-virtio-vga-gl
+
+    # Sound
+    qemu-audio-alsa
+    qemu-audio-dbus
+    qemu-audio-pipewire
+    qemu-audio-sdl
+    qemu-audio-spice
 )
 sudo pacman -S --needed ${packages[@]}
 
