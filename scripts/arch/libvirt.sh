@@ -27,12 +27,27 @@ echo ""
 echo $hr
 echo "$info Installing libvirt and virt-manager..."
 echo $hr
-# libvirt       - VM server
-# virt-manager  - VM client
-# qemu          - Hypervisor
-# edk2-ovmf     - Enables UEFI support
-# dnsmasq       - For NAT/DHCP networking
-sudo pacman -S libvirt virt-manager qemu edk2-ovmf dnsmasq
+
+packages=(
+    libvirt       # VM server
+    virt-manager  # VM client
+    qemu          # Hypervisor
+    edk2-ovmf     # Enables UEFI support
+    dnsmasq       # For NAT/DHCP networking
+
+    # Spice
+    qemu-ui-spice-core
+    qemu-ui-spice-app
+
+    # Video drivers
+    qemu-hw-display-virtio-gpu
+    qemu-hw-display-virtio-gpu-gl
+    qemu-hw-display-virtio-gpu-pci
+    qemu-hw-display-virtio-gpu-pci-gl
+    qemu-hw-display-virtio-vga
+    qemu-hw-display-virtio-vga-gl
+)
+sudo pacman -S --needed ${packages[@]}
 
 # libvirtd uses polkit or user groups by default. Just for references.
 # Reference: https://wiki.archlinux.org/title/libvirt#Set_up_authentication
