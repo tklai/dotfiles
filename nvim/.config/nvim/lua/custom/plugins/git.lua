@@ -3,12 +3,13 @@ return {
     "tpope/vim-fugitive",
     cmd = { "Git", "G" },
     keys = {
-      -- { "<leader>gg", "<cmd>Git<CR>" },
+      { "<leader>gg", "<cmd>Git<CR>" },
       { "<leader>gb", "<cmd>Git blame<CR>" },
     }
   },
   {
     "kdheepak/lazygit.nvim",
+    enabled = false,
     dependencies = {
       "nvim-lua/plenary.nvim",
     },

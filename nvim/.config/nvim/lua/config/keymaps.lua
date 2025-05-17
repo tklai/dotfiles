@@ -124,3 +124,11 @@ nnoremap("<leader>d", vim.diagnostic.open_float, {
   desc = "Open diagnostic float",
   silent = true,
 })
+
+nnoremap("<leader>py", function()
+  vim.fn.setreg("+", vim.fn.expand("%"))
+end, {
+  noremap = true,
+  silent = true,
+  desc = "Copy path to clipboard",
+})

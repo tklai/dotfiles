@@ -16,8 +16,8 @@ opt.inccommand = "split"
 opt.laststatus = 3
 opt.mouse = "a"
 opt.pumheight = 10
--- opt.number = true
--- opt.relativenumber = true
+opt.number = true
+opt.relativenumber = true
 -- We will use status line instead.
 opt.scrolloff = 4
 opt.showtabline = 2
@@ -41,7 +41,7 @@ opt.tabstop = 4
 opt.softtabstop = 4
 opt.smartindent = true
 opt.shiftround = true
-opt.colorcolumn = "80,120"
+opt.colorcolumn = "120"
 -- Fold
 opt.foldlevel = 99
 if vim.fn.has("nvim-0.10") == 1 then
