@@ -18,6 +18,14 @@ config.jsonls = {
   },
 }
 
+config.yamlls = {
+  settings = {
+    yaml = {
+      --
+    },
+  },
+}
+
 local schemastore = vim.F.npcall(require, "schemastore")
 if schemastore then
   config.jsonls = vim.tbl_extend("force", config.jsonls.settings.json, {
@@ -25,6 +33,14 @@ if schemastore then
     validate = {
       enable = true,
     },
+  })
+
+  config.yamlls = vim.tbl_extend("force", config.yamlls.settings.yaml, {
+    schemaStore = {
+      enable = false,
+      url = "",
+    },
+    schemas = require('schemastore').yaml.schemas(),
   })
 end
 

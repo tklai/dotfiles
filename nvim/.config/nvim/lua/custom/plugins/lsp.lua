@@ -3,10 +3,10 @@ return {
     "neovim/nvim-lspconfig",
     event = "BufEnter",
     dependencies = {
-      "b0o/schemastore.nvim",
-      "williamboman/mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
+      "mason-org/mason.nvim",
+      "mason-org/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
+      "b0o/schemastore.nvim",
       {
         "stevearc/conform.nvim",
         opts = {
