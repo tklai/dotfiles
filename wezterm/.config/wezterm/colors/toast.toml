@@ -1,0 +1,33 @@
+[colors]
+ansi = [
+    "#323434",
+    "#D12D00",
+    "#427B00",
+    "#B68200",
+    "#006FD1",
+    "#A53BCE",
+    "#119C97",
+    "#E4E2D8",
+]
+brights = [
+    "#4F4A36",
+    "#E74D23",
+    "#7DC030",
+    "#FFC233",
+    "#5AA2E0",
+    "#B968D9",
+    "#15C1BB",
+    "#F4F3EF",
+]
+foreground = "#323434"
+background = "#F4F3EF"
+cursor_bg = "#7F785C"
+cursor_fg = "#F1EEE9"
+selection_fg = '#3D3C44'
+selection_bg = '#DCD2D2'
+
+[colors.indexed]
+
+[metadata]
+name = 'Toast'
+origin_url = 'https://github.com/jsit/toast.vim'
