@@ -9,12 +9,9 @@ hr="=========================================="
 packages=(
     # Core
     fcitx5
-    fcitx5-autostart
     fcitx5-configtool
     fcitx5-gtk
     fcitx5-qt
-
-    kcm-fcitx5
 
     # Tables
     fcitx5-table-extra
@@ -35,6 +32,22 @@ sudo -v
 
 print_head "info" "Removing ibus..."
 sudo dnf remove ibus
+
+print_head "info" "Checking if KDE is installed..."
+grep kde-desktop < <(sudo dnf group list --installed)
+if [ $? -ne 0 ]; then
+    print_head "info" "KDE is not installed."
+
+    packages+=(
+        fcitx5-autostart
+    )
+else
+    print_head "info" "KDE is installed."
+
+    packages+=(
+        kcm-fcitx5
+    )
+fi
 
 print_head "info" "Installing fcitx5..."
 
