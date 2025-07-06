@@ -1,7 +1,7 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    event = "BufEnter",
+    event = "VeryLazy",
     dependencies = {
       "nvim-treesitter/nvim-treesitter-context",
       "nvim-treesitter/nvim-treesitter-textobjects",
@@ -44,8 +44,8 @@ return {
     opts = {
       use_default_keymaps = false,
     },
-    init = function()
-      vim.keymap.set("n", "<leader>m", "<cmd>TSJToggle<CR>", { desc = "Join / Split" })
-    end,
+    keys = {
+      { "<leader>m", "<cmd>TSJToggle<CR>", { desc = "Join / Split" } },
+    },
   },
 }

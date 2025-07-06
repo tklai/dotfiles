@@ -75,6 +75,8 @@ return {
     version = "*",
     event = "VeryLazy",
     opts = {
+      fuzzy = { implementation = "prefer_rust" },
+      cmdline = { enabled = false },
       keymap = {
         preset = "default",
         ["<C-b>"] = {}, -- <C-b> to <C-d>
@@ -92,7 +94,43 @@ return {
       completion = {
         documentation = {
           auto_show = true,
-          auto_show_delay_ms = 500,
+          auto_show_delay_ms = 0,
+          window = {
+            border = "rounded",
+            min_width = 50,
+            winhighlight = "",
+          },
+          --- draw function comes from OXY2DEV and trimmed
+          --- @see https://github.com/OXY2DEV/nvim/blob/3c0c8a0d8770ed3a9f6dc3bb833a2f0723fbea77/lua/plugins/lsp.lua#L168-L231
+          draw = function(data)
+            local buf = data.window.buf
+            local src_buf = vim.api.nvim_get_current_buf()
+
+            local lines = {}
+
+            if data.item and data.item.documentation then
+              lines = vim.split(data.item.documentation.value or "", "\n", { trimempty = true })
+            end
+
+            local details = vim.split(data.item.detail or "", "\n", { trimempty = true })
+
+            if #details > 0 then
+              table.insert(details, 1, string.format("```%s", vim.bo[src_buf].ft or ""))
+              table.insert(details, "```")
+
+              if #lines > 0 then
+                details = vim.list_extend(details, {
+                  "",
+                  "Detail:",
+                  "----------",
+                  "",
+                })
+              end
+            end
+
+            local visible_lines = vim.list_extend(details, lines)
+            vim.api.nvim_buf_set_lines(buf, 0, -1, false, visible_lines)
+          end,
         },
       },
       signature = { enabled = true },
@@ -105,13 +143,8 @@ return {
       snippetDir = snippets_dir,
     },
     keys = {
-      { ",se", function() require("scissors").editSnippet() end },
-      { ",sa", mode = { "n", "x" }, function() require("scissors").addNewSnippet() end },
+      { ",se", ":ScissorsEditSnippet<CR>" },
+      { ",sa", mode = { "n", "x" }, ":ScissorsAddNewSnippet<CR>" },
     },
-  },
-  {
-    "windwp/nvim-autopairs",
-    event = "InsertEnter",
-    config = true,
   },
 }

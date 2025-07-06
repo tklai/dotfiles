@@ -79,7 +79,7 @@ return {
   },
   {
     "rmagatti/goto-preview",
-    event = "BufEnter",
+    event = "VeryLazy",
     keys = {
       {
         "<M-Space>",

@@ -10,8 +10,4 @@ return {
       vim.g.undotree_SplitWidth = 40
     end,
   },
-  {
-    "tpope/vim-sleuth",
-    lazy = false,
-  },
 }

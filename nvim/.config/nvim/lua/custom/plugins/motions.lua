@@ -26,7 +26,7 @@ return {
   },
   {
     "chaoren/vim-wordmotion",
-    event = "BufEnter",
+    event = "VeryLazy",
   },
   {
     "mg979/vim-visual-multi",

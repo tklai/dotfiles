@@ -1,7 +1,7 @@
 return {
   {
     "numToStr/Comment.nvim",
-    event = "BufEnter",
+    event = "VeryLazy",
     config = true,
     opts = {
       mappings = {
