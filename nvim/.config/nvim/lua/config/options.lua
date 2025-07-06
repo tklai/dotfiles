@@ -37,8 +37,7 @@ opt.wrap = false
 -- Indentation
 opt.expandtab = true
 opt.shiftwidth = 4
-opt.tabstop = 4
-opt.softtabstop = 4
+opt.softtabstop = -1
 opt.smartindent = true
 opt.shiftround = true
 opt.colorcolumn = "120"
