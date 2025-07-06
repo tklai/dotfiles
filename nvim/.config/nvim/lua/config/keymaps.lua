@@ -130,5 +130,13 @@ nnoremap("<leader>py", function()
 end, {
   noremap = true,
   silent = true,
-  desc = "Copy path to clipboard",
+  desc = "Copy relative path to clipboard",
+})
+
+nnoremap("<leader>pY", function()
+  vim.fn.setreg("+", vim.fn.expand("%:p"))
+end, {
+  noremap = true,
+  silent = true,
+  desc = "Copy absolute path to clipboard",
 })
