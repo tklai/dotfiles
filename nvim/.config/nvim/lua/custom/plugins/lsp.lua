@@ -269,6 +269,16 @@ return {
   --   end,
   -- },
   {
+    "rachartier/tiny-inline-diagnostic.nvim",
+    event = "LspAttach",
+    init = function()
+        vim.diagnostic.config({ virtual_text = false })
+    end,
+    opts = {
+      preset = "powerline",
+    },
+  },
+  {
     "hedyhli/outline.nvim",
     lazy = true,
     config = true,

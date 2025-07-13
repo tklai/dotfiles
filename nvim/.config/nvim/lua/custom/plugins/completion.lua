@@ -71,7 +71,10 @@ return {
   -- },
   {
     "saghen/blink.cmp",
-    dependencies = "rafamadriz/friendly-snippets",
+    dependencies = {
+      "rafamadriz/friendly-snippets",
+      "OXY2DEV/markview.nvim",
+    },
     version = "*",
     event = "VeryLazy",
     opts = {
@@ -130,6 +133,35 @@ return {
 
             local visible_lines = vim.list_extend(details, lines)
             vim.api.nvim_buf_set_lines(buf, 0, -1, false, visible_lines)
+
+            if vim.g.__reg_doc ~= true then
+              vim.treesitter.language.register("markdown", "blink-cmp-documentation")
+              vim.g.__reg_doc = true
+            end
+
+            if package.loaded["markview"] then
+              local markview = require("markview")
+
+              local win = data.window:get_win()
+
+              if win then
+                vim.bo[buf].ft = "markdown"
+                markview.render(buf, { enable = true, hybrid_mode = false })
+                vim.bo[buf].ft = "blink-cmp-documentation"
+              end
+
+              vim.defer_fn(function()
+                win = data.window:get_win()
+
+                if win then
+                  vim.wo[win].signcolumn = "no"
+                end
+
+                vim.bo[buf].ft = "markdown"
+                markview.render(buf, { enable = true, hybrid_mode = false })
+                vim.bo[buf].ft = "blink-cmp-documentation"
+              end, 25)
+            end
           end,
         },
       },
@@ -146,5 +178,10 @@ return {
       { ",se", ":ScissorsEditSnippet<CR>" },
       { ",sa", mode = { "n", "x" }, ":ScissorsAddNewSnippet<CR>" },
     },
+  },
+  {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    config = true,
   },
 }
