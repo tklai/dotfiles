@@ -228,47 +228,6 @@ return {
     end,
   },
   {
-    "ThePrimeagen/refactoring.nvim",
-    event = "VeryLazy",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-    },
-    keys = {
-      {
-        "<leader>rr",
-        mode = { "v" },
-        function()
-          require("refactoring").select_refactor()
-        end,
-      },
-    },
-    opts = {
-      show_success_message = true,
-    },
-  },
-  {
-    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-    event = "VeryLazy",
-    opts = {},
-    init = function()
-      vim.keymap.set("n", "<Leader>L", require("lsp_lines").toggle, { desc = "Toggle lsp_lines" })
-
-      vim.diagnostic.config({
-        virtual_text = false,
-      })
-    end,
-  },
-  -- {
-  --   "sontungexpt/better-diagnostic-virtual-text",
-  --   event = "LspAttach",
-  --   init = function()
-  --     vim.diagnostic.config({
-  --       virtual_text = false,
-  --     })
-  --   end,
-  -- },
-  {
     "rachartier/tiny-inline-diagnostic.nvim",
     event = "LspAttach",
     init = function()

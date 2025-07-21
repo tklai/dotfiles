@@ -12,4 +12,15 @@ return {
       },
     },
   },
+  {
+    "A7Lavinraj/fyler.nvim",
+    enabled = false,
+    cmd = "Fyler",
+    keys = {
+      { "<C-b>", "<cmd>Fyler kind=split:right<CR>", desc = "Toggle NvimTree" },
+    },
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    branch = "stable",
+    opts = {},
+  },
 }

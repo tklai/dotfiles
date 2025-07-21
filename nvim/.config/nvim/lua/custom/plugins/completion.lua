@@ -179,9 +179,4 @@ return {
       { ",sa", mode = { "n", "x" }, ":ScissorsAddNewSnippet<CR>" },
     },
   },
-  {
-    "windwp/nvim-autopairs",
-    event = "InsertEnter",
-    config = true,
-  },
 }
