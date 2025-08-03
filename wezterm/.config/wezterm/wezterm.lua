@@ -10,7 +10,7 @@ local config = wezterm.config_builder()
 config.audible_bell = "Disabled"
 config.font = wezterm.font_with_fallback({
   {
-    family = "CaskaydiaCove Nerd Font",
+    family = "CaskaydiaMono Nerd Font",
   },
   {
     family = "CommitMono Nerd Font",
@@ -80,5 +80,8 @@ config.window_padding = {
 
 -- Toast
 config.color_scheme = "Toast"
+
+-- Rose Pine Dawn
+config.color_scheme = "rose-pine-dawn"
 
 return config
