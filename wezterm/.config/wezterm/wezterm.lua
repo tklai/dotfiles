@@ -9,6 +9,12 @@ local config = wezterm.config_builder()
 
 config.audible_bell = "Disabled"
 config.font = wezterm.font_with_fallback({
+  -- {
+  --   family = "KodeMono Nerd Font",
+  -- },
+  -- {
+  --   family = "DepartureMono Nerd Font",
+  -- },
   {
     family = "CaskaydiaMono Nerd Font",
   },
