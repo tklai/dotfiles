@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+reboot_confirm() {
+    SELECTION=$(echo -e "Confirm\nCancel" | fuzzel -d -p " " -w 20 -l 2)
+
+    case $SELECTION in
+        "Confirm")
+            notify-send "Rebooting..."
+            systemctl reboot
+            ;;
+        *)
+            ;;
+    esac
+}
+shutdown_confirm() {
+    SELECTION=$(echo -e "Confirm\nCancel" | fuzzel -d -p " " -w 20 -l 2)
+    case $SELECTION in
+        Confirm)
+            notify-send "Shutting down..."
+            systemctl poweroff
+            ;;
+
+        *)
+            ;;
+    esac
+}
+
+SELECTION=$(echo -e "Screen Off\nReboot\nShut Down" | fuzzel -d -p " " -w 20 -l 3)
+
+case $SELECTION in
+"Screen Off")
+    niri msg action power-off-monitors
+    ;;
+"Reboot")
+    reboot_confirm
+    ;;
+"Shut Down")
+    shutdown_confirm
+    ;;
+*)
+    ;;
+esac
