@@ -1,0 +1,139 @@
+{
+  "schemes" : [
+    {
+      "pointer" : {
+        "disableAcceleration" : true,
+        "speed" : 0.0689655172413792768,
+        "acceleration" : 0.6875
+      },
+      "scrolling" : {
+        "distance" : {
+          "vertical" : "auto"
+        },
+        "speed" : {
+          "vertical" : 0
+        },
+        "reverse" : {
+          "vertical" : false
+        },
+        "acceleration" : {
+          "vertical" : 1
+        }
+      },
+      "if" : {
+        "device" : {
+          "productName" : "Apple Internal Keyboard \/ Trackpad",
+          "productID" : "0x341",
+          "category" : "trackpad",
+          "vendorID" : "0x5ac"
+        }
+      }
+    },
+    {
+      "pointer" : {
+        "disableAcceleration" : false,
+        "speed" : 0.3,
+        "acceleration" : 0
+      },
+      "scrolling" : {
+        "reverse" : true
+      },
+      "if" : {
+        "device" : {
+          "productName" : "MX Ergo",
+          "productID" : "0xb01d",
+          "category" : "mouse",
+          "vendorID" : "0x46d"
+        }
+      },
+      "buttons" : {
+        "universalBackForward" : true
+      }
+    },
+    {
+      "pointer" : {
+        "disableAcceleration" : true,
+        "speed" : 0.6,
+        "acceleration" : 0.75
+      },
+      "scrolling" : {
+        "reverse" : true
+      },
+      "if" : {
+        "device" : {
+          "productName" : "Expert Wireless TB",
+          "productID" : "0x8019",
+          "category" : "mouse",
+          "vendorID" : "0x47d"
+        }
+      },
+      "buttons" : {
+        "universalBackForward" : true
+      }
+    },
+    {
+      "pointer" : {
+        "disableAcceleration" : true,
+        "speed" : 0.1,
+        "acceleration" : 1
+      },
+      "scrolling" : {
+        "distance" : {
+          "vertical" : 4
+        },
+        "speed" : {
+          "vertical" : 0
+        },
+        "reverse" : true,
+        "acceleration" : {
+          "vertical" : 1
+        }
+      },
+      "if" : {
+        "device" : {
+          "productName" : "MX Master 3",
+          "productID" : "0xb023",
+          "category" : "mouse",
+          "vendorID" : "0x46d"
+        }
+      },
+      "buttons" : {
+        "universalBackForward" : true
+      }
+    },
+    {
+      "scrolling" : {
+        "reverse" : {
+          "vertical" : true
+        },
+        "acceleration" : {
+          "vertical" : 1
+        }
+      },
+      "if" : {
+        "device" : {
+          "productName" : "Expert Wireless TB",
+          "productID" : "0x8018",
+          "category" : "mouse",
+          "vendorID" : "0x47d"
+        }
+      }
+    },
+    {
+      "scrolling" : {
+        "reverse" : {
+          "vertical" : true
+        }
+      },
+      "if" : {
+        "device" : {
+          "productName" : "SlimBlade Pro",
+          "productID" : "0x80d4",
+          "category" : "mouse",
+          "vendorID" : "0x47d"
+        }
+      }
+    }
+  ],
+  "$schema" : "https:\/\/schema.linearmouse.app\/0.10.0"
+}
