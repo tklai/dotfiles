@@ -1,14 +1,7 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
-
 msg_hr()      { echo "=========================================="; }
 msg_error()   { echo -e "$(tput setaf 1)[ERROR]$(tput sgr0) $*"; }
 msg_success() { echo -e "$(tput setaf 2)[SUCCESS]$(tput sgr0) $*"; }
 msg_warning() { echo -e "$(tput setaf 3)[WARNING]$(tput sgr0) $*"; }
 msg_info()    { echo -e "$(tput setaf 4)[INFO]$(tput sgr0) $*"; }
-
-kwriteconfig6 --file "${HOME}/.config/klaunchrc" --group 'BusyCursorSettings' --key 'Bouncing' 'false'
-kwriteconfig6 --file "${HOME}/.config/klaunchrc" --group 'FeedbackStyle' --key 'BusyCursor' 'false'
-
-msg_success "KDE configured"

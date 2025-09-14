@@ -1,31 +1,33 @@
 #!/bin/bash
 
+set -euo pipefail
+
+msg_hr()      { echo "=========================================="; }
+msg_error()   { echo -e "$(tput setaf 1)[ERROR]$(tput sgr0) $*"; }
+msg_success() { echo -e "$(tput setaf 2)[SUCCESS]$(tput sgr0) $*"; }
+msg_warning() { echo -e "$(tput setaf 3)[WARNING]$(tput sgr0) $*"; }
+msg_info()    { echo -e "$(tput setaf 4)[INFO]$(tput sgr0) $*"; }
+
 AUR_HELPER="$(echo ${AUR_HELPER:-'paru'} | tr '[:upper:]' '[:lower:]')"
 
-error="$(tput setaf 1)[ERROR]$(tput sgr0)"
-success="$(tput setaf 2)[SUCCESS]$(tput sgr0)"
-warning="$(tput setaf 3)[WARNING]$(tput sgr0)"
-info="$(tput setaf 4)[INFO]$(tput sgr0)"
-
-# Check it is ArchLinux and exit the script if it is not
-if [ ! -f /etc/arch-release ]; then
-    echo ""
-    echo "$error This script is only for ArchLinux."
-    echo ""
+# Check it is ArchLinux and exit if not
+if [[ ! -f /etc/arch-release ]]; then
+    msg_error "This script is only for ArchLinux."
+    echo
     exit 1
 fi
 
-# Prompt the user to enter the password for further sudo use
-echo ""
-echo "Please enter your password for sudo use."
-echo ""
+msg_info "You may get a sudo prompt here. Please enter your password if prompted."
 sudo -v
 
-echo ""
-echo "$info Adjust pacman configurations before installing packages..."
-echo ""
+echo
+msg_info "Adjust pacman configurations before installing packages..."
 sudo sed -ie 's/#Color/Color/' /etc/pacman.conf
-sudo sed -ie 's/#ParallelDownloads/ParallelDownloads/' /etc/pacman.conf
+sudo sed -ie '/Color/a ILoveCandy' /etc/pacman.conf
+sudo sed -ie 's/#VerbosePkgLists/VerbosePkgLists/' /etc/pacman.conf
+
+# This should be enabled in recent archinstall settings
+# sudo sed -ie 's/#ParallelDownloads/ParallelDownloads/' /etc/pacman.conf
 
 essentials=(
     # System
@@ -38,7 +40,6 @@ essentials=(
     # Fuzzy Finders
     ripgrep
     fzf
-    fzy
 
     # Essentials
     fastfetch
@@ -51,7 +52,7 @@ essentials=(
     gitui
     lazygit
     python
-    7zip
+    p7zip
     # zip
     unzip
     stow
@@ -64,6 +65,7 @@ essentials=(
     vi
     vim
     neovim
+    nano
 
     # Useful
     aria2
@@ -75,6 +77,7 @@ fonts=(
     noto-fonts-emoji
     noto-fonts-extra
     ttf-jetbrains-mono-nerd
+    ttf-cascadia-mono-nerd
 )
 
 guis=(
@@ -82,9 +85,9 @@ guis=(
     flatpak
 
     # Terminal
-    ghostty
+    # ghostty
     # kitty
-    # wezterm
+    wezterm
 
     # Browser
     firefox
@@ -107,46 +110,39 @@ aurs=(
 )
 
 # Update package list
-echo ""
-echo "$info Updating package list..."
-echo ""
+echo
+msg_info "Updating package list..."
 sudo pacman -Sy
 
 # Insatll base development tools
-echo ""
-echo "$info Insatlling base development tools..."
-echo ""
+echo 
+msg_info "Insatlling base development tools..."
 sudo pacman -S --needed base-devel git
 
 # Install essential packages
-echo ""
-echo "$info Installing essential packages..."
-echo ""
+echo
+msg_info "Installing essential packages..."
 sudo pacman -S --needed ${essentials[@]}
 
 # Install fonts
-echo ""
-echo "$info Installing fonts..."
-echo ""
+echo
+msg_info "Installing fonts..."
 sudo pacman -S --needed ${fonts[@]}
 
 # Install GUI packages
-echo ""
-echo "$info Installing GUI packages..."
-echo ""
+echo
+msg_info "Installing GUI packages..."
 sudo pacman -S --needed ${guis[@]}
 
 # AUR Helper
 if [[ "$AUR_HELPER" == "yay" ]]; then
     if [ -x "$(command -v yay)" ]; then
-        echo ""
-        echo "$info yay is installed."
-        echo ""
+        echo
+        msg_info "yay is installed."
     else
         # Install yay
-        echo ""
-        echo "$info Installing yay (yay-bin)..."
-        echo ""
+        echo
+        msg_info "Installing yay (yay-bin)..."
         cd /tmp
         git clone --depth=1 https://aur.archlinux.org/yay-bin.git
         cd yay-bin
@@ -154,14 +150,12 @@ if [[ "$AUR_HELPER" == "yay" ]]; then
     fi
 else
     if [ -x "$(command -v paru)" ]; then
-        echo "" 
-        echo "$info paru is installed."
-        echo ""
+        echo 
+        msg_info "paru is installed."
     else 
         # Install paru
-        echo ""
-        echo "$info Installing paru (paru-bin)..."
-        echo ""
+        echo
+        msg_info "Installing paru (paru-bin)..."
         cd /tmp
         git clone --depth=1 https://aur.archlinux.org/paru-bin.git
         cd paru-bin
@@ -170,62 +164,57 @@ else
 fi
 
 # Install GUI packages
-echo ""
-echo "$info Installing AUR packages..."
-echo ""
-sudo pacman -S --needed ${aurs[@]}
+echo
+msg_info "Installing AUR packages..."
+$AUR_HELPER -S --needed ${aurs[@]}
 
 # Check r8168 is required for the network card
 if [[ -n "$(lspci | grep -i ethernet | grep -i realtek | grep -i 8168)" ]]; then
-    echo ""
-    echo "$info Installing r8168 for the network card..."
-    echo ""
+    echo
+    msg_info "Installing r8168 for the network card..."
+    echo
     sudo pacman -S --needed r8168
     sudo echo "blacklist r8169" > /etc/modprobe.d/blacklist_r8169.conf
     sudo mkinitcpio -p linux
 fi
 
-
 # Fix systemd-boot menu resolution
 # Seems fixed in recent systemd-boot, previously need to add "console-mode keep" to /boot/loader/loader.conf
-# echo ""
-# echo "$info Fix systemd-boot boot menu screen resolution..."
-# echo ""
+# echo
+# msg_info "Fix systemd-boot boot menu screen resolution..."
 # sudo echo "console-mode keep" >> /boot/loader/loader.conf
 
 # Install plymouth
-# echo ""
-# echo "$info Installing plymouth..."
-# echo ""
+# echo
+# msg_info "Installing plymouth..."
 # sudo pacman -S plymouth
+# 
 # grep -qE ' ?plymouth ?' /etc/mkinitcpio.conf
 # if [ $? -ne 0 ]; then
-#     echo ""
-#     echo "$info Adding plymouth to mkinitcpio hooks..."
-#     echo ""
+#     echo
+#     msg_info "Adding plymouth to mkinitcpio hooks..."
 #     sudo sed -ie 's/HOOKS=\([^)]*\)/& plymouth/' /etc/mkinitcpio.conf
 # fi
 # # Only add `splash` to non-fallback entries
 # sudo find /boot/loader/entries/ -type f -name "*linux.conf" -exec sed -i '/^options /s/$/ quiet splash/' {} \;
-# echo ""
-# echo "$info Rebuilding initrd..."
-# echo ""
+#
+# echo
+# msg_info "Rebuilding initrd..."
 # sudo mkinitcpio -P
 
 # Install ly
-echo ""
-echo "$info Installing ly..."
-echo ""
-sudo pacman -S --needed ly
-sudo find /boot/loader/entries/ -type f -name "*linux*.conf" -exec sed -i '/^options /s/$/ quiet/' {} \;
+# echo
+# msg_info "Installing ly..."
+# echo
+# sudo pacman -S --needed ly
+# sudo find /boot/loader/entries/ -type f -name "*linux*.conf" -exec sed -i '/^options /s/$/ quiet/' {} \;
 
-echo ""
-echo "$info Checking if KDE installed..."
+echo
+msg_info "Checking if KDE installed..."
 sudo pacman -Qi plasma-desktop > /dev/null
 if [ $? -eq 0 ]; then
-    echo ""
-    echo "$info KDE installed."
-    echo ""
+    echo
+    msg_info "KDE installed."
 
     kde=(
         # Pacman
@@ -234,27 +223,25 @@ if [ $? -eq 0 ]; then
         ksshaskpass
 
         # AUR
-        konsave
+        # konsave
     )
 
-    echo ""
-    echo "$info Installing remaining KDE applications..."
-    echo ""
+    echo
+    msg_info "Installing remaining KDE applications..."
     $AUR_HELPER -S --needed ${kde[@]}
 
     mkdir -p $HOME/.config/environment.d
     printf "SSH_ASKPASS=%s\nSSH_ASKPASS_REQUIRE=prefer\n" "$(which ksshaskpass)" | tee $HOME/.config/environment.d/ssh_askpass.conf
+
+    $(dirname "$0")/desktop/kde/config.sh
 else
-    echo ""
-    echo "$info KDE not installed."
-    echo ""
+    echo
+    msg_info "KDE not installed."
 fi
 
-echo ""
-echo "$info Enabling ssh-agent with systemd..."
-echo ""
-sudo systemctl --user enable --now ssh-agent
+echo
+msg_info "Enabling ssh-agent with systemd..."
+systemctl --user enable --now ssh-agent
 
-echo ""
-echo "$success All done!"
-echo ""
+echo
+msg_success "All done!"
