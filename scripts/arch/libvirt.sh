@@ -29,31 +29,12 @@ echo "$info Installing libvirt and virt-manager..."
 echo $hr
 
 packages=(
-    libvirt       # VM server
-    virt-manager  # VM client
-    qemu          # Hypervisor
-    edk2-ovmf     # Enables UEFI support
-    dnsmasq       # For NAT/DHCP networking
-
-    # Spice
-    qemu-ui-spice-core
-    qemu-ui-spice-app
-
-    # Video drivers
-    qemu-hw-display-virtio-gpu
-    qemu-hw-display-virtio-gpu-gl
-    qemu-hw-display-virtio-gpu-pci
-    qemu-hw-display-virtio-gpu-pci-gl
-    qemu-hw-display-virtio-vga
-    qemu-hw-display-virtio-vga-gl
-
-    # Sound
-    qemu-audio-alsa
-    qemu-audio-dbus
-    qemu-audio-pipewire
-    qemu-audio-sdl
-    qemu-audio-spice
+    virt-manager    # VM client
+    # libvirt       # VM server (will be installed with virt-manager)
+    qemu-desktop    # Hypervisor
+    dnsmasq         # Networking for NAT
 )
+
 sudo pacman -S --needed ${packages[@]}
 
 # libvirtd uses polkit or user groups by default. Just for references.
