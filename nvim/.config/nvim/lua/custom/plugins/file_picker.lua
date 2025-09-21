@@ -12,11 +12,11 @@ return {
       { "<leader>dS", "<cmd>FzfLua lsp_live_workspace_symbols<cr>" },
       { "<leader>vh", "<cmd>FzfLua help_tags<cr>" },
     },
-    opts = function(_, opts)
+    config = function()
       local fzf = require("fzf-lua")
       local actions = fzf.actions
 
-      return {
+      fzf.setup({
         fzf_colors = true,
         fzf_opts = {
           ["--no-scrollbar"] = true,
@@ -55,7 +55,9 @@ return {
             ["ctrl-x"] = actions.file_split,
           },
         },
-      }
+      })
+
+      fzf.register_ui_select();
     end,
   },
 }

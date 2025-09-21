@@ -79,6 +79,7 @@ return {
   },
   {
     "rmagatti/goto-preview",
+    enabled = false,
     event = "VeryLazy",
     keys = {
       {
@@ -87,6 +88,14 @@ return {
           require("goto-preview").goto_preview_definition()
         end,
       },
+    },
+    config = true,
+  },
+  {
+    "carbon-steel/detour.nvim",
+    event = "VeryLazy",
+    keys = {
+      { "<M-Space>", "<CMD>DetourCurrentWindow<CR>" },
     },
     config = true,
   },

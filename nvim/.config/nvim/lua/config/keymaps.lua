@@ -13,6 +13,27 @@ inoremap("jj", "<ESC>", { desc = "Escape" })
 -- No more highlight after search please
 nnoremap("<ESC>", "<cmd>nohlsearch<CR>", { silent = true, desc = "Disable highlight search on escape" })
 
+-- Close?
+nnoremap("<M-q>", function ()
+  local buffers = vim.fn.getbufinfo({buflisted = 1})
+  local windows = vim.api.nvim_list_wins()
+
+  if #buffers > 1 and #windows == 1 then
+    vim.cmd(':bd')
+
+    return;
+  end
+
+  if #buffers == 1 and #windows > 1 then
+    vim.cmd(':q')
+
+    return
+  end
+
+  vim.notify('Buffers: ' .. #buffers .. '. Windows: ' .. #windows, vim.log.levels.DEBUG)
+  vim.notify('What should I do?', vim.log.levels.INFO)
+end , { desc = "Close pane" })
+
 -- Window navigation
 nnoremap("<C-h>", "<C-w>h", { desc = "Move cursor to the left window" })
 nnoremap("<C-j>", "<C-w>j", { desc = "Move cursor to the lower window" })
