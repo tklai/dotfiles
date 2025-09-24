@@ -22,6 +22,7 @@ return {
           ["--no-scrollbar"] = true,
         },
         defaults = {
+          default = vim.fn.exepath("bat") and "bat" or "cat",
           formatter = "path.dirname_first",
         },
         winopts = {
@@ -29,7 +30,7 @@ return {
           row = 1,
           col = 0,
           width = 1,
-          height = 0.3,
+          height = 0.4,
           backdrop = 100,
           preview = {
             title = false,
