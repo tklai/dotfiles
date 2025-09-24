@@ -61,7 +61,7 @@ return {
           -- "gopls",
           "html",
           -- "phpactor",
-          "psalm",
+          -- "psalm",
           "intelephense",
           "jsonls",
           "rust_analyzer",
