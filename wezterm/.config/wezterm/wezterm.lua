@@ -12,9 +12,9 @@ config.font = wezterm.font_with_fallback({
   -- {
   --   family = "KodeMono Nerd Font",
   -- },
-  -- {
-  --   family = "DepartureMono Nerd Font",
-  -- },
+  {
+    family = "DepartureMono Nerd Font",
+  },
   {
     family = "CaskaydiaMono Nerd Font",
   },
@@ -85,9 +85,15 @@ config.window_padding = {
 -- config.color_scheme = "Everforest Light (Medium)"
 
 -- Toast
-config.color_scheme = "Toast"
+-- config.color_scheme = "Toast"
 
 -- Rose Pine Dawn
-config.color_scheme = "rose-pine-dawn"
+-- config.color_scheme = "rose-pine-dawn"
+
+-- E-ink
+config.color_scheme = "E-ink (Light)"
+
+-- Zenwritten
+config.color_scheme = "zenwritten_light"
 
 return config
