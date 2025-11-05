@@ -1,0 +1,27 @@
+# Niri
+# dunst
+# fuzzel
+# hypridle
+# hyprlock
+# niri
+# swww
+# waybar
+
+# Must-have
+@development-tools
+btop
+fastfetch
+git
+git-delta
+htop
+lazygit
+neovim
+p7zip
+p7zip-plugins
+pavucontrol
+stow
+tmux
+unrar
+vim
+wezterm
+zsh

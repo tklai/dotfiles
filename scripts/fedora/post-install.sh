@@ -1,69 +1,32 @@
 #!/usr/bin/env bash
 
-set -x
+set -xe
 
 sudo -v
 
+install_packages ()
+{
+	sudo dnf install --skip-unavailable $@
+}
+
 CHASSIS=$(hostnamectl chassis)
 
-# Remove libreoffice
-sudo dnf remove @libreoffice
-sudo dnf remove libreoffice-core
+mapfile -t copr_repos < <(grep -v '^#' "./packages/copr.repos" | grep -v '^$')
+for repo in $copr_repos; do sudo dnf copr enable $repo; done
 
-# Remove unwanted games
-sudo dnf remove kmahjongg kmines kpat
+mapfile -t remove_packages < <(grep -v '^#' "./packages/remove.packages" | grep -v '^$')
+if [ ${#remove_packages[@]} -ne 0 ]; then
+	sudo dnf remove "${remove_packages[@]}"
+fi
 
-sudo dnf install @development-tools
-
-sudo dnf copr enable solopasha/hyprland
-sudo dnf copr enable wezfurlong/wezterm-nightly
-
-# PACKAGES_NIRI=(
-#     niri
-#     dunst
-#     fuzzel
-#     waybar
-#
-#     hypridle
-#     hyprlock
-#     swww
-# )
-#
-# sudo dnf install --skip-unavailable ${PACKAGES_NIRI[@]}
-
-PACKAGES_DESKTOP=(
-    # Must-have
-    git
-    lazygit
-    stow
-    tmux
-    zsh
-    p7zip
-    p7zip-plugins
-    unrar
-    vim     # Not installed by default
-    neovim
-    wezterm
-
-    # IME
-    ibus-cangjie
-
-    # Monitoring
-    htop
-    btop
-    fastfetch
-
-    # Hardware Controls
-    blueman
-    pavucontrol
-)
-
-sudo dnf install --skip-unavailable ${PACKAGES_DESKTOP[@]}
-
-PACKAGES_LAPTOP=(
-    brightnessctl
-)
+mapfile -t generic_packages < <(grep -v '^#' "./packages/generic.packages" | grep -v '^$')
+if [ ${#generic_packages[@]} -ne 0 ]; then
+	install_packages ${generic_packages[@]}
+fi
 
 if [ $CHASSIS == 'laptop' ]; then
-    sudo dnf install ${PACKAGES_LAPTOP[@]}
+	mapfile -t laptop_packages < <(grep -v '^#' "./packages/laptop.packages" | grep -v '^$')
+	if [ ${#laptop_packages[@]} -ne 0 ]; then
+		install_packages ${laptop_packages[@]}
+	fi
 fi
