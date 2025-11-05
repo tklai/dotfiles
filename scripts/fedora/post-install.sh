@@ -30,3 +30,5 @@ if [ $CHASSIS == 'laptop' ]; then
 		install_packages ${laptop_packages[@]}
 	fi
 fi
+
+sudo dnf autoremove
