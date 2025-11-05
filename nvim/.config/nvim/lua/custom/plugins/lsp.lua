@@ -52,26 +52,26 @@ return {
       local mason_lspconfig = require("mason-lspconfig")
       mason_lspconfig.setup({
         ensure_installed = {
-          "bashls",
-          "cssls",
-          -- "diagnosticls",
-          "dockerls",
-          "emmet_ls",
-          "eslint",
-          -- "gopls",
-          "html",
-          -- "phpactor",
-          -- "psalm",
-          "intelephense",
-          "jsonls",
-          "rust_analyzer",
-          "lua_ls",
-          "sqlls",
-          "svelte",
-          "ts_ls",
-          "vuels",
-          "yamlls",
-          "zls",
+          -- "bashls",
+          -- "cssls",
+          -- -- "diagnosticls",
+          -- "dockerls",
+          -- "emmet_ls",
+          -- "eslint",
+          -- -- "gopls",
+          -- "html",
+          -- -- "phpactor",
+          -- -- "psalm",
+          -- "intelephense",
+          -- "jsonls",
+          -- "rust_analyzer",
+          -- "lua_ls",
+          -- "sqlls",
+          -- "svelte",
+          -- "ts_ls",
+          -- "vuels",
+          -- "yamlls",
+          -- "zls",
         },
         handlers = {
           function(server_name)
@@ -97,11 +97,11 @@ return {
 
       require("mason-tool-installer").setup({
         ensure_installed = {
-          "stylua",
-          "php-cs-fixer",
-          "prettierd",
-          "sql-formatter",
-          "jq",
+          -- "stylua",
+          -- "php-cs-fixer",
+          -- "prettierd",
+          -- "sql-formatter",
+          -- "jq",
         },
       })
 
