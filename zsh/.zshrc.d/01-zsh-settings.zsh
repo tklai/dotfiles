@@ -36,18 +36,19 @@ function git_status() {
     /^[[:space:]]+[A-Z]/ { count += gsub(/[[:upper:]]/, "", $1) }
     END { if (count > 0) printf("%s *%d", branch, count); else printf("%s", branch)}
     ')
+
     if [ "$GITSTATUS" != "" ]; then
         echo " $GITSTATUS"
     fi
 }
 
 function precmd() {
-  if [ "$NEW_LINE_BEFORE_PROMPT" -eq 1 ]; then
-    echo ""
-  else
-    NEW_LINE_BEFORE_PROMPT=1
-  fi
+    if [ "$NEW_LINE_BEFORE_PROMPT" -eq 1 ]; then
+        echo ""
+    else
+        NEW_LINE_BEFORE_PROMPT=1
+    fi
 
-  PROMPT="%F{204}%n%f@%F{244}%M%f:%F{28}%(5~|%-1~/…/%3~|%4~)%f $(git_status) "$'\n'"%F{250}(%?)%f %# "
-  RPROMPT="[%D{%Y-%m-%d %H:%M:%S}]"
+    PROMPT="%F{204}%n%f@%F{244}%M%f:%F{28}%(5~|%-1~/…/%3~|%4~)%f $(git_status) "$'\n'"%F{250}(%?)%f %# "
+    RPROMPT="[%D{%Y-%m-%d %H:%M:%S}]"
 }
