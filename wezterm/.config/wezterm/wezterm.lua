@@ -7,11 +7,14 @@ end
 
 local config = wezterm.config_builder()
 
+if wezterm.target_triple == 'x86_64-unknown-linux-gnu' then
+  config.font_size = 10.0
+else
+  config.font_size = 12.0
+end
+
 config.audible_bell = "Disabled"
 config.font = wezterm.font_with_fallback({
-  -- {
-  --   family = "KodeMono Nerd Font",
-  -- },
   {
     family = "DepartureMono Nerd Font",
   },
