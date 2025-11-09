@@ -40,70 +40,13 @@ return {
       },
     },
     config = function()
-      local lspconfig = require("lspconfig")
-
       require("mason").setup()
+      -- Check external package
+      require("mason-lspconfig").setup()
 
       vim.opt.rtp:prepend(vim.fn.stdpath("data") .. "/mason/bin")
 
-      local servers = vim.F.npcall(require, "config.lsp_servers") or {}
-
-      -- Check external package
-      local mason_lspconfig = require("mason-lspconfig")
-      mason_lspconfig.setup({
-        ensure_installed = {
-          -- "bashls",
-          -- "cssls",
-          -- -- "diagnosticls",
-          -- "dockerls",
-          -- "emmet_ls",
-          -- "eslint",
-          -- -- "gopls",
-          -- "html",
-          -- -- "phpactor",
-          -- -- "psalm",
-          -- "intelephense",
-          -- "jsonls",
-          -- "rust_analyzer",
-          -- "lua_ls",
-          -- "sqlls",
-          -- "svelte",
-          -- "ts_ls",
-          -- "vuels",
-          -- "yamlls",
-          -- "zls",
-        },
-        handlers = {
-          function(server_name)
-            local server = servers[server_name] or {}
-
-            local capabilities = vim.lsp.protocol.make_client_capabilities()
-            -- local cmp_lsp = vim.F.npcall(require, "cmp_nvim_lsp")
-            -- if cmp_lsp then
-            --   capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
-            -- end
-
-            local blink_cmp = vim.F.npcall(require, "blink.cmp")
-            if blink_cmp then
-              capabilities = blink_cmp.get_lsp_capabilities(capabilities)
-            end
-
-            server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-
-            lspconfig[server_name].setup(server)
-          end,
-        },
-      })
-
-      require("mason-tool-installer").setup({
-        ensure_installed = {
-          -- "stylua",
-          -- "php-cs-fixer",
-          -- "prettierd",
-          -- "sql-formatter",
-          -- "jq",
-        },
-      })
+      require("mason-tool-installer").setup({})
 
       local definition_on_list = function(split_cmd)
         split_cmd = split_cmd or "vsplit"
