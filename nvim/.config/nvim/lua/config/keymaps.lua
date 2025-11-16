@@ -64,7 +64,7 @@ nnoremap("<C-i>", "<C-i>zz")
 nnoremap("gf", ":edit <cfile><CR>", { desc = "Allow opening non-existent file" })
 
 -- Disable Macros
--- nnoremap("q", "<Nop>", { desc = "Macros disabled" })
+nnoremap("q", "<Nop>", { desc = "Macros disabled" })
 
 -- Disable Ex-mode
 nnoremap("Q", "<Nop>", { desc = "Ex-mode disabled" })
