@@ -23,10 +23,18 @@ stow-base:
 	stow lazygit
 	stow wezterm
 
-.PHONY: stow-niri
-stow-niri:
-	stow niri
-	stow hypr
+.PHONY: stow-tiling-base
+stow-tiling-base:
+	stow kanshi
 	stow fuzzel
 	stow dunst
 	stow waybar
+
+.PHONY: stow-hypr
+stow-hypr:
+	stow hypr
+
+.PHONY: stow-niri
+stow-niri:
+	make stow-hypr
+	stow niri

@@ -1,0 +1,38 @@
+output "Dell Inc. DELL U2723QE *" {
+    scale 1.5
+
+    # Horizontally Aligned
+    position -320,-1440
+    alias $MONITOR_HOME
+}
+
+output "BOE 0x0964 *" {
+    scale 1
+    position 0,0
+    alias $INTERNAL
+}
+
+# Home Combination
+profile extended {
+    output $MONITOR_HOME enable
+    output $INTERNAL enable
+}
+
+profile clamshell {
+    output $MONITOR_HOME enable
+    output $INTERNAL disable
+}
+
+profile laptop {
+    output $MONITOR_HOME disable
+    output $INTERNAL enable
+}
+
+# Fallback profiles
+profile extended {
+    output $INTERNAL enable
+}
+
+profile laptop {
+    output $INTERNAL enable
+}
