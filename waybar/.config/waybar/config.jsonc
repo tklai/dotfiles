@@ -3,20 +3,24 @@
     "position": "top", // Waybar at the bottom of your screen
     "height": 28, // Waybar height
     // Choose the order of the modules
-    "modules-left": ["niri/workspaces"],
+    "modules-left": ["hyprland/workspaces"],
     "modules-center": ["clock"],
     "modules-right": ["pulseaudio", "network", "bluetooth", "cpu", "battery", "tray"],
-    "niri/workspaces": {
-        "format": "{icon}"
+    "hyprland/workspaces": {
+        "format": "{name} {icon}",
+        "format-icons": {
+            "active": "",
+            "default": ""
+        },
     },
     "tray": {
         // "icon-size": 21,
         "spacing": 10
     },
     "clock": {
-	"format": "{:%A %d %H:%M}",
+        "format": "{:%A %d %H:%M}",
         "format-alt": "{:%A %Y-%m-%d}",
-	"tooltip": false
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
     },
     "cpu": {
         "format": "{usage}% "
@@ -34,16 +38,16 @@
         "format-icons": ["", "", "", "", ""]
     },
     "network": {
-        "format-wifi": "{signalStrength}% ",
-        "format-ethernet": "Cable ",
-        "format-disconnected": "Disconnected ⚠",
-        "tooltip-format": "IP: {ipaddr}/{cidr}\nGateway: {gwaddr}\n==========\nInterface: {ifname}\nSSID: {essid} ({signaldBm} dBm)",
+        "interval": 10,
+        "format-wifi": " ",
+        "format-ethernet": "󰈀 ",
+        "format-disconnected": "",
+        "tooltip-format": "IP: {ipaddr}/{cidr}\nGateway: {gwaddr}\n==========\nInterface: {ifname}\nSSID: {essid} ({signaldBm}dBm, {signalStrength}%)",
     },
     "bluetooth": {
         "format": "",
         "format-disabled": "󰂲",
-        "format-connected": " {device_alias}",
-        "format-connected-battery": " {device_alias} {device_battery_percentage}%",
+        "format-connected": "󰂱",
         // "format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device
         "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
         "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
