@@ -2,7 +2,7 @@
 
 set -xe
 
-cat <<- EOF > /etc/yum.repos.d/microsoft-visual-studio-code.repo
+sudo tee /etc/yum.repos.d/microsoft-visual-studio-code.repo <<EOF
 [microsoft-visual-studio-code]
 name=Microsoft Visual Studio Code
 baseurl=https://packages.microsoft.com/yumrepos/vscode
