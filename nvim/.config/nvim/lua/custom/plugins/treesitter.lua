@@ -2,42 +2,131 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     lazy = false,
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter-context",
-      {
-        "nvim-treesitter/nvim-treesitter-textobjects",
-        branch = "main",
-        config = true,
-      },
-    },
+    branch = "main",
+    version = false,
     build = ":TSUpdate",
     config = function()
-      require("nvim-treesitter").setup({
-        auto_install = true,
-        ensure_installed = {
-          "bash",
-          "css",
-          "html",
-          "javascript",
-          "json",
-          "lua",
-          "markdown",
-          "php_only",
-          "regex",
-          "scss",
-          "tsx",
-          "typescript",
-          "vim",
-          "vimdoc",
-        },
-        highlight = { enable = true },
-        indent = { enable = true },
+      local ts = require('nvim-treesitter')
+      local group = vim.api.nvim_create_augroup('TreesitterSetup', { clear = true })
+
+      -- Enable treesitter for a buffer
+      local function enable_treesitter(buf, lang)
+        if not vim.api.nvim_buf_is_valid(buf) then
+          return
+        end
+
+        print(vim.inspect({buf, lang}))
+
+
+        local ok = pcall(vim.treesitter.start, buf, lang)
+        if ok then
+          vim.bo[buf].syntax = 'on'
+          vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+          for _, win in ipairs(vim.api.nvim_list_wins()) do
+            if vim.api.nvim_win_get_buf(win) == buf and vim.api.nvim_win_is_valid(win) then
+              vim.wo[win].foldmethod = 'expr'
+              vim.wo[win].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+            end
+          end
+        end
+      end
+
+      -- Install core parsers after lazy.nvim finishes loading all plugins
+      vim.api.nvim_create_autocmd('User', {
+        group = group,
+        pattern = 'LazySync',
+        once = true,
+        desc = 'Install core treesitter parsers',
+        callback = function()
+          ts.install({
+            "bash",
+            "blade",
+            "caddy",
+            "c",
+            "comment",
+            "css",
+            "csv",
+            "dockerfile",
+            "editorconfig",
+            "git_config",
+            "git_rebase",
+            "gitattributes",
+            "gitcommit",
+            "gitignore",
+            "html",
+            "http",
+            "javascript",
+            "jsdoc",
+            "json",
+            "json5",
+            "jsonc",
+            "lua",
+            "luadoc",
+            "make",
+            "markdown",
+            "markdown_inline",
+            "nix",
+            "php_only",
+            "phpdoc",
+            "python",
+            "query",
+            "regex",
+            "scss",
+            "tmux",
+            "toml",
+            "tsx",
+            "typescript",
+            "vim",
+            "vimdoc",
+            "xml",
+            "yaml",
+          })
+        end,
       })
 
-      require("treesitter-context").setup({
-        multiline_threshold = 2,
+      local ignore_filetypes = {
+        checkhealth = true,
+        lazy = true,
+        mason = true,
+        notify = true,
+        noice = true,
+        qf = true,
+        toggleterm = true,
+      }
+
+      -- Enable treesitter highlighting and indentation on FileType
+      vim.api.nvim_create_autocmd('FileType', {
+        group = group,
+        desc = 'Enable treesitter highlighting and indentation',
+        callback = function(event)
+          if ignore_filetypes[event.match] then
+            return
+          end
+
+          -- Skip treesitter on large files
+          local stats = vim.uv.fs_stat(vim.api.nvim_buf_get_name(event.buf))
+          if vim.api.nvim_buf_line_count(event.buf) > 5000 or (stats and stats.size > 100 * 1024) then
+            return
+          end
+
+          local lang = vim.treesitter.language.get_lang(event.match) or event.match
+          enable_treesitter(event.buf, lang)
+        end,
       })
     end,
+  },
+  {
+    "nvim-treesitter/nvim-treesitter-context",
+    event = "VeryLazy",
+    config = true,
+  },
+  {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    branch = "main",
+    event = "VeryLazy",
+    opts ={
+      multiline_threshold = 2,
+    },
   },
   {
     "Wansmer/treesj",
@@ -51,5 +140,16 @@ return {
     keys = {
       { "<leader>m", "<cmd>TSJToggle<CR>", { desc = "Join / Split" } },
     },
+  },
+  {
+    "chrisgrieser/nvim-origami",
+    event = "VeryLazy",
+    opts = {
+      --
+    },
+    init = function()
+      vim.opt.foldlevel = 99
+      vim.opt.foldlevelstart = 99
+    end,
   },
 }
