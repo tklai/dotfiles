@@ -22,12 +22,23 @@ echo
 msg_info "Installing libvirt and virt-manager..."
 
 packages=(
-    virt-manager    # VM client
+    libvirt         # Base virtualisation library
     qemu-desktop    # Hypervisor
     dnsmasq         # Networking for NAT
+
+    virt-manager    # VM client
 )
 
 sudo pacman -S --needed "${packages[@]}"
+
+if ! pacman -Q firewalld &> /dev/null; then
+    echo
+    msg_info "Firewalld is not found. Fallback to iptables for firewall backend..."
+
+    sudo pacman -S --needed iptables-nft
+
+    echo "firewall_backend = \"iptables\"" | sudo tee -a "/etc/libvirt/network.conf" > /dev/null
+fi
 
 echo
 msg_info "Adding user to group libvirt..."
