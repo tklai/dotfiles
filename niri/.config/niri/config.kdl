@@ -140,9 +140,9 @@ layout {
     }
 }
 
-spawn-at-startup "waybar"
-spawn-at-startup "swww-daemon"
-spawn-at-startup "hypridle"
+spawn-at-startup "ashell"
+spawn-at-startup "awww-daemon"
+// spawn-at-startup "hypridle"
 
 screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 

@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+if pgrep -x "nmtui" > /dev/null; then
+    true
+else
+    xdg-terminal-exec nmtui
+fi
+
+# if pgrep -x "impala" > /dev/null; then
+#     true
+# else
+#     xdg-terminal-exec impala
+# fi

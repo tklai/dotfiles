@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+if pgrep -x "bluetui" > /dev/null; then
+    true
+else
+    xdg-terminal-exec bluetui
+fi
