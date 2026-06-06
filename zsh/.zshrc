@@ -6,14 +6,15 @@ if [ -f /etc/zshrc ]; then
 fi
 
 # User specific environment
-if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
-    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+LOCAL_BIN="$HOME/.local/bin"
+if ! [[ "$PATH" =~ "$LOCAL_BIN:" ]]; then
+    PATH="$LOCAL_BIN:$PATH"
 fi
 
 LOCAL_SCRIPTS="$HOME/.local/scripts"
 if [ -d "${LOCAL_SCRIPTS}" ]; then
-    if ! [[ "$PATH" =~ "$HOME/.local/scripts:" ]]; then
-        PATH="$HOME/.local/scripts:$PATH"
+    if ! [[ "$PATH" =~ "$LOCAL_SCRIPTS:" ]]; then
+        PATH="$LOCAL_SCRIPTS:$PATH"
     fi
 fi
 

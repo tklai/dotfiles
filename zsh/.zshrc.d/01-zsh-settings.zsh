@@ -11,6 +11,12 @@ bindkey -e
 autoload -U select-word-style
 select-word-style bash
 
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey '^x^e' edit-command-line
+
+bindkey ' ' magic-space
+
 ## History
 HISTSIZE=5000
 HISTFILE=~/.zsh_history
