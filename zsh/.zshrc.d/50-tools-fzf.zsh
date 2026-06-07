@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
 
-if [ -x "$(command -v fzf)" ]; then
+if hash fzf 2>/dev/null; then
     eval "$(fzf --zsh)"
 fi

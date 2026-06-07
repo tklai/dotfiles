@@ -1,7 +1,9 @@
 #!/usr/bin/env zsh
 
-autoload -Uz compinit
-compinit
+if [ $LOADED_ZIM -eq 0 ]; then
+    autoload -Uz compinit
+    compinit
+fi
 
 # Z-shell settings
 # Keep Emacs mode in shell. Vi mode breaks sometimes.
@@ -31,7 +33,7 @@ setopt hist_ignore_dups
 setopt hist_find_no_dups
 
 # When the system runs the command longer than REPORTTIME, the shell will print
-# the elasped time.
+# the elapsed time.
 REPORTTIME=60
 TIMEFMT='%J  %*U user %*S system %P cpu (%*E wasted time).'
 

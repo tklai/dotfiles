@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-if [ -x "$(command -v nvim)" ]; then
+if hash nvim 2>/dev/null; then
     export EDITOR=nvim
     export MANPAGER='nvim +Man!'
 

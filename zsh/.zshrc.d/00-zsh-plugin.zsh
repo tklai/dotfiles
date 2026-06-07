@@ -1,6 +1,9 @@
 #!/usr/bin/env zsh
 
-if [ -x "$(command -v git)" ]; then
+ENABLE_ZINIT=0
+LOADED_ZINIT=0
+
+if [ "$ENABLE_ZINIT" -eq 1 ] && hash git 2>/dev/null; then
     ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
     [ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
     [ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
@@ -22,4 +25,8 @@ if [ -x "$(command -v git)" ]; then
     zstyle ':completion:*' menu no
     zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls -1 --color=always $realpath'
     zstyle ':fzf-tab:*' switch-group '[' ']'
+
+    LOADED_ZINIT=1
 fi
+
+export LOADED_ZINIT

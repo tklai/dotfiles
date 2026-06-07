@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-if [ -x "$(command -v docker)" ]; then
+if hash docker 2>/dev/null; then
     alias dcom="docker compose"
 
     # Attach container

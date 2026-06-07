@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-if [ -x "$(command -v zoxide)" ]; then
+if hash zoxide 2>/dev/null; then
     eval "$(zoxide init zsh)"
     alias cd="z"
 fi

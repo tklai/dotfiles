@@ -2,10 +2,8 @@
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
     # Homebrew
-    if [[ -x "$(command -v /opt/homebrew/bin/brew)" && "$(arch)" = "arm64" ]]; then
+    if [[ -x /opt/homebrew/bin/brew ]]; then
         eval "$(/opt/homebrew/bin/brew shellenv)"
-    elif [[ -x "$(command -v /usr/local/bin/brew)" && "$(arch)" = "i386" ]]; then
-        eval "$(/usr/local/bin/brew shellenv)"
     fi
 
     if [ -d "$HOMEBREW_PREFIX/opt/ruby/bin" ]; then

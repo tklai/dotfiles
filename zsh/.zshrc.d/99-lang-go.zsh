@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-if [ -x "$(command -v go)" ]; then
+if hash go 2>/dev/null; then
     GOPATH=$HOME/go/bin
     if [ -d "$GOPATH" ]; then
         PATH="$GOPATH:$PATH"
