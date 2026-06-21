@@ -1,4 +1,6 @@
 [tools]
 aws-cli = { version = "latest", symlink_bins = "true" }
+helm = "latest"
+kubectl = "latest"
 node = "24"
 pnpm = "11"
