@@ -9,3 +9,12 @@ alias ll="$EXECUTABLE_LS -l"
 alias la="$EXECUTABLE_LS -la"
 alias lt="$EXECUTABLE_LS --sort=time"
 alias lat="$EXECUTABLE_LS -la --sort=time"
+
+runenv() {
+    if [ -f .env ]; then
+        (export $(grep -v "^#" .env | xargs) && env $(envsubst < .env | xargs) "$@")
+    else
+        echo "Notice: .env not found. Running command without environment injection."
+        "$@"
+    fi
+}
