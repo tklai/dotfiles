@@ -12,7 +12,7 @@ alias lat="$EXECUTABLE_LS -la --sort=time"
 
 runenv() {
     if [ -f .env ]; then
-        (export $(grep -v "^#" .env | xargs) && env $(envsubst < .env | xargs) "$@")
+        env $(grep -v '^#' .env | envsubst | xargs) "$@"
     else
         echo "Notice: .env not found. Running command without environment injection."
         "$@"
