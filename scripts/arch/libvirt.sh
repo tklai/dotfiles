@@ -22,31 +22,30 @@ echo
 msg_info "Installing libvirt and virt-manager..."
 
 packages=(
-    libvirt         # Base virtualisation library
     qemu-desktop    # Hypervisor
-    dnsmasq         # Networking for NAT
-
     virt-manager    # VM client
+    swtpm           # Software TPM for Windows
 )
 
 sudo pacman -S --needed "${packages[@]}"
 
-if ! pacman -Q firewalld &> /dev/null; then
-    echo
-    msg_info "Firewalld is not found. Fallback to iptables for firewall backend..."
-
-    sudo pacman -S --needed iptables-nft
-
-    echo "firewall_backend = \"iptables\"" | sudo tee -a "/etc/libvirt/network.conf" > /dev/null
-fi
+# Firewall Handling
+echo
+msg_info "Set firewall backend to iptables"
+echo 'firewall_backend = "iptables"' | sudo tee -a /etc/libvirt/network.conf
 
 echo
 msg_info "Adding user to group libvirt..."
 sudo usermod -aG libvirt "$USER"
 
 echo
-msg_info "Enabling libvirtd service..."
-sudo systemctl enable libvirtd
+msg_info "Enabling libvirtd socket for QEMU VMs..."
+sudo systemctl enable --now libvirtd.socket
+
+echo
+msg_info "Bring up VM network on boot"
+sudo virsh net-autostart default
+sudo ufw route allow from 192.168.122.0/24
 
 echo
 msg_success "Installation finished"
