@@ -19,7 +19,7 @@ return {
     config = function(_, opts)
       require("nightfox").setup(opts)
 
-      local palette = require("nightfox.palette").load("nightfox")
+      local palette = require("nightfox.palette").load("nordfox")
 
       local line_number_change_mode = vim.F.npcall(require, "line-number-change-mode")
       if line_number_change_mode ~= nil then

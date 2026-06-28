@@ -9,6 +9,7 @@ return {
       "b0o/schemastore.nvim",
       {
         "stevearc/conform.nvim",
+        enabled = false,
         opts = {
           formatters_by_ft = {
             lua = { "stylua" },

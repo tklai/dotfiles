@@ -73,11 +73,23 @@ return {
     "saghen/blink.cmp",
     dependencies = {
       "rafamadriz/friendly-snippets",
+      "budimanjojo/k8s-snippets",
       "OXY2DEV/markview.nvim",
     },
     version = "*",
     event = "VeryLazy",
     opts = {
+      sources = {
+        providers = {
+          snippets = {
+            opts = {
+              search_paths = {
+                vim.fn.stdpath("data") .. "/lazy/k8s-snippets",
+              }
+            },
+          },
+        },
+      },
       fuzzy = { implementation = "prefer_rust" },
       cmdline = { enabled = false },
       keymap = {
@@ -170,7 +182,7 @@ return {
   },
   {
     "chrisgrieser/nvim-scissors",
-    event = "VeryLazy",
+    cmd = { "ScissorsEditSnippet", "ScissorsAddNewSnippet" },
     opts = {
       snippetDir = snippets_dir,
     },
