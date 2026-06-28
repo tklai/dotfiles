@@ -15,19 +15,16 @@ return {
           return
         end
 
-        print(vim.inspect({buf, lang}))
-
-
         local ok = pcall(vim.treesitter.start, buf, lang)
         if ok then
           vim.bo[buf].syntax = 'on'
           vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-          for _, win in ipairs(vim.api.nvim_list_wins()) do
-            if vim.api.nvim_win_get_buf(win) == buf and vim.api.nvim_win_is_valid(win) then
-              vim.wo[win].foldmethod = 'expr'
-              vim.wo[win].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-            end
-          end
+          -- for _, win in ipairs(vim.api.nvim_list_wins()) do
+          --   if vim.api.nvim_win_get_buf(win) == buf and vim.api.nvim_win_is_valid(win) then
+          --     vim.wo[win].foldmethod = 'expr'
+          --     vim.wo[win].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+          --   end
+          -- end
         end
       end
 
@@ -66,7 +63,7 @@ return {
             "markdown",
             "markdown_inline",
             "nix",
-            "php_only",
+            "php",
             "phpdoc",
             "python",
             "query",

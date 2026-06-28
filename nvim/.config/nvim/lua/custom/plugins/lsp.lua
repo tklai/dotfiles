@@ -103,8 +103,12 @@ return {
           -- vim.keymap.set("n", "sh", vim.lsp.buf.signature_help, { desc = "Show signature help of the function under cursor" })
           -- vim.keymap.set("n", "sd", vim.lsp.buf.hover, { desc = "Show documentation" })
           vim.keymap.set("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Show error" })
-          vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next error" })
-          vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous error" })
+          vim.keymap.set("n", "]d", function()
+            vim.diagnostic.jump({ count = 1, float = true })
+          end, { desc = "Go to next error" })
+          vim.keymap.set("n", "[d", function()
+            vim.diagnostic.jump({ count = 1, float = true })
+          end, { desc = "Go to previous error" })
 
           vim.keymap.set("n", "ca", vim.lsp.buf.code_action, { desc = "Show code actions" })
           vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, { desc = "Go to type definition" })
@@ -117,7 +121,7 @@ return {
           vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Show code actions" })
           vim.keymap.set("n", "<leader>rr", "<CMD>LspRestart<CR>", { desc = "Restart LSP" })
           vim.keymap.set("n", "\\\\", function()
-            local conform = vim.F.npcall(require, "conform")
+            local conform = false -- vim.F.npcall(require, "conform")
             if conform then
               conform.format({ async = true, lsp_fallback = true })
               vim.notify("Formatted code with Conform", vim.log.levels.INFO)
