@@ -72,12 +72,15 @@ return {
   {
     "saghen/blink.cmp",
     dependencies = {
-      "rafamadriz/friendly-snippets",
-      "budimanjojo/k8s-snippets",
-      "OXY2DEV/markview.nvim",
+      { "rafamadriz/friendly-snippets", lazy = true },
+      { "budimanjojo/k8s-snippets", lazy = true },
     },
     version = "*",
-    event = "VeryLazy",
+    lazy = true,
+    event = "InsertEnter",
+    -- keys = {
+    --   { ":", mode = { "n", "v" } },
+    -- },
     opts = {
       sources = {
         providers = {

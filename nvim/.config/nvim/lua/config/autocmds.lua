@@ -127,3 +127,31 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
     end)
   end,
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+    group = augroup("indent_settings"),
+    pattern = {
+        "c",
+        "cpp",
+        "cs",
+        "sh",
+        "php",
+        "python",
+        "rust",
+        "java",
+    },
+    callback = function()
+        vim.opt_local.shiftwidth = 4
+    end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+    group = augroup("keyword_settings"),
+    pattern = {
+        "css",
+        "vue",
+    },
+    callback = function()
+        vim.opt_local.iskeyword:append("-")
+    end,
+})

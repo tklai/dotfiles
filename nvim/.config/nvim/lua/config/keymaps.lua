@@ -70,6 +70,9 @@ vnoremap("q", "<Nop>", { desc = "Macros disabled" })
 -- Disable Ex-mode
 nnoremap("Q", "<Nop>", { desc = "Ex-mode disabled" })
 
+-- Disable marks
+nnoremap("m", "<Nop>", { desc = "Marks disabled" })
+
 -- Buffer Switching
 nnoremap("[b", ":bprevious<CR>", { desc = "Switch to previous buffer" })
 nnoremap("]b", ":bnext<CR>", { desc = "Switch to next buffer" })

@@ -114,28 +114,17 @@ return {
   },
   {
     "nvim-treesitter/nvim-treesitter-context",
-    event = "VeryLazy",
-    config = true,
+    event = { "BufReadPost", "BufNewFile" },
+    opts = {
+      max_lines = 3,
+    }
   },
   {
     "nvim-treesitter/nvim-treesitter-textobjects",
     branch = "main",
-    event = "VeryLazy",
-    opts ={
-      multiline_threshold = 2,
-    },
-  },
-  {
-    "Wansmer/treesj",
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-    },
-    event = "VeryLazy",
+    event = { "BufReadPost", "BufNewFile" },
     opts = {
-      use_default_keymaps = false,
-    },
-    keys = {
-      { "<leader>m", "<cmd>TSJToggle<CR>", { desc = "Join / Split" } },
+      multiline_threshold = 2,
     },
   },
 }

@@ -1,8 +1,12 @@
 return {
   {
-    'echasnovski/mini.nvim',
+    'nvim-mini/mini.nvim',
     version = false,
+    event = "VeryLazy",
     config = function()
+      require('mini.splitjoin').setup({
+        mappings = { toggle = '<leader>m' },
+      })
       require('mini.surround').setup({
         mappings = {
           add = '<leader>sa',

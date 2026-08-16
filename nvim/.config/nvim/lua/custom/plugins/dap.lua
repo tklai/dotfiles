@@ -1,7 +1,11 @@
 return {
   "mfussenegger/nvim-dap",
   -- enabled = false,
-  event = "VeryLazy",
+  keys = {
+    { "<space>b", function() require('dap').toggle_breakpoint() end, desc = "Toggle breakpoint" },
+    { "<space>gb", function() require('dap').run_to_cursor() end, desc = "Run to cursor" },
+    { "<space>gc", function() require('dap').continue() end, desc = "Continue debugger" },
+  },
   dependencies = {
     "nvim-neotest/nvim-nio",
     "theHamsta/nvim-dap-virtual-text",
@@ -20,9 +24,6 @@ return {
     local dap = require("dap")
 
     require("nvim-dap-virtual-text").setup()
-
-    vim.keymap.set("n", "<space>b", dap.toggle_breakpoint)
-    vim.keymap.set("n", "<space>gb", dap.run_to_cursor)
 
     -- vim.keymap.set("n", "<F1>", dap.step_into)
     -- vim.keymap.set("n", "<F2>", dap.step_over)

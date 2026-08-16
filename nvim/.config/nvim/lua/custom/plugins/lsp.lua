@@ -1,11 +1,11 @@
 return {
   {
     "neovim/nvim-lspconfig",
-    event = "BufEnter",
+    event = { 'BufReadPre', 'BufNewFile' },
     dependencies = {
-      "mason-org/mason.nvim",
-      "mason-org/mason-lspconfig.nvim",
-      "WhoIsSethDaniel/mason-tool-installer.nvim",
+      { "mason-org/mason.nvim", opts = {} },
+      { "mason-org/mason-lspconfig.nvim", opts = {} },
+      { "WhoIsSethDaniel/mason-tool-installer.nvim", opts = {} },
       "b0o/schemastore.nvim",
       {
         "stevearc/conform.nvim",
@@ -41,13 +41,7 @@ return {
       },
     },
     config = function()
-      require("mason").setup()
-      -- Check external package
-      require("mason-lspconfig").setup()
-
       vim.opt.rtp:prepend(vim.fn.stdpath("data") .. "/mason/bin")
-
-      require("mason-tool-installer").setup({})
 
       local definition_on_list = function(split_cmd)
         split_cmd = split_cmd or "vsplit"
@@ -84,44 +78,50 @@ return {
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("CustomLspAttach", { clear = true }),
         callback = function(event)
-          vim.keymap.set("n", "gd", function()
+          local map = function(keys, func, options)
+            options = options or  {}
+            local merged_options = vim.tbl_extend("force", { buffer = event.buf }, options)
+
+            vim.keymap.set("n", keys, func, merged_options)
+          end
+
+          map("gd", function()
             vim.lsp.buf.definition()
           end, { desc = "Go to definition" })
-          vim.keymap.set("n", "gdn", function()
+          map("gdn", function()
             vim.lsp.buf.definition()
           end, { desc = "Go to definition" })
-          vim.keymap.set("n", "gdv", function()
+          map("gdv", function()
             vim.lsp.buf.definition({ on_list = definition_on_list() })
           end, { desc = "Go to definition (Split Vertical)" })
-          vim.keymap.set("n", "gdx", function()
+          map("gdx", function()
             vim.lsp.buf.definition({ on_list = definition_on_list("split") })
           end, { desc = "Go to definition (Split Horizontal)" })
 
-          -- vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to declaration" })
-          vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "Go to implementation" })
-          vim.keymap.set("n", "gf", vim.lsp.buf.references, { desc = "Find references" })
-          vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Show hover documentation" })
-          -- vim.keymap.set("n", "sh", vim.lsp.buf.signature_help, { desc = "Show signature help of the function under cursor" })
-          -- vim.keymap.set("n", "sd", vim.lsp.buf.hover, { desc = "Show documentation" })
-          vim.keymap.set("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Show error" })
-          vim.keymap.set("n", "]d", function()
+          -- map("gD", vim.lsp.buf.declaration, { desc = "Go to declaration" })
+          map("gi", vim.lsp.buf.implementation, { desc = "Go to implementation" })
+          map("gf", vim.lsp.buf.references, { desc = "Find references" })
+          map("K", vim.lsp.buf.hover, { desc = "Show hover documentation" })
+          -- map("sh", vim.lsp.buf.signature_help, { desc = "Show signature help of the function under cursor" })
+          -- map("sd", vim.lsp.buf.hover, { desc = "Show documentation" })
+          map("<leader>cd", vim.diagnostic.open_float, { desc = "Show error" })
+          map("]d", function()
             vim.diagnostic.jump({ count = 1, float = true })
           end, { desc = "Go to next error" })
-          vim.keymap.set("n", "[d", function()
+          map("[d", function()
             vim.diagnostic.jump({ count = 1, float = true })
           end, { desc = "Go to previous error" })
 
-          vim.keymap.set("n", "ca", vim.lsp.buf.code_action, { desc = "Show code actions" })
-          vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, { desc = "Go to type definition" })
-          vim.keymap.set(
-            "n",
+          map("ca", vim.lsp.buf.code_action, { desc = "Show code actions" })
+          map("<leader>D", vim.lsp.buf.type_definition, { desc = "Go to type definition" })
+          map(
             "<leader>rn",
             vim.lsp.buf.rename,
             { desc = "Rename the thing under cursor in the buffer" }
           )
-          vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Show code actions" })
-          vim.keymap.set("n", "<leader>rr", "<CMD>LspRestart<CR>", { desc = "Restart LSP" })
-          vim.keymap.set("n", "\\\\", function()
+          map("<leader>ca", vim.lsp.buf.code_action, { desc = "Show code actions" })
+          map("<leader>rr", "<CMD>LspRestart<CR>", { desc = "Restart LSP" })
+          map("\\\\", function()
             local conform = false -- vim.F.npcall(require, "conform")
             if conform then
               conform.format({ async = true, lsp_fallback = true })
@@ -146,7 +146,7 @@ return {
               })
             end
 
-            vim.keymap.set("n", "<leader>uh", function()
+            map("<leader>uh", function()
               if vim.lsp.inlay_hint and client.server_capabilities.inlayHintProvider then
                 local new_status = not vim.lsp.inlay_hint.is_enabled({})
 
@@ -165,7 +165,7 @@ return {
               inline = false,
             })
 
-            vim.keymap.set("n", "<Leader>L", function()
+            map("<Leader>L", function()
               local new_status = not vim.diagnostic.is_enabled({ bufnr = event.buf })
 
               vim.diagnostic.enable(new_status, { bufnr = event.buf })
@@ -195,6 +195,9 @@ return {
     "bassamsdata/namu.nvim",
     lazy = true,
     cmd = "Namu",
+    keys = {
+      { "<leader>ss", ":Namu symbols<cr>", { desc = "Jump to LSP symbol", silent = true } },
+    },
     opts = {
       -- Enable the modules you want
       namu_symbols = {
@@ -212,17 +215,11 @@ return {
         },
       },
     },
-    keys = {
-      { "<leader>ss", ":Namu symbols<cr>", { desc = "Jump to LSP symbol", silent = true } },
-    },
   },
   {
     "retran/meow.yarn.nvim",
     dependencies = { "MunifTanjim/nui.nvim" },
-    config = function()
-      require("meow.yarn").setup({
-        -- Your custom configuration goes here
-      })
-    end,
+    cmd = "MeowYarn",
+    opts = {},
   },
 }

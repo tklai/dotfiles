@@ -1,7 +1,6 @@
 return {
   {
     "danymat/neogen",
-    event = "VeryLazy",
     keys = {
       {
         "<leader>aa",

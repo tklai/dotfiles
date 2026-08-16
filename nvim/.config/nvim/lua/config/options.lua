@@ -36,7 +36,7 @@ opt.updatetime = 300
 opt.wrap = false
 -- Indentation
 opt.expandtab = true
-opt.shiftwidth = 4
+opt.shiftwidth = 2
 opt.softtabstop = -1
 opt.smartindent = true
 opt.shiftround = true

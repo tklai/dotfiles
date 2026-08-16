@@ -74,29 +74,19 @@ return {
   },
   {
     "mcauley-penney/visual-whitespace.nvim",
-    event = "VeryLazy",
-    config = true,
-  },
-  {
-    "rmagatti/goto-preview",
-    enabled = false,
-    event = "VeryLazy",
-    keys = {
-      {
-        "<M-Space>",
-        function()
-          require("goto-preview").goto_preview_definition()
-        end,
-      },
-    },
+    event = "ModeChanged",
     config = true,
   },
   {
     "carbon-steel/detour.nvim",
-    event = "VeryLazy",
     keys = {
       { "<M-Space>", "<CMD>DetourCurrentWindow<CR>" },
     },
+    config = true,
+  },
+  {
+    "OXY2DEV/markview.nvim",
+    ft = { "markdown", "codecompanion" },
     config = true,
   },
 }

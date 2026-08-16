@@ -1,7 +1,6 @@
 return {
   {
     "folke/flash.nvim",
-    event = "VeryLazy",
     keys = {
       {
         "s",
@@ -26,10 +25,12 @@ return {
   },
   {
     "chaoren/vim-wordmotion",
-    event = "VeryLazy",
+    event = { "BufReadPost", "BufNewFile" },
   },
   {
     "mg979/vim-visual-multi",
-    event = "VeryLazy",
+    keys = {
+      { "<C-n>", mode = { "n", "x" }, desc = "Find Multiple" },
+    },
   },
 }

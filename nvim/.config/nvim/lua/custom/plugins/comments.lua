@@ -1,8 +1,10 @@
 return {
   {
     "numToStr/Comment.nvim",
-    event = "VeryLazy",
-    config = true,
+    keys = {
+      { "gcc", mode = "n", desc = "Comment toggle current line" },
+      { "gc", mode = { "n", "o", "x" }, desc = "Comment toggle selection" },
+    },
     opts = {
       mappings = {
         extra = false,
